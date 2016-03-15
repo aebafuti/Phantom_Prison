@@ -1,0 +1,72 @@
+◇効果音
+・くらげ工匠 様(http://www.kurage-kosho.info/)
+button23
+button30
+button45
+button69
+
+◇プラグイン
+※それぞれ独自に改造を施している場合があります。
+　本作からの二次使用はおやめください。
+
+・Hime 様(http://himeworks.com/2015/11/more-enemy-drops/)
+HIME_MoreEnemyDrops
+
+・Naoya 様(http://respawnfromhere.blog.fc2.com/)
+ResidentWindow
+
+・Ru/むっくRu 様(http://torigoya.hatenadiary.jp/)
+Torigoya_InputNamePrompt
+Torigoya_ReplaceDeadMember
+Torigoya_SameEquipType
+Torigoya_SaveCommand
+
+・saronpasu 様(https://twitter.com/saronpasu)
+Chikuwa
+
+・ScriptMaterials Lab. 様
+ExpDtiail(経験値詳細設定)
+
+・Shaz 様
+SmartPath
+
+・Szyu 様
+CraftingSystem
+
+・tomoaky 様 (http://hikimoki.sakura.ne.jp/)
+TMAutoNewGame
+TMBattlerEx
+TMEventItemEx
+TMOmitEquipCommand
+TMTextEscape
+TMTopFix
+
+・TOMY (Kamesoft) 様(http://ytomy.sakura.ne.jp/index.html)
+KMS_AltGauge
+
+・TYPE74RX-T 様(http://mdc-light.jpn.org/TYPE74RX-T/)
+RX_T_CallEvent_in_Map
+
+・Yanfly Engine 様(http://yanfly.moe/)
+YEP_BattleAICore
+YEP_BattleEngineCore
+YEP_BattleStatusWindow
+YEP_CoreEngine
+YEP_SaveEventLocations
+YEP_VictoryAftermath
+YEP_X_BattleSysATB
+YEP_X_VisualHpGauge
+
+・坂本昌一郎 様(http://sepher.jp/)
+SSEP_BattleSpeedUp
+
+・トリアコンタン 様(https://twitter.com/triacontane)
+BattleActorFaceVisibility
+BugFixImageOnLoad
+CustomizeConfigDefault
+MapRapid
+MessageWindowPopup
+
+・やな 様
+CommonPopupCore
+GetInformation

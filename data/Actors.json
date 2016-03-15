@@ -1,0 +1,11 @@
+[
+null,
+{"id":1,"battlerName":"","characterIndex":6,"characterName":"Actor4","classId":1,"equips":[0,0,0,0],"faceIndex":6,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":20,"name":"","nickname":"","note":"<stand_picture:Evil_s>\n<face_picture:Evil>","profile":""},
+{"id":2,"battlerName":"","characterIndex":0,"characterName":"Actor4","classId":2,"equips":[0,0,0,0],"faceIndex":0,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":20,"name":"黒の聖霊","nickname":"","note":"<stand_picture:Black_Spirit_s>\n<face_picture:Black_Spirit>","profile":""},
+{"id":3,"battlerName":"","characterIndex":1,"characterName":"Actor4","classId":3,"equips":[0,0,0,0],"faceIndex":1,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":20,"name":"白の聖霊","nickname":"","note":"<stand_picture:White_Spirit_s>\n<face_picture:White_Spirit>","profile":""},
+{"id":4,"battlerName":"","characterIndex":2,"characterName":"Actor4","classId":4,"equips":[0,0,0,0],"faceIndex":2,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":20,"name":"赤の聖霊","nickname":"","note":"<stand_picture:Red_Spirit_s>\n<face_picture:Red_Spirit>","profile":""},
+{"id":5,"battlerName":"","characterIndex":3,"characterName":"Actor4","classId":5,"equips":[0,0,0,0],"faceIndex":3,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":20,"name":"青の聖霊","nickname":"","note":"<stand_picture:Blue_Spirit_s>\n<face_picture:Blue_Spirit>","profile":""},
+{"id":6,"battlerName":"","characterIndex":4,"characterName":"Actor4","classId":6,"equips":[0,0,0,0],"faceIndex":4,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":20,"name":"緑の聖霊","nickname":"","note":"<stand_picture:Green_Spirit_s>\n<face_picture:Green_Spirit>","profile":""},
+{"id":7,"battlerName":"","characterIndex":5,"characterName":"Actor4","classId":7,"equips":[0,0,0,0],"faceIndex":5,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":20,"name":"銀の聖霊","nickname":"","note":"<stand_picture:Silver_Spirit_s>\n<face_picture:Silver_Spirit>","profile":""},
+{"id":8,"battlerName":"","characterIndex":7,"characterName":"Actor4","classId":8,"equips":[0,0,0,0],"faceIndex":7,"faceName":"Actor4","traits":[],"initialLevel":1,"maxLevel":20,"name":"金の聖霊","nickname":"","note":"<stand_picture:Gold_Spirit_s>\n<face_picture:Gold_Spirit>","profile":""}
+]
