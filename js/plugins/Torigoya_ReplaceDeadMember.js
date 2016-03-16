@@ -31,20 +31,19 @@
     // 死んだ戦闘参加中メンバーを控えと入れ替え
     var swapDeadMember = function () {
         var allMembers = $gameParty.allMembers();
+        if (allMembers[0].isDead()){
+        	SceneManager.goto(Scene_Gameover);
+			return;
+        }
         for (var i = 0; i < $gameParty.maxBattleMembers(); ++i) {
             if (!allMembers[i]) break;
             if (!allMembers[i].isDead()) continue;
 
             for (var j = $gameParty.maxBattleMembers(); j < allMembers.length; ++j) {
                 if (allMembers[j].isDead()) continue;
-                if (i == 0){
-                	SceneManager.goto(Scene_Gameover);
-                	break;
-                }else{
-                	$gameParty.swapOrder(i, j);
-                	allMembers = $gameParty.allMembers(); // 取り直す
-                	break;
-                }
+                $gameParty.swapOrder(i, j);
+                allMembers = $gameParty.allMembers(); // 取り直す
+                break;
             }
         }
     };

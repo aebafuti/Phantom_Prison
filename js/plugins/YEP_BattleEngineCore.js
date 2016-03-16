@@ -2970,10 +2970,11 @@ Game_Action.prototype.itemEffectAddAttackState = function(target, effect) {
 Game_Action.prototype.itemEffectAddNormalState = function(target, effect) {
     var stateId = effect.dataId;
     var chance = effect.value1;
-    if (!this.isCertainHit()) {
-      chance *= target.stateRate(stateId);
-      chance *= this.lukEffectRate(target);
-    }
+    chance *= target.stateRate(stateId);
+    //if (!this.isCertainHit()) {
+    //  chance *= target.stateRate(stateId);
+    //  chance *= this.lukEffectRate(target);
+    //}
     if (Math.random() < chance) {
       if (stateId === target.deathStateId()) {
         if (target.isImmortal()) target.removeImmortal();
