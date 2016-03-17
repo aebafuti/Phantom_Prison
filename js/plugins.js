@@ -41,5 +41,5 @@ var $plugins =
 {"name":"TMTextEscape","status":true,"description":"文章の表示に使える制御文字を追加します。","parameters":{}},
 {"name":"Chikuwa","status":true,"description":"「どのデータをロードしても共有した変数を読み込める」プラグイン","parameters":{"FileName":"chikuwa","WebStorageKey":"Chikuwa"}},
 {"name":"BattleActorFaceVisibility","status":true,"description":"戦闘中顔グラフィック表示プラグイン","parameters":{"ウィンドウ表示":"ON","ウィンドウX座標":"","ウィンドウY座標":""}},
-{"name":"GrowItem","status":false,"description":"","parameters":{}}
+{"name":"GrowItem","status":true,"description":"","parameters":{}}
 ];
