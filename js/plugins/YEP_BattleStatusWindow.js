@@ -465,6 +465,7 @@ Window_BattleStatus.prototype.drawBasicArea = function(rect, actor) {
     this.drawActorName(actor, rect.x + iw + 4, rect.y, rect.width);
     var wy = rect.y + this.lineHeight();
     this.drawActorIcons(actor, rect.x + 2, wy, rect.width);
+    //this.drawActorIcons(actor, rect.x + 2, wy + 40, rect.width, true);
 };
 
 Window_BattleStatus.prototype.basicAreaRect = function(index) {
@@ -646,7 +647,7 @@ Scene_Battle.prototype.selectRightCommand = function() {
     if (Imported.YEP_BattleEngineCore && BattleManager.isTickBased()) {
       if (BattleManager.actor()) BattleManager.actor().onTurnStart();
     }
-    this.selectNextCommand();
+    //this.selectNextCommand();
 };
 
 Scene_Battle.prototype.isAllowRightCommand = function() {

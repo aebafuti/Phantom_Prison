@@ -520,11 +520,16 @@ Window_Base.prototype.drawActorLevel = function(actor, x, y) {
     this.drawText(actor.level, x + 84, y, 36, 'right');
 };
 
-Window_Base.prototype.drawActorIcons = function(actor, x, y, width) {
+Window_Base.prototype.drawActorIcons = function(actor, x, y, width, right) {
     width = width || 144;
     var icons = actor.allIcons().slice(0, Math.floor(width / Window_Base._iconWidth));
+    if(right) x += width - Window_Base._iconWidth;
     for (var i = 0; i < icons.length; i++) {
-        this.drawIcon(icons[i], x + Window_Base._iconWidth * i, y + 2);
+    	if(right){
+    		this.drawIcon(icons[i], x - Window_Base._iconWidth * i, y + 2);
+    	}else{
+        	this.drawIcon(icons[i], x + Window_Base._iconWidth * i, y + 2);
+        }
     }
 };
 

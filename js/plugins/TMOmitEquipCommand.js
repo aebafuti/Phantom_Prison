@@ -52,6 +52,10 @@ Imported.TMOmitEquipCommand = true;
     var wy = this._statusWindow.y;
     var ww = Graphics.boxWidth - this._statusWindow.width;
     var wh = this._statusWindow.height;
+    this._operateWindow = new Window_Operate(wx, wy, ww);
+    
+    wy += this._operateWindow.height;
+    wh -= this._operateWindow.height;
     this._slotWindow = new Window_EquipSlot(wx, wy, ww, wh);
     this._slotWindow.setHelpWindow(this._helpWindow);
     this._slotWindow.setStatusWindow(this._statusWindow);
@@ -59,8 +63,11 @@ Imported.TMOmitEquipCommand = true;
     this._slotWindow.setHandler('cancel',   this.popScene.bind(this));
     this._slotWindow.setHandler('pagedown', this.nextActor.bind(this));
     this._slotWindow.setHandler('pageup',   this.previousActor.bind(this));
+    this.addWindow(this._operateWindow);
     this.addWindow(this._slotWindow);
   };
+  
+
 
   Scene_Equip.prototype.onActorChange = function() {
     this.refreshActor();
@@ -83,16 +90,60 @@ Imported.TMOmitEquipCommand = true;
     this._slotWindow.activate();
   };
 
+  Scene_Equip.prototype.commandRemove = function() {
+    SoundManager.playEquip();
+    this.actor().changeEquip(this._slotWindow.index(), null);
+    this._statusWindow.refresh();
+    this._slotWindow.refresh();
+    this._itemWindow.refresh();
+    this._slotWindow.activate();
+  };
+
   var _Scene_Equip_update = Scene_Equip.prototype.update;
   Scene_Equip.prototype.update = function() {
     _Scene_Equip_update.call(this);
     if (this._slotWindow.active) {
       if (Input.isTriggered('shift')) {
-        this.commandOptimize();
-      } else if (Input.isTriggered('control')) {
-        this.commandClear();
-      }
+        this.commandRemove();
+      } 
     }
   };
 
 })();
+
+
+//-----------------------------------------------------------------------------
+// Window_Operate
+//
+
+function Window_Operate() {
+    this.initialize.apply(this, arguments);
+}
+
+Window_Operate.prototype = Object.create(Window_Base.prototype);
+Window_Operate.prototype.constructor = Window_Operate;
+
+Window_Operate.prototype.initialize = function(x,y,width) {
+    //var width = this.windowWidth();
+    var height = this.windowHeight();
+    //var x = (Graphics.boxWidth - width)/2;
+    //var y = (Graphics.boxHeight - height)/2;
+    Window_Base.prototype.initialize.call(this, x, y, width, height);
+    this.refresh();
+};
+
+Window_Operate.prototype.windowHeight = function() {
+    return this.fittingHeight(1);
+};
+
+
+
+Window_Operate.prototype.windowY = function() {
+    return ;
+};
+
+Window_Operate.prototype.refresh = function() {
+    this.contents.clear();
+    var width = this.contentsWidth();
+    this.drawTextEx("Shift:装備解除", 0, 0);
+};

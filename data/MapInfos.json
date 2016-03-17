@@ -1,6 +1,6 @@
 [
 null,
-{"id":1,"expanded":true,"name":"幽獄","order":1,"parentId":0,"scrollX":819,"scrollY":481.5},
+{"id":1,"expanded":false,"name":"幽獄","order":1,"parentId":0,"scrollX":819,"scrollY":481.5},
 {"id":2,"expanded":false,"name":"出口","order":2,"parentId":1,"scrollX":819,"scrollY":481.5},
 {"id":3,"expanded":false,"name":"エンディング","order":3,"parentId":1,"scrollX":819,"scrollY":481.5}
 ]

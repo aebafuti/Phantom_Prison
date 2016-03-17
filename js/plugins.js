@@ -14,7 +14,7 @@ var $plugins =
 {"name":"RX_T_CallEvent_in_Map","status":true,"description":"マップ内に設定したイベントを他のイベントから呼び出すことができます。","parameters":{}},
 {"name":"MessageWindowPopup","status":true,"description":"フキダシウィンドウプラグイン","parameters":{"フォントサイズ":"22","余白":"10","自動設定":"ON","フェイス倍率":"75","ウィンドウ連携":"ON","行間":"4"}},
 {"name":"CraftingSystem","status":true,"description":"Craft items, weapons and armors based on categorized recipe books.","parameters":{"Categories":"作成するアイテムを選択","CraftingSounds":"Sword2, Ice4","Price Text":"Price","Equip Text":"装備","Type Text":"種類","Ingredients Text":"必要素材：","Currency Text":"Currency","Item Crafted Text":"作成："}},
-{"name":"Torigoya_InputNamePrompt","status":true,"description":"名前入力ダイアログ機能を追加します","parameters":{"Max Length":"8","Message":"名前を入力してください","Maximum Message":"(%1 文字以内で入力)"}},
+{"name":"Torigoya_InputNamePrompt","status":true,"description":"名前入力ダイアログ機能を追加します","parameters":{"Max Length":"5","Message":"名前を入力してください","Maximum Message":"(%1 文字以内で入力)"}},
 {"name":"Torigoya_SameEquipType","status":true,"description":"装備タイプ名が同じならば、同じ種別のアイテムを装備できるようにします","parameters":{}},
 {"name":"Torigoya_ReplaceDeadMember","status":true,"description":"戦闘中、死亡したメンバーを自動的に控えメンバーに入れ替えます。","parameters":{}},
 {"name":"Torigoya_SaveCommand","status":true,"description":"プラグインコマンドからセーブを実行できるようにします。","parameters":{}},
@@ -28,7 +28,6 @@ var $plugins =
 {"name":"KMS_AltGauge","status":true,"description":"[v0.1.0] 画像を使用した汎用のゲージです。","parameters":{"HP gauge image":"GaugeHP","HP gauge config":"-31, -2, -4, 30","MP gauge image":"GaugeMP","MP gauge config":"-31, -2, -4, 30","TP gauge image":"GaugeTP","TP gauge config":"-31, -2, -4, 30","EXP gauge image":"GaugeEXP","EXP gauge config":"-31, -2, -4, 30","Use exp gauge":"1"}},
 {"name":"TMOmitEquipCommand","status":true,"description":"装備シーンからコマンドウィンドウを削除し、\nスロットウィンドウに２行分のスペースを追加します。","parameters":{}},
 {"name":"TMTopFix","status":true,"description":"パーティの先頭にいるアクターの並び替えを禁止します。","parameters":{}},
-{"name":"TMEventItemEx","status":false,"description":"アイテム選択の処理にヘルプウィンドウを追加し、\n個数表示の有無と表示行数をアイテムタイプごとに設定できます。","parameters":{"helpWindowEnabledItem":"1","helpWindowEnabledKey":"1","helpWindowEnabledA":"1","helpWindowEnabledB":"1","showItemNumberItem":"1","showItemNumberKey":"1","showItemNumberA":"1","showItemNumberB":"1","numVisibleRowsItem":"4","numVisibleRowsKey":"4","numVisibleRowsA":"4","numVisibleRowsB":"4"}},
 {"name":"TMAutoNewGame","status":true,"description":"起動時に自動ではじめからゲームを開始します。\nWeb用ミニゲームなど、タイトルが不要な場合に使えます。","parameters":{"autoNewGame":"1","allwaysOnTop":"1","autoDevTool":"0"}},
 {"name":"TMBattlerEx","status":false,"description":"エネミーに遠近感や息づかいの表現を追加します。","parameters":{"baseY":"400","breathH":"0.005","mirrorRate":"0"}},
 {"name":"TMBattleMist","status":false,"description":"戦闘シーンにそれっぽい霧を表示します。","parameters":{"mistNumber":"32","mistTopSide":"200","mistRangeSide":"300","mistTopFront":"240","mistRangeFront":"340","mistScale":"1"}},
@@ -41,5 +40,6 @@ var $plugins =
 {"name":"CustomizeConfigDefault","status":true,"description":"Optionsデフォルト値設定プラグイン","parameters":{"alwaysDash":"ON","commandRemember":"OFF","bgmVolume":"20","bgsVolume":"20","meVolume":"20","seVolume":"20"}},
 {"name":"TMTextEscape","status":true,"description":"文章の表示に使える制御文字を追加します。","parameters":{}},
 {"name":"Chikuwa","status":true,"description":"「どのデータをロードしても共有した変数を読み込める」プラグイン","parameters":{"FileName":"chikuwa","WebStorageKey":"Chikuwa"}},
-{"name":"BattleActorFaceVisibility","status":true,"description":"戦闘中顔グラフィック表示プラグイン","parameters":{"ウィンドウ表示":"ON","ウィンドウX座標":"","ウィンドウY座標":""}}
+{"name":"BattleActorFaceVisibility","status":true,"description":"戦闘中顔グラフィック表示プラグイン","parameters":{"ウィンドウ表示":"ON","ウィンドウX座標":"","ウィンドウY座標":""}},
+{"name":"GrowItem","status":true,"description":"","parameters":{}}
 ];
