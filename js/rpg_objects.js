@@ -3366,7 +3366,7 @@ Game_Battler.prototype.performMagicEvasion = function() {
 };
 
 Game_Battler.prototype.performCounter = function() {
-    SoundManager.playEvasion();
+    //SoundManager.playEvasion();
 };
 
 Game_Battler.prototype.performReflection = function() {
@@ -3374,6 +3374,7 @@ Game_Battler.prototype.performReflection = function() {
 };
 
 Game_Battler.prototype.performSubstitute = function(target) {
+	SoundManager.playMagicEvasion();
 };
 
 Game_Battler.prototype.performCollapse = function() {
@@ -5233,6 +5234,8 @@ Game_Troop.prototype.setup = function(troopId) {
     this.troop().members.forEach(function(member) {
         if ($dataEnemies[member.enemyId]) {
             var enemyId = member.enemyId;
+            // 強化敵フラグ
+            if($gameSwitches.value(22)) enemyId += 20;
             var x = member.x;
             var y = member.y;
             var enemy = new Game_Enemy(enemyId, x, y);

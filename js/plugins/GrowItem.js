@@ -3,7 +3,6 @@ var isGrow = false;
 this.item().effects.some(function(effect) {
         isGrow = effect.code == Game_Action.EFFECT_GROW;
     }, this);
-    console.log(isGrow);
     return ((this.isForDeadFriend() === target.isDead() ) &&
     		(isGrow ? target.actorId() != 1 : true) &&
             ($gameParty.inBattle() || this.isForOpponent() ||

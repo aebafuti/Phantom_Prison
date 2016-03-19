@@ -1700,6 +1700,7 @@ BattleManager.invokeAction = function(subject, target) {
   if (Math.random() < this._action.itemMrf(target)) {
     this.invokeMagicReflection(subject, target);
   } else if (Math.random() < this._action.itemCnt(target)) {
+  	this.invokeNormalAction(subject, target);
     this.invokeCounterAttack(subject, target);
   } else {
     this.invokeNormalAction(subject, target);

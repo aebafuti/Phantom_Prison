@@ -106,33 +106,32 @@ Window_Status.prototype.refresh = function() {
         this.drawBlock1(lineHeight * 0);
         this.drawHorzLine(lineHeight * 1);
         this.drawBlock2(lineHeight * 2);
-        //this.drawHorzLine(lineHeight * 6);
-        this.drawBlock3(lineHeight * 7);
-        this.drawHorzLine(lineHeight * 9);
-        this.drawBlock4(lineHeight * 10);
+        this.drawHorzLine(lineHeight * 8);
+        this.drawBlock3(lineHeight * 9);
+        this.drawHorzLine(lineHeight * 14);
+        this.drawBlock4(lineHeight * 15);
     }
 };
 
 Window_Status.prototype.drawBlock1 = function(y) {
     this.drawActorName(this._actor, 6, y);
     //this.drawActorClass(this._actor, 192, y);
-    this.drawActorNickname(this._actor, 432, y);
+    this.drawActorNickname(this._actor, 0, y, 404);
 };
 
 Window_Status.prototype.drawBlock2 = function(y) {
     //this.drawActorFace(this._actor, 12, y);
     this.drawBasicInfo(12, y);
-    
+    //this.drawExpInfo(12, y);
 };
 
 Window_Status.prototype.drawBlock3 = function(y) {
-	this.drawExpInfo(12, y);
+	this.drawParameters(12, y);
+    this.drawEquipments(182, y);
 };
 
 Window_Status.prototype.drawBlock4 = function(y) {
-	this.drawParameters(12, y);
-    this.drawEquipments(182, y);
-    //this.drawProfile(6, y);
+	this.drawProfile(6, y);
 };
 
 Window_Status.prototype.drawHorzLine = function(y) {
@@ -149,9 +148,10 @@ Window_Status.prototype.lineColor = function() {
 Window_Status.prototype.drawBasicInfo = function(x, y) {
     var lineHeight = this.lineHeight();
     this.drawActorLevel(this._actor, x, y + lineHeight * 0);
-    this.drawActorIcons(this._actor, x, y + lineHeight * 1);
-    this.drawActorHp(this._actor, x, y + lineHeight * 2);
-    this.drawActorMp(this._actor, x, y + lineHeight * 3);
+    this.drawActorIcons(this._actor, x + 220, y + lineHeight * 0);
+    this.drawActorHp(this._actor, x, y + lineHeight * 1);
+    this.drawActorMp(this._actor, x, y + lineHeight * 2);
+    this.drawExpInfo(12, y+ lineHeight * 4);
 };
 
 Window_Status.prototype.drawParameters = function(x, y) {
@@ -193,9 +193,27 @@ Window_Status.prototype.drawEquipments = function(x, y) {
 };
 
 Window_Status.prototype.drawProfile = function(x, y) {
-    this.drawTextEx(this._actor.profile(), x, y);
+	this.contents.fontSize = 20;
+	var id = this._actor.actorId();
+    this.drawProfileText($dataActors[id].profile, x, y - 6);
+    this.resetFontSettings();
 };
 
 Window_Status.prototype.maxEquipmentLines = function() {
     return 6;
+};
+
+
+Window_Status.prototype.drawProfileText = function(text, x, y) {
+    if (text) {
+        var textState = { index: 0, x: x, y: y, left: x };
+        textState.text = this.convertEscapeCharacters(text);
+        textState.height = this.calcTextHeight(textState, false);
+        while (textState.index < textState.text.length) {
+            this.processCharacter(textState);
+        }
+        return textState.x - x;
+    } else {
+        return 0;
+    }
 };

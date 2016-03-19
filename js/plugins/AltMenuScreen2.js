@@ -74,7 +74,7 @@
  * 高さ： コマンドウィンドウ 1行:444px 2行:408px
  *
  */
-
+	
 (function() {
 
     // set parameters
@@ -109,7 +109,42 @@
         // if background file is invalid, it does original process.
         _Scene_Menu_createBackground.call(this);
     };
-
+    
+    Scene_Menu.prototype.createCommandWindow = function() {
+	    this._commandWindow = new Window_MenuCommand(0, 0);
+	    this._commandWindow.setHandler('item',      this.commandItem.bind(this));
+	    this._commandWindow.setHandler('skill',     this.commandPersonal.bind(this));
+	    this._commandWindow.setHandler('equip',     this.commandPersonal.bind(this));
+	    this._commandWindow.setHandler('status',    this.commandPersonal.bind(this));
+	    this._commandWindow.setHandler('formation', this.commandFormation.bind(this));
+	    this._commandWindow.setHandler('talk',      this.commandTalk.bind(this));
+	    this._commandWindow.setHandler('options',   this.commandOptions.bind(this));
+	    this._commandWindow.setHandler('save',      this.commandSave.bind(this));
+	    //this._commandWindow.setHandler('gameEnd',   this.commandGameEnd.bind(this));
+	    this._commandWindow.setHandler('cancel',    this.popScene.bind(this));
+	    this.addWindow(this._commandWindow);
+	};
+	
+	Scene_Menu.prototype.commandTalk = function() {
+		SceneManager.pop();
+	    $gameTemp.reserveCommonEvent(10);
+	};
+	
+	
+	Window_MenuCommand.prototype.makeCommandList = function() {
+	    this.addMainCommands();
+	    this.addOriginalCommands();
+	    this.addFormationCommand();
+	    this.addSaveCommand();
+	    this.addOptionsCommand();
+	    //this.addGameEndCommand();
+	};
+	
+	Window_MenuCommand.prototype.addOriginalCommands = function() {
+		var enabled = $gameParty.size() >= 2;
+		this.addCommand("会話", 'talk', enabled);
+	};
+    
     Window_MenuCommand.prototype.windowWidth = function() {
         return Graphics.boxWidth;
     };

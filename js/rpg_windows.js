@@ -510,7 +510,9 @@ Window_Base.prototype.drawActorClass = function(actor, x, y, width) {
 Window_Base.prototype.drawActorNickname = function(actor, x, y, width) {
     width = width || 270;
     this.resetTextColor();
-    this.drawText(actor.nickname(), x, y, width);
+    this.contents.fontSize = 24;
+    this.drawText(actor.nickname(), x, y, width, 'right');
+    this.contents.fontSize = this.standardFontSize();
 };
 
 Window_Base.prototype.drawActorLevel = function(actor, x, y) {

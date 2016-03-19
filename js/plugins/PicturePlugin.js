@@ -43,7 +43,7 @@
     	var x;
     	var newx;
     	switch (pictureId) {
-		case 1:
+		case 3:
 			x = 404;
 			newx = 454;
 			break;
