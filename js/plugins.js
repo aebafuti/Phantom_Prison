@@ -46,5 +46,6 @@ var $plugins =
 {"name":"Counter","status":true,"description":"","parameters":{}},
 {"name":"Tradesman","status":true,"description":"","parameters":{}},
 {"name":"WeaponSkill","status":true,"description":"武器ごとに通常攻撃のスキルIDを変更します。","parameters":{}},
-{"name":"Talk","status":true,"description":"","parameters":{}}
+{"name":"Talk","status":true,"description":"","parameters":{}},
+{"name":"VersionSpecified","status":true,"description":"【MMP ver.1.0】タイトル画面にバージョンを明記します。","parameters":{"version":"Ver 0.83","fontSize":"20","fontColor":"rgb(255, 255, 255)","windowX":"0","windowY":"0"}}
 ];
