@@ -1172,6 +1172,7 @@ Yanfly.ATB.BattleManager_endAction = BattleManager.endAction;
 BattleManager.endAction = function() {
     if (this.isATB()) {
       this.endATBAction();
+      this.refreshStatus();
     } else {
       Yanfly.ATB.BattleManager_endAction.call(this);
     }

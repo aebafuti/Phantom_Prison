@@ -4205,11 +4205,16 @@ Window_BattleActor.prototype.autoSelect = function() {
     if (!action) return;
     this._inputLock = false;
     this._selectDead = false;
+    this.setCursorAll(false);
+    this.updateCursor();
     if (action.isForUser()) {
-      this.select(BattleManager.actor().index());
-      this._inputLock = true;
+    	this.select(BattleManager.actor().index());
+    	this._inputLock = true;
     } else if (action.isForDeadFriend()) {
-      this._selectDead = true;
+    	this._selectDead = true;
+    } else if (action.isForAll()) {
+    	this.setCursorAll(true);
+        this.select(0);
     }
 };
 

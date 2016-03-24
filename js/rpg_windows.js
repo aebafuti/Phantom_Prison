@@ -1537,7 +1537,7 @@ Window_Gold.prototype.refresh = function() {
     var x = this.textPadding();
     var width = this.contents.width - this.textPadding() * 2;
     this.contents.clear();
-    this.drawCurrencyValue(this.value(), this.currencyUnit(), x, 0, width);
+    this.drawCurrencyValue("あと　" + this.value(), this.currencyUnit(), x, 0, width);
 };
 
 Window_Gold.prototype.value = function() {
@@ -3868,6 +3868,9 @@ Window_ChoiceList.prototype.updatePlacement = function() {
     } else {
         this.y = messageY + this._messageWindow.height;
     }
+    if (positionType == 0){
+    	this.y = (Graphics.boxHeight - this.height) / 2;
+    }
 };
 
 Window_ChoiceList.prototype.updateBackground = function() {
@@ -3886,7 +3889,7 @@ Window_ChoiceList.prototype.numVisibleRows = function() {
     var centerY = Graphics.boxHeight / 2;
     var choices = $gameMessage.choices();
     var numLines = choices.length;
-    var maxLines = 8;
+    var maxLines = 12;
     if (messageY < centerY && messageY + messageHeight > centerY) {
         maxLines = 4;
     }

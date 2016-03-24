@@ -38,6 +38,7 @@
 	};
 	
 	Game_Screen.prototype.standPicture = function(pictureId, name) {
+		this.preLoadPicture(name);
 		var realPictureId = this.realPictureId(pictureId);
     	var picture = new Game_Picture();
     	var x;
@@ -101,22 +102,7 @@
   			picture.change(name);
   		}
 	};
-	
-	Game_Screen.prototype.activePicture = function(pictureId) {
-  	 	var picture = this.picture(pictureId);
-  	 	if (picture) {
-  			picture.tint([0, 0, 0, 0], 10);
-  		}
-	};
-	
-	Game_Screen.prototype.unactivePicture = function(pictureId) {
-  	 	var picture = this.picture(pictureId);
-  	 	if (picture) {
-  			picture.tint([-60, -60, -60, 60], 10);
-  		}
-	};
-	
-	
+		
 	Game_Picture.prototype.change = function(name) {
  	   this._name = name;
 	};
@@ -128,6 +114,101 @@
 	};
 	
 
+Game_Screen.prototype.preLoadPicture = function(name) {
+	var spirit;
+	var spiritList = ['Black', 'Blue', 'Gold', 'Green', 'Red','Silver', 'White'];
+	for (i = 0; i < spiritList.length; i++){
+		if (name.indexOf(spiritList[i]) != -1){
+			spirit = spiritList[i];
+			break;
+		}
+	}
+	if(spirit){
+		var list = this.pictureList(spirit);
+		for (i = 0; i < list.length; i++){
+			ImageManager.loadPicture(list[i]);
+		}
+	}
+}
+
+Game_Screen.prototype.pictureList = function(spirit) {
+	var list = new Array();
+	switch(spirit){
+	case 'Black':
+		list.push('Black_Spirit');
+		list.push('Black_Spirit_ExFear');
+		list.push('Black_Spirit_ExNomal');
+		list.push('Black_Spirit_ExSmile');
+		list.push('Black_Spirit_ExSurprise');
+		list.push('Black_Spirit_ExWryly');
+		list.push('Black_Spirit_ExDis');
+		break;
+	case 'Blue':
+		list.push('Blue_Spirit');
+		list.push('Blue_Spirit_ExAnger');
+		list.push('Blue_Spirit_ExAway');
+		list.push('Blue_Spirit_ExDown');
+		list.push('Blue_Spirit_ExNormal');
+		list.push('Blue_Spirit_ExShock');
+		list.push('Blue_Spirit_ExSmile');
+		list.push('Blue_Spirit_ExWeak');
+		break;
+	case 'Gold':
+		list.push('Gold_Spirit');
+		list.push('Gold_Spirit_ExPanic');
+		list.push('Gold_Spirit_ExShy');
+		list.push('Gold_Spirit_ExSmile');
+		list.push('Gold_Spirit_ExSurprise');
+		list.push('Gold_Spirit_ExWeak');
+		list.push('Gold_Spirit_ExWeak2');
+		list.push('Gold_Spirit_ExThink');
+		break;
+	case 'Green':
+		list.push('Green_Spirit');
+		list.push('Green_Spirit_ExAdmire');
+		list.push('Green_Spirit_ExDrive');
+		list.push('Green_Spirit_ExPanic');
+		list.push('Green_Spirit_ExPanic2');
+		list.push('Green_Spirit_ExPuzzle');
+		list.push('Green_Spirit_ExShock');
+		list.push('Green_Spirit_ExSmile');
+		list.push('Green_Spirit_ExHatena');
+		break;
+	case 'Red':
+		list.push('Red_Spirit');
+		list.push('Red_Spirit_ExCoax');
+		list.push('Red_Spirit_ExDum');
+		list.push('Red_Spirit_ExNormal');
+		list.push('Red_Spirit_ExNormal2');
+		list.push('Red_Spirit_ExSmile');
+		list.push('Red_Spirit_ExSmile2');
+		list.push('Red_Spirit_ExSulk');
+		list.push('Red_Spirit_ExSurprise');
+		break;
+	case 'Silver':
+		list.push('Silver_Spirit');
+		list.push('Silver_Spirit_ExDoya');
+		list.push('Silver_Spirit_ExFear');
+		list.push('Silver_Spirit_ExFear2');
+		list.push('Silver_Spirit_ExNormal');
+		list.push('Silver_Spirit_ExNormal2');
+		list.push('Silver_Spirit_ExPuzzle');
+		list.push('Silver_Spirit_ExSmile');
+		list.push('Silver_Spirit_ExSurprise');
+		list.push('Silver_Spirit_ExGununu');
+		break;
+	case 'White':
+		list.push('White_Spirit');
+		list.push('White_Spirit_ExDum');
+		list.push('White_Spirit_ExNormal');
+		list.push('White_Spirit_ExPanic');
+		list.push('White_Spirit_ExSmile');
+		list.push('White_Spirit_ExSurprise');
+		list.push('White_Spirit_ExSmile2');
+		break;
+	}
+	return list;
+}
 
 })();
  

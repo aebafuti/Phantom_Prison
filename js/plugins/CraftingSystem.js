@@ -322,6 +322,8 @@
 		$gameMessage.setBackground(0);
         $gameMessage.setPositionType(1);
 		$gameMessage.add(itemCraftedText+'\n' + this._indexWindow.item().name);
+		
+		this._indexWindow.refresh();
 	};
 
 /*
@@ -474,8 +476,10 @@
 	Window_CraftingItems.prototype.drawItem = function(index){
 		var item = this._list[index];
 		var rect = this.itemRect(index);
+		this.changePaintOpacity(this.itemIngredientsMet(item));
 		var width = rect.width - this.textPadding();
 		this.drawItemName(item, rect.x, rect.y, width);
+		this.changePaintOpacity(true);
 	};
 	
 	Window_CraftingItems.prototype.processCancel = function(){
@@ -493,6 +497,8 @@
 	        this.playBuzzerSound();
 	    }
 	};
+	
+	
 
 	Window_CraftingItems.prototype.item = function() {
     	var index = this.index();
@@ -500,8 +506,9 @@
  
     };
 	
-	Window_CraftingItems.prototype.itemIngredientsMet = function(){
-		var item = this.item();
+	Window_CraftingItems.prototype.itemIngredientsMet = function(item){
+		var item = item === undefined ? this.item() : item;
+		//var item = this.item();
 		var met = true;
 		if (item == null) return false;
 
@@ -557,9 +564,14 @@
         }
 
         this.drawItemName(item, x, y);
-
+        
+        var num = "所持数:" + $gameParty.numItems(item);
+		this.drawText(num, x, y, width, 'right');
+		
         x = this.textPadding();
         y = lineHeight + this.textPadding();
+        
+        
 /*
         var price = item.price > 0 ? item.price : '-';
         this.changeTextColor(this.systemColor());

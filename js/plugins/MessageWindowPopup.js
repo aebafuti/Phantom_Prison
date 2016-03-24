@@ -361,18 +361,30 @@
 
     var _Window_Message_standardFontSize = Window_Message.prototype.standardFontSize;
     Window_Message.prototype.standardFontSize = function() {
-        return this.isPopup() ? paramFontSize : _Window_Message_standardFontSize.apply(this, arguments);
+    	if (this._targetCharacterId <= -2){
+        	return this.isPopup() ? paramFontSize + 2 : _Window_Message_standardFontSize.apply(this, arguments);
+        }else{
+        	return this.isPopup() ? paramFontSize : _Window_Message_standardFontSize.apply(this, arguments);
+        }
     };
 
     var _Window_Message_standardPadding = Window_Message.prototype.standardPadding;
     Window_Message.prototype.standardPadding = function() {
-        return this.isPopup() ? paramPadding : _Window_Message_standardPadding.apply(this, arguments);
+    	if (this._targetCharacterId <= -2){
+    		return this.isPopup() ? paramPadding + 4 : _Window_Message_standardPadding.apply(this, arguments);
+    	}else{
+        	return this.isPopup() ? paramPadding : _Window_Message_standardPadding.apply(this, arguments);
+        }
     };
 
     var _Window_Message_calcTextHeight = Window_Message.prototype.calcTextHeight;
     Window_Message.prototype.calcTextHeight = function(textState, all) {
         var height = _Window_Message_calcTextHeight.apply(this, arguments);
-        return this.isPopup() ? height - 8 + paramBetweenLines : height;
+        if (this._targetCharacterId <= -2){
+        	return this.isPopup() ? height - 8 + paramBetweenLines + 2 : height;
+        }else{
+        	return this.isPopup() ? height - 8 + paramBetweenLines : height;
+        }
     };
 
     var _Window_Message_startMessage = Window_Message.prototype.startMessage;
@@ -385,12 +397,20 @@
     var _Window_Message_resetFontSettings = Window_Message.prototype.resetFontSettings;
     Window_Message.prototype.resetFontSettings = function() {
         _Window_Message_resetFontSettings.apply(this, arguments);
-        if (this.isPopup()) this.contents.fontSize = paramFontSize;
+        if (this._targetCharacterId <= -2){
+        	if (this.isPopup()) this.contents.fontSize = paramFontSize + 2;
+        }else{
+        	if (this.isPopup()) this.contents.fontSize = paramFontSize;
+        }
     };
 
     Window_Message.prototype.getPopupTargetCharacter = function() {
         var id = this._targetCharacterId;
-        return id == null ? null : id === -1 ? $gamePlayer : $gameMap.event(id);
+        if (id <= -2){
+        	return 'talk';
+        }else{
+        	return id == null ? null : id === -1 ? $gamePlayer : $gameMap.event(id);
+        }
     };
 
     Window_Message.prototype.isPopup = function() {
@@ -406,6 +426,7 @@
     var _Window_Message_updatePauseSign = Window_Message.prototype._updatePauseSign;
     Window_Message.prototype._updatePauseSign = function() {
         _Window_Message_updatePauseSign.apply(this, arguments);
+        var character = this.getPopupTargetCharacter();
         if (this.isPopup()) this._windowPauseSignSprite.alpha = 1;
     };
 
@@ -422,17 +443,37 @@
 
     Window_Message.prototype.updatePlacementPopup = function() {
         var character = this.getPopupTargetCharacter();
-        this.x = character.screenX() - this.width / 2;
-        this.y = character.screenY() - this.height - 56;
-        if (this.isPopupLower()) {
-            this.y = character.screenY() + 8;
-            this._windowPauseSignSprite.rotation = 180 * Math.PI / 180;
-            this._windowPauseSignSprite.y = 12;
-            this._windowPauseSignSprite.anchor.y = 0;
-        } else {
-            this._windowPauseSignSprite.rotation = 0;
-            this._windowPauseSignSprite.y = this.height + 12;
-            this._windowPauseSignSprite.anchor.y = 1.0;
+        if (character === 'talk'){
+        	var shippo = 180;
+        	switch(this._targetCharacterId){
+        	case -2:
+        		this.x = shippo;
+        		break;
+        	case -3:
+        		this.x = (Graphics.boxWidth - this.width) - shippo;
+        		this._windowPauseSignSprite.x = this._width - 24;
+        		break;
+        	}
+        	//this.x = (Graphics.boxWidth - this.width) / 2;
+	        this.y = this._positionType * (Graphics.boxHeight - this.height) / 2;
+	        this.y -= 48;
+	        this.y = 400;
+	    	this._windowPauseSignSprite.rotation = 180 * Math.PI / 180;
+	        this._windowPauseSignSprite.y = 12;
+	        this._windowPauseSignSprite.anchor.y = 0;
+        }else{
+	        this.x = character.screenX() - this.width / 2;
+	        this.y = character.screenY() - this.height - 56;
+	        if (this.isPopupLower()) {
+	            this.y = character.screenY() + 8;
+	            this._windowPauseSignSprite.rotation = 180 * Math.PI / 180;
+	            this._windowPauseSignSprite.y = 12;
+	            this._windowPauseSignSprite.anchor.y = 0;
+	        } else {
+	            this._windowPauseSignSprite.rotation = 0;
+	            this._windowPauseSignSprite.y = this.height + 12;
+	            this._windowPauseSignSprite.anchor.y = 1.0;
+	        }
         }
         var deltaX = 0;
         if (this.x < 0) {
@@ -443,7 +484,17 @@
             deltaX = this.x + this.width - Graphics.boxWidth;
             this.x = Graphics.boxWidth - this.width;
         }
-        this._windowPauseSignSprite.x = this._width / 2 + deltaX;
+        switch(this._targetCharacterId){
+        	case -2:
+        		this._windowPauseSignSprite.x = deltaX + 24;
+        		break;
+        	case -3:
+        		this._windowPauseSignSprite.x = this._width - 24;
+        		break;
+        	default:
+        		this._windowPauseSignSprite.x = this._width / 2 + deltaX;
+        		break;
+        }
         this.subWindows().forEach(function(subWindow) {
             if (typeof subWindow.updatePlacementPopup === 'function') {
                 subWindow.updatePlacementPopup();

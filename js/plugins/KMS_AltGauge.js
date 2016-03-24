@@ -244,9 +244,12 @@ if (Params.isEnableExp)
     Window_Base.prototype.drawActorLevel = function(actor, x, y, showGauge)
     {
         if (showGauge)
-        {
-            var width = 120;
-            this.drawKmsGauge(x, y, width, actor.nextExpRate(), 'exp');
+        {	var width = 120;
+        	if (actor.isMaxLevel())
+        	{	this.drawKmsGauge(x, y, width, 1, 'exp');
+        	}	else
+        	{	this.drawKmsGauge(x, y, width, actor.nextExpRate(), 'exp');
+        	}
         }
 
         _KMS_AltGauge_Window_Base_drawActorLevel.call(this, actor, x, y);

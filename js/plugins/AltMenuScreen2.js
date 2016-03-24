@@ -141,7 +141,7 @@
 	};
 	
 	Window_MenuCommand.prototype.addOriginalCommands = function() {
-		var enabled = $gameParty.size() >= 2;
+		var enabled = $gameParty.size() >= 2 && !$gameSwitches.value(4);
 		this.addCommand("会話", 'talk', enabled);
 	};
     
@@ -175,6 +175,12 @@
         return 1;
     };
 
+	Window_MenuStatus.prototype.loadImages = function() {
+	    $gameParty.members().forEach(function(actor) {
+	    	var bitmapName = $dataActors[actor.actorId()].meta.stand_picture;
+        	var bitmap = bitmapName ? ImageManager.loadPicture(bitmapName) : null;
+	    }, this);
+	};
     Window_MenuStatus.prototype.drawItemImage = function(index) {
         var actor = $gameParty.members()[index];
         var rect = this.itemRectForText(index);
@@ -223,5 +229,72 @@
         _Window_MenuActor_initialize.call(this);
         this.y = this.fittingHeight(2);
     };
+
+var _Scene_Item_create = Scene_Item.prototype.create;
+Scene_Item.prototype.create = function() {
+    _Scene_Item_create.call(this);
+    this.createNumberWindow();
+};
+
+Scene_Item.prototype.createNumberWindow = function() {
+    this._numberWindow = new Window_Number();
+    this._numberWindow.y = this._actorWindow.y + this._actorWindow.height;
+	this.addWindow(this._numberWindow);
+};
+
+var _Scene_Item_onItemOK = Scene_Item.prototype.onItemOk;
+Scene_Item.prototype.onItemOk = function() {
+	_Scene_Item_onItemOK.call(this);
+	var number = $gameParty.numItems(this.item());
+	this._numberWindow.refresh(number);
+    this._numberWindow.show();
+};
+
+Scene_Item.prototype.onActorCancel = function() {
+    Scene_ItemBase.prototype.onActorCancel.call(this);
+    this._numberWindow.hide();
+};
+
+var _Scene_Item_useItem = Scene_Item.prototype.useItem;
+Scene_Item.prototype.useItem = function() {
+    _Scene_Item_useItem.call(this);
+    var number = $gameParty.numItems(this.item());
+    this._numberWindow.refresh(number);
+};
+//-----------------------------------------------------------------------------
+// Window_Number
+//
+
+function Window_Number() {
+    this.initialize.apply(this, arguments);
+}
+
+Window_Number.prototype = Object.create(Window_Base.prototype);
+Window_Number.prototype.constructor = Window_Number;
+
+Window_Number.prototype.initialize = function() {
+    var width = this.windowWidth();
+    var height = this.windowHeight();
+    Window_Base.prototype.initialize.call(this, 0, 0, width, height);
+    this.hide();
+};
+
+Window_Number.prototype.windowWidth = function() {
+    return 240;
+};
+
+Window_Number.prototype.windowHeight = function() {
+    return this.fittingHeight(1);
+};
+
+Window_Number.prototype.refresh = function(number) {
+    var x = this.textPadding();
+    var width = this.contents.width - this.textPadding() * 2;
+    this.contents.clear();
+    this.drawText("所持数：", 0, 0, width);
+    this.drawText(number, 0, 0, width, 'right');
+};
+
+
 
 })();

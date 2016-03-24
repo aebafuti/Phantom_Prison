@@ -3374,7 +3374,6 @@ Game_Battler.prototype.performReflection = function() {
 };
 
 Game_Battler.prototype.performSubstitute = function(target) {
-	SoundManager.playMagicEvasion();
 };
 
 Game_Battler.prototype.performCollapse = function() {
