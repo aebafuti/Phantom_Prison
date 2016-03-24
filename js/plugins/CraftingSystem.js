@@ -323,6 +323,7 @@
         $gameMessage.setPositionType(1);
 		$gameMessage.add(itemCraftedText+'\n' + this._indexWindow.item().name);
 		
+		this._statusWindow.refresh();
 		this._indexWindow.refresh();
 	};
 
