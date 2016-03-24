@@ -168,6 +168,15 @@ if (!Imported.CommonPopupCore) {
  */
 
 (function() {
+	var _Game_Interpreter_pluginCommand =
+            Game_Interpreter.prototype.pluginCommand;
+    Game_Interpreter.prototype.pluginCommand = function(command, args) {
+        _Game_Interpreter_pluginCommand.call(this, command, args);
+        if (command === 'GetInformationText') {
+        	CommonPopupManager.showInfo(args[0], 1, 'text'); 
+        }
+    };
+    
 	var parameters = PluginManager.parameters('GetInformation');
 	var infoDisableSwitchId = Number(parameters['Info Disable Switch Id'] || 10);
 	var getGoldText = String(parameters['Get Gold Text'] || '「\\I[_icon]_num\\C[14]\\G\\C[0]」 を\\C[24]手に入れた！');
@@ -421,6 +430,9 @@ if (!Imported.CommonPopupCore) {
 		var text1 = null;
 		if (value === 0) { return }
 		switch(type) {
+		case 'text':
+			text1 = object;
+			break;
 		case 'gold':
 			text1 = getGoldText;
 			if (value < 0) {
@@ -478,6 +490,7 @@ if (!Imported.CommonPopupCore) {
 			};
 		}
 		texts = texts.compact();
+		console.log(texts);
 		var oneHeight = (infoFontSize + 8)
 		var height = oneHeight * texts.length;
 		var bitmap = new Bitmap(Graphics.boxWidth, height);
