@@ -769,15 +769,6 @@ Scene_Menu.prototype.create = function() {
     this.createCommandWindow();
     this.createGoldWindow();
     this.createStatusWindow();
-    switch (this._commandWindow.currentSymbol()) {
-    case 'skill':
-    case 'equip':
-    case 'status':
-    	this._commandWindow.deactivate();
-        this.commandPersonal();
-        break;
-    }
-    //console.log(this._commandWindow.currentSymbol());
 };
 
 Scene_Menu.prototype.start = function() {

@@ -94,8 +94,48 @@
         this._statusWindow.opacity = 0;
         //this._goldWindow.opacity = 0;
         //this._commandWindow.opacity = 0;
+        
+        this._wheelHelpWindow = new Window_WheelHelp();
+	    this._wheelHelpWindow.x = 0;
+	    this._wheelHelpWindow.y = this._statusWindow.y + this._statusWindow.height;
+	    this.addWindow(this._wheelHelpWindow);
+	    
+	    //魔術、装備、ステータスから戻る場合
+	    switch (this._commandWindow.currentSymbol()) {
+		    case 'skill':
+		    case 'equip':
+		    case 'status':
+		    	this._commandWindow.deactivate();
+		        this.commandPersonal();
+		        break;
+    	}
     };
+    
+	var _Scene_Menu_commandPersonal = Scene_Menu.prototype.commandPersonal;
+	Scene_Menu.prototype.commandPersonal = function() {
+	    _Scene_Menu_commandPersonal.call(this);
+	    if ($gameParty.size() > 4) this._wheelHelpWindow.show();
+	};
 
+
+	var _Scene_Menu_commandFormation = Scene_Menu.prototype.commandFormation;
+	Scene_Menu.prototype.commandFormation = function() {
+	    _Scene_Menu_commandFormation.call(this);
+	    if ($gameParty.size() > 4) this._wheelHelpWindow.show();
+	};
+	
+	var _Scene_Menu_onPersonalCancel = Scene_Menu.prototype.onPersonalCancel;
+	Scene_Menu.prototype.onPersonalCancel = function() {
+		_Scene_Menu_onPersonalCancel.call(this);
+		this._wheelHelpWindow.hide();
+	};
+	
+	var _Scene_Menu_onFormationCancel = Scene_Menu.prototype.onFormationCancel;
+	Scene_Menu.prototype.onFormationCancel = function() {
+		_Scene_Menu_onFormationCancel.call(this);
+		this._wheelHelpWindow.hide();
+	};
+	
     // load bitmap that set in plugin parameter
     var _Scene_Menu_createBackground = Scene_Menu.prototype.createBackground;
     Scene_Menu.prototype.createBackground = function(){
@@ -130,6 +170,10 @@
 	    $gameTemp.reserveCommonEvent(10);
 	};
 	
+	
+//-----------------------------------------------------------------------------
+// Window_MenuCommand
+//-----------------------------------------------------------------------------
 	
 	Window_MenuCommand.prototype.makeCommandList = function() {
 	    this.addMainCommands();
@@ -230,6 +274,10 @@
         this.y = this.fittingHeight(2);
     };
 
+//-----------------------------------------------------------------------------
+// Scene_Item
+//-----------------------------------------------------------------------------
+
 var _Scene_Item_create = Scene_Item.prototype.create;
 Scene_Item.prototype.create = function() {
     _Scene_Item_create.call(this);
@@ -261,9 +309,10 @@ Scene_Item.prototype.useItem = function() {
     var number = $gameParty.numItems(this.item());
     this._numberWindow.refresh(number);
 };
+
 //-----------------------------------------------------------------------------
 // Window_Number
-//
+//-----------------------------------------------------------------------------
 
 function Window_Number() {
     this.initialize.apply(this, arguments);

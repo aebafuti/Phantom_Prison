@@ -20,50 +20,28 @@ Scene_Status.prototype.create = function() {
     this._statusWindow.setHandler('cancel',   this.popScene.bind(this));
     this._statusWindow.setHandler('pagedown', this.nextActor.bind(this));
     this._statusWindow.setHandler('pageup',   this.previousActor.bind(this));
+    this._statusWindow.setHandler('wheeldown', this.nextActor.bind(this));
+    this._statusWindow.setHandler('wheelup',   this.previousActor.bind(this));
     this.addWindow(this._statusWindow);
+    
     this._standSprite = new Sprite();
     this.refreshActor();
+    this.addChild(this._standSprite);
+    
+    this._wheelHelpWindow = new Window_WheelHelp();
+    this._wheelHelpWindow.x = Graphics.boxWidth - this._wheelHelpWindow.width;
+    //this._wheelHelpWindow.y -= 20;
+    this.addWindow(this._wheelHelpWindow);
+    this._wheelHelpWindow.show();
 };
 
 Scene_Status.prototype.stand = function(actor) {
-	/*
-	var name= "";
-    switch(actor.actorId()){
-    	case 1:
-    		name = "Evil";
-    		break;
-    	case 2:
-    		name = "Black_Spirit";
-    		break;
-    	case 3:
-    		name = "White_Spirit";
-    		break;
-    	case 4:
-    		name = "Red_Spirit";
-    		break;
-    	case 5:
-    		name = "Blue_Spirit";
-    		break;
-    	case 6:
-    		name = "Green_Spirit";
-    		break;
-    	case 7:
-    		name = "Silver_Spirit";
-    		break;
-    	case 8:
-    		name = "Gold_Spirit";
-    		break;
-    }
-    this._standSprite.bitmap = ImageManager.loadPicture(name);
-    */
     var meta = actor.actor().meta;
 	if (meta != null && meta.face_picture) {
 		this._standSprite.bitmap = ImageManager.loadPicture(meta.face_picture);
 	}
-    
     this._standSprite.x = Graphics.boxWidth - 429;
     this._standSprite.y = 0;
-    this.addChild(this._standSprite);
 };
 
 Scene_Status.prototype.refreshActor = function() {
@@ -186,8 +164,6 @@ Window_Status.prototype.drawActorSkills = function(actor, x, y) {
 };
 
 
-
-
 Window_Status.prototype.drawExpInfo = function(x, y) {
     var lineHeight = this.lineHeight();
     var expTotal = TextManager.expTotal.format(TextManager.exp);
@@ -240,4 +216,68 @@ Window_Status.prototype.drawProfileText = function(text, x, y) {
     } else {
         return 0;
     }
+};
+
+
+Window_Status.prototype.processWheel = function() {
+    if (this.isOpenAndActive()) {
+        var threshold = 20;
+        if (this.isHandled('wheeldown') && TouchInput.wheelY >= threshold) {
+            this.callHandler('wheeldown');
+        }
+        if (this.isHandled('wheelup') && TouchInput.wheelY <= -threshold) {
+            this.callHandler('wheelup');
+        }
+    }
+};
+
+
+//-----------------------------------------------------------------------------
+// Window_WheelHelp
+//-----------------------------------------------------------------------------
+
+function Window_WheelHelp() {
+    this.initialize.apply(this, arguments);
+}
+
+Window_WheelHelp.prototype = Object.create(Window_Base.prototype);
+Window_WheelHelp.prototype.constructor = Window_WheelHelp;
+
+Window_WheelHelp.prototype.initialize = function() {
+    var width = this.windowWidth();
+    var height = this.windowHeight();
+    Window_Base.prototype.initialize.call(this, 0, 0, width, height);
+    this.refresh();
+    //this.opacity = 0;
+    this.setBackgroundType(1);
+    this.hide();
+};
+
+Window_WheelHelp.prototype.windowWidth = function() {
+    return 180;
+};
+
+Window_WheelHelp.prototype.windowHeight = function() {
+    return this.fittingHeight(1) - 36;
+};
+
+Window_WheelHelp.prototype.contentsWidth = function() {
+    return this.width;
+};
+
+Window_WheelHelp.prototype.contentsHeight = function() {
+    return this.height;
+};
+
+Window_WheelHelp.prototype.windowY = function() {
+    return ;
+};
+
+Window_WheelHelp.prototype.refresh = function() {
+    this.contents.clear();
+    this.contents.fontSize = 20;
+    this.padding = 0;
+    var width = this.contentsWidth();
+    this.drawText("Wheel:切り替え", 0, 0, width, 'center');
+    this.contents.fontSize = this.standardFontSize();
 };

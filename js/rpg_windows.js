@@ -1142,11 +1142,13 @@ Window_Selectable.prototype.isCancelEnabled = function() {
 };
 
 Window_Selectable.prototype.isOkTriggered = function() {
-    return Input.isRepeated('ok');
+	//return Input.isRepeated('ok');
+    return Input.isTriggered('ok');
 };
 
 Window_Selectable.prototype.isCancelTriggered = function() {
-    return Input.isRepeated('cancel');
+    //return Input.isRepeated('cancel');
+    return Input.isTriggered('cancel');
 };
 
 Window_Selectable.prototype.processOk = function() {

@@ -670,7 +670,8 @@ Window_VictoryExp.prototype.drawExpGained = function(actor, rect) {
 Window_VictoryExp.prototype.drawGainedSkills = function(actor, rect) {
     if (actor._victorySkills.length <= 0) return;
     if (!this.meetDrawGainedSkillsCondition(actor)) return;
-    var wy = rect.y;
+    //var wy = rect.y;
+    var wy = rect.y + this.lineHeight();
     for (var i = 0; i < actor._victorySkills.length; ++i) {
       if (wy + this.lineHeight() > rect.y + rect.height) break;
       var skillId = actor._victorySkills[i];
@@ -679,7 +680,8 @@ Window_VictoryExp.prototype.drawGainedSkills = function(actor, rect) {
       var text = '\\i[' + skill.iconIndex + ']' + skill.name;
       text = TextManager.obtainSkill.format(text);
       var ww = this.textWidthEx(text);
-      var wx = rect.x + (rect.width - ww) / 2;
+      //var wx = rect.x + (rect.width - ww) / 2;
+      var wx = rect.x;
       this.drawTextEx(text, wx, wy);
       wy += this.lineHeight();
     }
