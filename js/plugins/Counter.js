@@ -40,3 +40,7 @@ BattleManager.invokeCounterAttack = function(subject, target) {
 Game_Battler.prototype.performSubstitute = function(target) {
 	SoundManager.playMagicEvasion();
 };
+
+BattleManager.checkSubstitute = function(target) {
+    return !this._action.isCertainHit();
+};
