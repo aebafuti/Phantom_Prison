@@ -116,8 +116,8 @@ Scene_Title.prototype.terminate = function() {
     }
 };
 
-Scene_Title.prototype.commandNewGame = function() {
-	if(DataManager.isAnySavefileExists()){
+Scene_Title.prototype.commandNewGame = function(another) {
+	if(DataManager.isAnySavefileExists() && !another){
 		this._commandWindow.deactivate();
 		this._cautionWindow.show();
 		this._confirmWindow.show();
@@ -158,14 +158,19 @@ Scene_Title.prototype.reloadMapIfUpdated = function() {
     }
 };
 
+//-----------------------------------------------------------------------------
+// Scene_Men
+//-----------------------------------------------------------------------------
+
 Scene_Menu.prototype.commandSave = function() {
-	Scene_File.prototype.onSavefileOk.call(this);
-    $gameSystem.onBeforeSave();
-    if (DataManager.saveGame(1)) {
-        this.onSaveSuccess();
-    } else {
-        this.onSaveFailure();
-    }
+	this.onSaveSuccess();
+	//Scene_File.prototype.onSavefileOk.call(this);
+    //$gameSystem.onBeforeSave();
+    //if (DataManager.saveGame(1)) {
+    //    this.onSaveSuccess();
+    //} else {
+    //    this.onSaveFailure();
+    //}
     //SceneManager.push(Scene_Save);
 };
 
@@ -176,6 +181,7 @@ Scene_Menu.prototype.onSavefileOk = function() {
 Scene_Menu.prototype.onSaveSuccess = function() {
     SoundManager.playSave();
     this.popScene();
+    $gameTemp.reserveCommonEvent(21);
 };
 
 Scene_Menu.prototype.onSaveFailure = function() {
@@ -187,7 +193,7 @@ Scene_Menu.prototype.onSaveFailure = function() {
 
 //-----------------------------------------------------------------------------
 // Window_Confirm
-//
+//-----------------------------------------------------------------------------
 
 function Window_Confirm() {
     this.initialize.apply(this, arguments);
@@ -218,6 +224,8 @@ Window_Confirm.prototype.makeCommandList = function() {
     this.addCommand("はい", 'ok');
     this.addCommand("いいえ", 'cancel');
 };
+
+
 //-----------------------------------------------------------------------------
 // Window_Caution
 //
@@ -257,6 +265,4 @@ Window_Caution.prototype.refresh = function() {
     this.contents.clear();
     var width = this.contentsWidth();
     this.drawTextEx("現在の進行は失われますが"+ "\n" + "よろしいですか？", 0, 0);
-    //this.drawText("現在の進行は失われますが", 0, 0, width, 'left');
-    //this.drawText("よろしいですか？", 0, 32, width, 'left');
 };

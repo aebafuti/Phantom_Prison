@@ -613,21 +613,27 @@
     //=============================================================================
     // Window_ChoiceList
     //  ポップアップする場合、メッセージウィンドウに連動して表示位置と余白を調整します。
-    //=============================================================================
+    //=============================================================================    
     var _Window_ChoiceList_standardFontSize = Window_ChoiceList.prototype.standardFontSize;
     Window_ChoiceList.prototype.standardFontSize = function() {
-        return this.isPopupLinkage() ? paramFontSize : _Window_ChoiceList_standardFontSize.apply(this, arguments);
+        //return this.isPopupLinkage() ? paramFontSize : _Window_ChoiceList_standardFontSize.apply(this, arguments); 
+        return this.isPopupLinkage() && !this.talkMode() ? paramFontSize : paramFontSize + 2; //_Window_ChoiceList_standardFontSize.apply(this, arguments)
+        
     };
-
+	
+	Window_ChoiceList.prototype.talkMode = function() {
+		return this._messageWindow._targetCharacterId <= -2;
+	}
+	
     var _Window_ChoiceList_standardPadding = Window_ChoiceList.prototype.standardPadding;
     Window_ChoiceList.prototype.standardPadding = function() {
-        return this.isPopupLinkage() ? paramPadding : _Window_ChoiceList_standardPadding.apply(this, arguments);
+        return this.isPopupLinkage() && !this.talkMode() ? paramPadding : paramPadding + 4; //_Window_ChoiceList_standardPadding.apply(this, arguments)
     };
 
     var _Window_ChoiceList_lineHeight = Window_ChoiceList.prototype.lineHeight;
     Window_ChoiceList.prototype.lineHeight = function() {
-        return this.isPopupLinkage() ? paramFontSize + 8 : _Window_ChoiceList_lineHeight.apply(this, arguments);
-    };
+        return this.isPopupLinkage() && !this.talkMode() ? paramFontSize + 8 : paramFontSize + 2 + 8; //_Window_ChoiceList_lineHeight.apply(this, arguments)
+    }
 
     var _Window_ChoiceList_refresh = Window_ChoiceList.prototype.refresh;
     Window_ChoiceList.prototype.refresh = function() {
@@ -638,18 +644,18 @@
     };
 
     Window_ChoiceList.prototype.updatePlacementPopup = function() {
-        if (paramLinkage && this._messageWindow.openness > 0) {
-            this.x = this._messageWindow.x;
-            this.y = this._messageWindow.y + this._messageWindow.height;
-        } else {
-            this.y = Graphics.boxHeight - this.height - this._messageWindow.windowHeight() / 2;
-        }
+		if (paramLinkage && this._messageWindow.openness > 0) {
+			this.x = this._messageWindow.x;
+			this.y = this._messageWindow.y + this._messageWindow.height;
+		} else {
+			this.y = Graphics.boxHeight - this.height - this._messageWindow.windowHeight() / 2;
+		}
     };
 
     var _Window_ChoiceList_updatePlacement = Window_ChoiceList.prototype.updatePlacement;
     Window_ChoiceList.prototype.updatePlacement = function() {
         _Window_ChoiceList_updatePlacement.apply(this, arguments);
-        if (this.isPopup()) this.updatePlacementPopup();
+        if (this.isPopup() && !this.talkMode()) this.updatePlacementPopup();
     };
 
     Window_ChoiceList.prototype.isPopup = function() {

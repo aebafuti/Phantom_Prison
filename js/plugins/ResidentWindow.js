@@ -303,11 +303,11 @@ DataManager.extractSaveContents = function(contents) {
 //-----------------------------------------------------------------------------
 /* ニューゲーム時のウィンドウ可視状態の初期化 */
 var SFC_scene_title_commandNewGame = Scene_Title.prototype.commandNewGame;
-Scene_Title.prototype.commandNewGame = function() {
+Scene_Title.prototype.commandNewGame = function(another) {
     if(RW_HideStart){
         inVal.WinON = false;
     }
-    SFC_scene_title_commandNewGame.call(this);
+    SFC_scene_title_commandNewGame.call(this, another);
 };
 
 

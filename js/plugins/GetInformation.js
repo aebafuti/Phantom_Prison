@@ -490,7 +490,6 @@ if (!Imported.CommonPopupCore) {
 			};
 		}
 		texts = texts.compact();
-		console.log(texts);
 		var oneHeight = (infoFontSize + 8)
 		var height = oneHeight * texts.length;
 		var bitmap = new Bitmap(Graphics.boxWidth, height);

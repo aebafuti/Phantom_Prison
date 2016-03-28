@@ -186,8 +186,14 @@
 	
 	Window_MenuCommand.prototype.addOriginalCommands = function() {
 		var enabled = $gameParty.size() >= 2 && !$gameSwitches.value(4);
-		this.addCommand("会話", 'talk', enabled);
+		if(talkCheckUnread()){
+			this.addCommand("会話\\I[12]", 'talk', enabled);
+		}else{
+			this.addCommand("会話", 'talk', enabled);
+		}
 	};
+	
+	
     
     Window_MenuCommand.prototype.windowWidth = function() {
         return Graphics.boxWidth;
@@ -282,6 +288,18 @@ var _Scene_Item_create = Scene_Item.prototype.create;
 Scene_Item.prototype.create = function() {
     _Scene_Item_create.call(this);
     this.createNumberWindow();
+	this.createEffectWindow();
+};
+
+Scene_Item.prototype.createActorWindow = function() {
+	this._effectWindow = new Window_Effect();
+	this.addWindow(this._effectWindow);
+	
+    this._actorWindow = new Window_MenuActor();
+    this._actorWindow.setHelpWindow(this._effectWindow);
+    this._actorWindow.setHandler('ok',     this.onActorOk.bind(this));
+    this._actorWindow.setHandler('cancel', this.onActorCancel.bind(this));
+    this.addWindow(this._actorWindow);
 };
 
 Scene_Item.prototype.createNumberWindow = function() {
@@ -290,17 +308,43 @@ Scene_Item.prototype.createNumberWindow = function() {
 	this.addWindow(this._numberWindow);
 };
 
+Scene_Item.prototype.createEffectWindow = function() {
+    //this._effectWindow = new Window_Effect();
+    this._effectWindow.x = this._numberWindow.x + this._numberWindow.width;
+    this._effectWindow.y = this._actorWindow.y + this._actorWindow.height;
+	//this.addWindow(this._effectWindow);
+};
+
 var _Scene_Item_onItemOK = Scene_Item.prototype.onItemOk;
 Scene_Item.prototype.onItemOk = function() {
 	_Scene_Item_onItemOK.call(this);
 	var number = $gameParty.numItems(this.item());
 	this._numberWindow.refresh(number);
     this._numberWindow.show();
+    this.setGrowItem();
+    
 };
+
+Scene_Item.prototype.setGrowItem = function() {
+	var paramId = false;
+	if(this._actorWindow.index() != 0){
+    }
+    this.item().effects.some(function(effect) {
+	paramId = effect.code == Game_Action.EFFECT_GROW ? effect.dataId : false;
+	    }, this);
+	if (paramId){
+		var param = $gameParty.members()[this._actorWindow.index()].param(paramId);
+		this._effectWindow.setParamId(paramId);
+		this._actorWindow.updateHelp();
+		this._effectWindow.show();
+	}
+};
+
 
 Scene_Item.prototype.onActorCancel = function() {
     Scene_ItemBase.prototype.onActorCancel.call(this);
     this._numberWindow.hide();
+    this._effectWindow.hide();
 };
 
 var _Scene_Item_useItem = Scene_Item.prototype.useItem;
@@ -308,6 +352,23 @@ Scene_Item.prototype.useItem = function() {
     _Scene_Item_useItem.call(this);
     var number = $gameParty.numItems(this.item());
     this._numberWindow.refresh(number);
+	this._effectWindow.refresh();
+};
+
+//-----------------------------------------------------------------------------
+// Window_MenuActor
+//-----------------------------------------------------------------------------
+Window_MenuActor.prototype.setHelpWindowEffect = function(actor) {
+    if (this._helpWindow) {
+        this._helpWindow.setActor(actor);
+    }
+};
+
+
+Window_MenuActor.prototype.updateHelp = function() {
+	if(this.index() >=0){
+    	this.setHelpWindowEffect($gameParty.members()[this.index()]);
+    }
 };
 
 //-----------------------------------------------------------------------------
@@ -329,7 +390,7 @@ Window_Number.prototype.initialize = function() {
 };
 
 Window_Number.prototype.windowWidth = function() {
-    return 240;
+    return 200;
 };
 
 Window_Number.prototype.windowHeight = function() {
@@ -340,10 +401,65 @@ Window_Number.prototype.refresh = function(number) {
     var x = this.textPadding();
     var width = this.contents.width - this.textPadding() * 2;
     this.contents.clear();
-    this.drawText("所持数：", 0, 0, width);
+    this.drawText("所持数:", 0, 0, width);
     this.drawText(number, 0, 0, width, 'right');
 };
 
 
+//-----------------------------------------------------------------------------
+// Window_Effect
+//-----------------------------------------------------------------------------
+
+function Window_Effect() {
+    this.initialize.apply(this, arguments);
+}
+
+Window_Effect.prototype = Object.create(Window_Base.prototype);
+Window_Effect.prototype.constructor = Window_Effect;
+
+Window_Effect.prototype.initialize = function() {
+    var width = this.windowWidth();
+    var height = this.windowHeight();
+    Window_Base.prototype.initialize.call(this, 0, 0, width, height);
+    this._actor = null;
+    this._paramId = 0;
+    this.hide();
+};
+
+Window_Effect.prototype.windowWidth = function() {
+    return 320;
+};
+
+Window_Effect.prototype.windowHeight = function() {
+    return this.fittingHeight(1);
+};
+
+Window_Effect.prototype.setActor = function(actor) {
+    this._actor = actor;
+    this.refresh();
+};
+
+Window_Effect.prototype.setParamId = function(paramId) {
+	this._paramId = paramId;
+};
+
+Window_Effect.prototype.refresh = function() {
+	var param;
+	var name;
+	if( this._paramId == 7 ){
+		param = this._actor.nextRequiredExp();
+		name = TextManager.expNext.format(TextManager.level);
+		this.width = 320;
+	}else{
+		param = this._actor.param(this._paramId);
+		name = TextManager.param(this._paramId);
+		this.width = 200;
+	}
+    var x = this.textPadding();
+    var width = this.width - this.standardPadding() * 2;
+    this.contents.clear();
+    this.drawText(name + ":", 0, 0, width);
+    this.drawText(param, 0, 0, width, 'right');
+};
 
 })();

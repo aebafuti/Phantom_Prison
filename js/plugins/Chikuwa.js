@@ -70,7 +70,7 @@ var Imported = Imported || {};
 Imported.Chikuwa = {};
 
 (function() {
-
+})();
     'use strict';
 
     var parameters = PluginManager.parameters('Chikuwa');
@@ -145,7 +145,8 @@ Imported.Chikuwa = {};
     };
 
     Chikuwa.prototype.set = function(id, param) {
-        if ((!this.isValidId(id) || !this.isValidValue(param))) {
+    	//if ((!this.isValidId(id) || !this.isValidValue(param))) {
+        if (!this.isValidId(id)) {
             console.error('invalid id or value');
             return false;
         }
@@ -258,4 +259,4 @@ Imported.Chikuwa = {};
         return this._chikuwa.get(id);
     };
 
-})();
+
