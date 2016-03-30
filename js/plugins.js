@@ -31,7 +31,7 @@ var $plugins =
 {"name":"TMOmitEquipCommand","status":true,"description":"装備シーンからコマンドウィンドウを削除し、\nスロットウィンドウに２行分のスペースを追加します。","parameters":{}},
 {"name":"TMTopFix","status":true,"description":"パーティの先頭にいるアクターの並び替えを禁止します。","parameters":{}},
 {"name":"TMAutoNewGame","status":true,"description":"起動時に自動ではじめからゲームを開始します。\nWeb用ミニゲームなど、タイトルが不要な場合に使えます。","parameters":{"autoNewGame":"1","allwaysOnTop":"1","autoDevTool":"0"}},
-{"name":"TMBattlerEx","status":true,"description":"エネミーに遠近感や息づかいの表現を追加します。","parameters":{"baseY":"400","breathH":"0.005","mirrorRate":"0"}},
+{"name":"TMBattlerEx","status":false,"description":"エネミーに遠近感や息づかいの表現を追加します。","parameters":{"baseY":"400","breathH":"0.005","mirrorRate":"0"}},
 {"name":"AnotherNewGame","status":true,"description":"アナザーニューゲーム追加プラグイン","parameters":{"name":"会話回想","map_id":"4","map_x":"1","map_y":"1","hidden":"OFF","disable":"OFF"}},
 {"name":"ResidentWindow","status":true,"description":"マップに常駐するステータス＋所持金ウィンドウを生成します。","parameters":{"StartWithHideWindow":"true","FaceWindow_ON":"false","StatusWindow_ON":"true","GoldWindow_ON":"true","FaceWindow_x":"10","FaceWindow_y":"10","FaceWindow_type":"2","FaceFrame_ON":"false","StatusWindow_x":"0","StatusWindow_y":"0","StatusWindow_type":"2","GaugeFrame_ON":"false","StatusWindow_PaddingHeight":"10","TP_Gauge_ON":"false","GoldWindow_x":"636","GoldWindow_y":"550","GoldWindow_type":"0","GoldWindow_width":"180","GoldWindow_height":"60","GoldWindow_IconNumber":"0","GoldWindow_PaddingWidth":"10\r"}},
 {"name":"ExpDtiail","status":true,"description":"経験値を詳細に設定します。","parameters":{"経験値リスト":"プラグインエディタからの設定は不可能です。","自動加算値":"プラグインエディタからの設定は不可能です。"}},
