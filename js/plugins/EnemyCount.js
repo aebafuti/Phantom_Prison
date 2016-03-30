@@ -39,10 +39,12 @@ Game_System.prototype.redEnemy = function(element, index, array) {
 }
 
 Game_System.prototype.redEnemyEncount = function() {
+	if (!this._enemyEncount) this.clearEnemyEncount();
 	return this._enemyEncount.some(this.redEnemy);
 };
 
 Game_System.prototype.redEnemyDefeat = function() {
+	if (!this._enemyDefeat) this.clearEnemyDefeat();
 	return this._enemyDefeat.some(this.redEnemy);
 }
 
