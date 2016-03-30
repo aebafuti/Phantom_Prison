@@ -132,7 +132,7 @@ Game_Screen.prototype.preLoadPicture = function(name) {
 }
 
 Game_Screen.prototype.pictureList = function(spirit) {
-	var list = new Array();
+	var list = [];
 	switch(spirit){
 	case 'Black':
 		list.push('Black_Spirit');
@@ -152,6 +152,8 @@ Game_Screen.prototype.pictureList = function(spirit) {
 		list.push('Blue_Spirit_ExShock');
 		list.push('Blue_Spirit_ExSmile');
 		list.push('Blue_Spirit_ExWeak');
+		list.push('Blue_Spirit_ExSurprise');
+		list.push('Blue_Spirit_ExSneer');
 		break;
 	case 'Gold':
 		list.push('Gold_Spirit');
@@ -184,6 +186,7 @@ Game_Screen.prototype.pictureList = function(spirit) {
 		list.push('Red_Spirit_ExSmile2');
 		list.push('Red_Spirit_ExSulk');
 		list.push('Red_Spirit_ExSurprise');
+		list.push('Red_Spirit_ExSwap');
 		break;
 	case 'Silver':
 		list.push('Silver_Spirit');
@@ -196,6 +199,8 @@ Game_Screen.prototype.pictureList = function(spirit) {
 		list.push('Silver_Spirit_ExSmile');
 		list.push('Silver_Spirit_ExSurprise');
 		list.push('Silver_Spirit_ExGununu');
+		list.push('Silver_Spirit_ExAnger');
+		list.push('Silver_Spirit_ExDrive');
 		break;
 	case 'White':
 		list.push('White_Spirit');
@@ -205,6 +210,7 @@ Game_Screen.prototype.pictureList = function(spirit) {
 		list.push('White_Spirit_ExSmile');
 		list.push('White_Spirit_ExSurprise');
 		list.push('White_Spirit_ExSmile2');
+		list.push('White_Spirit_ExSwap');
 		break;
 	}
 	return list;

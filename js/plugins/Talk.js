@@ -79,18 +79,24 @@ function setTalkList(){
 	talk_list.push('金の聖霊①');
 	talk_list.push('金の聖霊②');
 	talk_list.push('黒と赤');
+	talk_list.push('黒と青');
 	talk_list.push('黒と金');
 	talk_list.push('白と黒');
+	talk_list.push('白と赤');
 	talk_list.push('白と緑');
 	talk_list.push('赤と青');
 	talk_list.push('赤と緑');
+	talk_list.push('赤と銀');
 	talk_list.push('青と白');
 	talk_list.push('青と緑');
+	talk_list.push('青と金');
 	talk_list.push('緑と黒');
+	talk_list.push('緑と銀');
 	talk_list.push('緑と金');
 	talk_list.push('銀と黒');
 	talk_list.push('銀と白');
 	talk_list.push('銀と青');
+	talk_list.push('金と白');
 	talk_list.push('金と赤');
 	talk_list.push('金と銀');
 }
@@ -115,6 +121,9 @@ function talkCondition(key){
 	case '黒と赤': // 
 		return black && red;
 		break;
+	case '黒と青': // 死神と遭遇
+		return black && blue && $gameSystem.enemyEncount(10);
+		break;
 	case '黒と金': // 
 		return black && gold;
 		break;
@@ -124,6 +133,9 @@ function talkCondition(key){
 		break;
 	case '白と黒': // 初めての商人 がON
 		return white && black && $gameSwitches.value(15);
+		break;
+	case '白と赤': // 戦闘回数20以上
+		return white && red && $gameSystem._battleCount >= 20;
 		break;
 	case '白と緑': // 緑が堅剛を覚えている
 		return white && green && $gameActors.actor(6).isLearnedSkill(22);
@@ -135,8 +147,11 @@ function talkCondition(key){
 	case '赤と青': // 赤が業炎を覚えている
 		return red && blue && $gameActors.actor(4).isLearnedSkill(29);
 		break;
-	case '赤と緑': // 残り日数7日未満
-		return red && green && $gameParty.gold() < 7;
+	case '赤と緑': // あと6日
+		return red && green && $gameParty.gold() <= 6;
+		break;
+	case '赤と銀': // 赤敵遭遇
+		return red && silver && $gameSystem.redEnemyEncount();
 		break;
 	case '青の聖霊①':
 	case '青の聖霊②':
@@ -148,12 +163,18 @@ function talkCondition(key){
 	case '青と緑': // 緑が堅剛を覚えている
 		return blue && green && $gameActors.actor(6).isLearnedSkill(22);
 		break;
+	case '青と金': // あと4日
+		return blue && gold && $gameParty.gold() <= 4;
+		break;
 	case '緑の聖霊①':
 	case '緑の聖霊②':
 		return green;
 		break;
 	case '緑と黒': // 白がパーティにいる && 主人公が豪気を覚えている
 		return green && black && white && $gameActors.actor(1).isLearnedSkill(15);
+		break;
+	case '緑と銀': // あと2日
+		return green && silver && $gameParty.gold() <= 2;
 		break;
 	case '緑と金': // 
 		return green && gold;
@@ -174,6 +195,9 @@ function talkCondition(key){
 	case '金の聖霊①':
 	case '金の聖霊②':
 		return gold;
+		break;
+	case '金と白': // あと0日
+		return gold && white && $gameParty.gold() <= 0;
 		break;
 	case '金と赤': // 金が魔力集中を覚えている
 		return gold && red && $gameActors.actor(8).isLearnedSkill(26);
