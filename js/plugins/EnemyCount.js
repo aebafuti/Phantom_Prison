@@ -1,3 +1,11 @@
+
+var _Game_System_initialize = Game_System.prototype.initialize;
+Game_System.prototype.initialize = function() {
+    _Game_System_initialize.call(this);
+    this.clearEnemyEncount();
+    this.clearEnemyDefeat();
+};
+
 Game_System.prototype.addToEnemyEncount = function(enemyId) {
 	if (!this._enemyEncount) this.clearEnemyEncount();
 	this._enemyEncount[enemyId] ? this._enemyEncount[enemyId]++ : this._enemyEncount[enemyId] = 1;
@@ -17,10 +25,12 @@ Game_System.prototype.clearEnemyDefeat = function() {
 };
 
 Game_System.prototype.enemyEncount = function(id) {
+	if (!this._enemyEncount) this.clearEnemyEncount();
 	return id ? this._enemyEncount[id] || this._enemyEncount[id + 30] : this._enemyEncount;
 };
 
 Game_System.prototype.enemyDefeat = function(id) {
+	if (!this._enemyDefeat) this.clearEnemyDefeat();
 	return id ? this._enemyDefeat[id] || this._enemDefeat[id + 30] : this._enemyDefeat;
 };
 

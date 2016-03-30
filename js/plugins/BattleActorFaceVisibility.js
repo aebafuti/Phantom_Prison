@@ -177,7 +177,31 @@
 		_Scene_Battle_update.call(this);
 	    this.standUpdate();
 	};
-
+	
+	var _Scene_Battle_commandSkill = Scene_Battle.prototype.commandSkill;
+	Scene_Battle.prototype.commandSkill = function() {
+	    _Scene_Battle_commandSkill.call(this);
+	    this._escapeHelpWindow.hide();
+	};
+	
+	var _Scene_Battle_commandItem = Scene_Battle.prototype.commandItem;
+	Scene_Battle.prototype.commandItem = function() {
+	    _Scene_Battle_commandItem.call(this);
+	    this._escapeHelpWindow.hide();
+	};
+	
+	var _Scene_Battle_onSkillCancel = Scene_Battle.prototype.onSkillCancel;
+	Scene_Battle.prototype.onSkillCancel = function() {
+	    _Scene_Battle_onSkillCancel.call(this);
+	    if(BattleManager.canEscape()) this._escapeHelpWindow.show();
+	};
+	
+	var _Scene_Battle_onItemCancel = Scene_Battle.prototype.onItemCancel;
+	Scene_Battle.prototype.onItemCancel = function() {
+	    _Scene_Battle_onItemCancel.call(this);
+	    if(BattleManager.canEscape()) this._escapeHelpWindow.show();
+	};
+	
 	Scene_Battle.prototype.standUpdate = function() {
 	    var actor = BattleManager.actor();
 	    if (actor && this._actorId != actor.actorId()) {

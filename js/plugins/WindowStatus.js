@@ -134,7 +134,7 @@ Window_Status.prototype.drawBasicInfo = function(x, y) {
     var lineHeight = this.lineHeight();
     this.drawActorLevel(this._actor, x, y + lineHeight * 0);
     this.drawActorIcons(this._actor, x + 100, y + lineHeight * 0);
-    //this.drawActorSkills(this._actor, x + 220, y + lineHeight * 0);
+    this.drawActorSkills(this._actor, x + 210, y + lineHeight * 0);
     this.drawActorHp(this._actor, x, y + lineHeight * 1);
     this.drawActorMp(this._actor, x, y + lineHeight * 2);
     this.drawExpInfo(12, y+ lineHeight * 4);
@@ -156,7 +156,7 @@ Window_Status.prototype.drawParameters = function(x, y) {
 Window_Status.prototype.drawActorSkills = function(actor, x, y) {
 	var skills = actor.skills();
     var lineHeight = this.lineHeight();
-    for (var i = 0; i < skills.length; i++) {
+    for (var i = 0; i < Math.min(skills.length, 6); i++) {
 		var rect = this.itemRect(i);
         rect.width -= this.textPadding();
         this.drawItemName(skills[i], x, y + lineHeight * i, rect.width);
@@ -174,13 +174,13 @@ Window_Status.prototype.drawExpInfo = function(x, y) {
         value1 = '----';
         value2 = '----';
     }
-    //this.contents.fontSize = 22;
+    this.contents.fontSize = 20;
     this.changeTextColor(this.systemColor());
-    this.drawText(expTotal, x, y + lineHeight * 0, 270);
-    this.drawText(expNext, x, y + lineHeight * 1, 270);
+    this.drawText(expTotal, x, y + lineHeight * 0, 190);
+    this.drawText(expNext, x, y + lineHeight * 1, 190);
     this.resetTextColor();
-    this.drawText(value1, x, y + lineHeight * 0, 270, 'right');
-    this.drawText(value2, x, y + lineHeight * 1, 270, 'right');
+    this.drawText(value1, x, y + lineHeight * 0, 190, 'right');
+    this.drawText(value2, x, y + lineHeight * 1, 190, 'right');
     this.contents.fontSize = this.standardFontSize();
 };
 
