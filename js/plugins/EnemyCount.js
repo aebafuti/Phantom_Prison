@@ -26,12 +26,12 @@ Game_System.prototype.clearEnemyDefeat = function() {
 
 Game_System.prototype.enemyEncount = function(id) {
 	if (!this._enemyEncount) this.clearEnemyEncount();
-	return id ? this._enemyEncount[id] || this._enemyEncount[id + 30] : this._enemyEncount;
+	return id ? this._enemyEncount[id]: this._enemyEncount; // || this._enemyEncount[id + 30] 
 };
 
 Game_System.prototype.enemyDefeat = function(id) {
 	if (!this._enemyDefeat) this.clearEnemyDefeat();
-	return id ? this._enemyDefeat[id] || this._enemDefeat[id + 30] : this._enemyDefeat;
+	return id ? this._enemyDefeat[id]: this._enemyDefeat; // || this._enemDefeat[id + 30] 
 };
 
 Game_System.prototype.redEnemy = function(element, index, array) {
