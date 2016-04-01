@@ -28,6 +28,7 @@ Chikuwa
 ExpDtiail(経験値詳細設定)
 
 ・Shaz 様
+CacheManager
 SmartPath
 
 ・Szyu 様
@@ -61,11 +62,16 @@ YEP_X_VisualHpGauge
 SSEP_BattleSpeedUp
 
 ・トリアコンタン 様(https://twitter.com/triacontane)
+AnotherNewGame
 BattleActorFaceVisibility
 BugFixImageOnLoad
+CommandIcon
 CustomizeConfigDefault
 MapRapid
 MessageWindowPopup
+
+・木星ペンギン 様(http://woodpenguin.blog.fc2.com/)
+VersionSpecified
 
 ・やな 様
 CommonPopupCore

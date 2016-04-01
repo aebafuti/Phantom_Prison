@@ -51,5 +51,6 @@ var $plugins =
 {"name":"CommandIcon","status":true,"description":"アイコン付きコマンドプラグイン","parameters":{}},
 {"name":"EnemyCount","status":true,"description":"","parameters":{}},
 {"name":"debug","status":false,"description":"","parameters":{}},
-{"name":"liply_memoryleak_patch","status":true,"description":"メモリリークパッチ","parameters":{}}
+{"name":"liply_memoryleak_patch","status":true,"description":"メモリリークパッチ","parameters":{}},
+{"name":"CacheManager","status":true,"description":"Selectively clear the image cache for memory usage improvements","parameters":{"Mobile only":"Y","--------------------------------------------":"","Clear All":"N","Clear Animations":"N","Clear Battlebacks":"N","Clear Battlers":"N","Clear Characters":"N","Clear Faces":"N","Clear Parallaxes":"N","Clear Pictures":"Y","Clear System":"N","Clear Tilesets":"N","Clear Titles":"N","Custom Images":""}}
 ];

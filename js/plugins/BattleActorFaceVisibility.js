@@ -81,7 +81,7 @@
 (function () {
     'use strict';
     var pluginName = 'BattleActorFaceVisibility';
-        //=============================================================================
+    //=============================================================================
     // ローカル関数
     //  プラグインパラメータやプラグインコマンドパラメータの整形やチェックをします
     //=============================================================================
@@ -147,6 +147,7 @@
 	Scene_Battle.prototype.createAllWindows = function() {
 		_Scene_Battle_createAllWindows.call(this);
 	   this.createEscapeHelpWindow();
+	   this.createQuickHelpWindow();
 	};
 	
 	Scene_Battle.prototype.createEscapeHelpWindow = function() {
@@ -155,6 +156,11 @@
 	    //this._escapeHelpWindow.x = 0
 	    this._escapeHelpWindow.y = this._actorCommandWindow.y - this._escapeHelpWindow.height;
 		this.addWindow(this._escapeHelpWindow);
+	};
+	
+	Scene_Battle.prototype.createQuickHelpWindow = function() {
+	    this._quickHelpWindow = new Window_QuickHelp();
+		this.addWindow(this._quickHelpWindow);
 	};
 
 
@@ -209,11 +215,13 @@
 		    this._actorId = actor.actorId();
 		    this._standSprite.visible = true;
 		    if(BattleManager.canEscape()) this._escapeHelpWindow.show();
+		    this._quickHelpWindow.hide();
 	    }
 	    if (actor == null && this._actorId != 0) {
 		    this._actorId = 0;
 		    this._standSprite.visible = false;
 		    this._escapeHelpWindow.hide();
+		    this._quickHelpWindow.show();
 	    }
 	};
 
@@ -295,6 +303,57 @@ Window_EscapeHelp.prototype.refresh = function() {
     this.padding = 0;
     var width = this.contentsWidth();
     this.drawText("キャンセル:戦闘/逃走", 4, 0, width, 'left');
+    this.contents.fontSize = this.standardFontSize();
+};
+
+
+//-----------------------------------------------------------------------------
+// Window_QuickHelp
+//
+
+function Window_QuickHelp() {
+    this.initialize.apply(this, arguments);
+}
+
+Window_QuickHelp.prototype = Object.create(Window_Base.prototype);
+Window_QuickHelp.prototype.constructor = Window_QuickHelp;
+
+Window_QuickHelp.prototype.initialize = function() {
+    var width = this.windowWidth();
+    var height = this.windowHeight();
+    Window_Base.prototype.initialize.call(this, 0, 0, width, height);
+    this.refresh();
+    //this.opacity = 0;
+    this.setBackgroundType(1);
+    //this.hide();
+};
+
+Window_QuickHelp.prototype.windowWidth = function() {
+    return 160;
+};
+
+Window_QuickHelp.prototype.windowHeight = function() {
+    return this.fittingHeight(1) - 36;
+};
+
+Window_QuickHelp.prototype.contentsWidth = function() {
+    return this.width;
+};
+
+Window_QuickHelp.prototype.contentsHeight = function() {
+    return this.height;
+};
+
+Window_QuickHelp.prototype.windowY = function() {
+    return ;
+};
+
+Window_QuickHelp.prototype.refresh = function() {
+    this.contents.clear();
+    this.contents.fontSize = 20;
+    this.padding = 0;
+    var width = this.contentsWidth();
+    this.drawText("決定キー:早送り", 4, 0, width, 'left');
     this.contents.fontSize = this.standardFontSize();
 };
 
