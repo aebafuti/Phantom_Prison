@@ -16,6 +16,15 @@ Game_Temp.prototype.initialize = function() {
     this._commonEventId = 0;
     this._destinationX = null;
     this._destinationY = null;
+    this._ore = false;
+};
+
+Game_Temp.prototype.isOre = function() {
+    return this._ore;
+};
+
+Game_Temp.prototype.setOre = function() {
+    this._ore = true;
 };
 
 Game_Temp.prototype.isPlaytest = function() {

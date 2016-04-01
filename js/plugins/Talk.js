@@ -109,6 +109,7 @@ function talkCondition(key){
 	var green = $gameParty.members().contains($gameActors.actor(6));
 	var silver = $gameParty.members().contains($gameActors.actor(7));
 	var gold = $gameParty.members().contains($gameActors.actor(8));
+	var deathEncount = $gameSystem.enemyEncount()[10] || $gameSystem.enemyEncount()[40];
 	
 	switch (key){
 	case '黒の聖霊①':
@@ -122,7 +123,7 @@ function talkCondition(key){
 		return black && red;
 		break;
 	case '黒と青': // 死神と遭遇
-		return black && blue && $gameSystem.enemyEncount(10);
+		return black && blue && deathEncount;
 		break;
 	case '黒と金': // 
 		return black && gold;
