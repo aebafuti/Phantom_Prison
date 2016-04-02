@@ -226,7 +226,7 @@ Imported.ResidentWindow = {};
 (function(){
 
 var inVal = Imported.ResidentWindow;
-inVal.WinON = true;
+inVal.WinON = false;
 inVal.last_WinState = true;
 
 // ---プラグインパラメータの取得-----------------------------------------------------
