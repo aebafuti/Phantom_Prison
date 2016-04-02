@@ -4,8 +4,13 @@
 	font-size: 15px;
 	width : 15em;
 	height : 1.5em;
+	left : 300px;
+	top : 200px;
+	
 }
 #_111_submit{
 	position: absolute; /* */
 	z-index:999; /* */
+	left : 300px;
+	top : 240px;
 }
