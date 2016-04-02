@@ -8,6 +8,8 @@ button69
 ◇プラグイン
 ※それぞれ独自に改造を施している場合があります。
 　本作からの二次使用はおやめください。
+・111 様(http://gamecome.hateblo.jp/)
+111_InputForm
 
 ・Hime 様(http://himeworks.com/2015/11/more-enemy-drops/)
 HIME_MoreEnemyDrops
@@ -76,3 +78,17 @@ VersionSpecified
 ・やな 様
 CommonPopupCore
 GetInformation
+
+
+・饗庭淵
+二次利用など特に構いませんが、
+汎用性についてはまったく考えていないのでそのまま流用しても使いものにはならないと思います。
+
+Counter
+EnemyCount
+GrowItem
+PicturePlugin
+Talk
+Tradesman
+WindowSkill
+WindowStatus

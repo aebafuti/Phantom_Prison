@@ -2466,7 +2466,7 @@ BattleManager.displayDefeatMessage = function() {
 };
 
 BattleManager.displayEscapeSuccessMessage = function() {
-    $gameMessage.add(TextManager.escapeStart.format($gameParty.name()));
+    //$gameMessage.add(TextManager.escapeStart.format($gameParty.name()));
 };
 
 BattleManager.displayEscapeFailureMessage = function() {
