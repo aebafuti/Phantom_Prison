@@ -57,6 +57,7 @@ Game_Troop.prototype.setup = function(troopId) {
         if ($dataEnemies[member.enemyId]) {
             var enemyId = member.enemyId;
             if($gameSwitches.value(22)) enemyId += 20; // 強化敵フラグ
+            if($gameSwitches.value(23)) enemyId += 30; // HARDフラグ
             var x = member.x;
             var y = member.y;
             var enemy = new Game_Enemy(enemyId, x, y);

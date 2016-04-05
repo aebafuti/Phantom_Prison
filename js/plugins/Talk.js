@@ -49,6 +49,7 @@ function sortRuleLast(val, rule){
 
 function talkCheckUnread(){
 	setTalkList();
+	talk_table = {};
 	if(Object.prototype.toString.call($gameVariables.value(51)) === '[object Object]'){
 		talk_table = $gameVariables.value(51);
 	}
