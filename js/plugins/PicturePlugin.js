@@ -16,9 +16,11 @@
     Game_Interpreter.prototype.pluginCommand = function(command, args) {
         _Game_Interpreter_pluginCommand.call(this, command, args);
         if (command === 'PictureChange') {
+        	args[0] = args[0].replace( /4/g , "1" );
         	$gameScreen.changePicture(Number(args[0]),args[1]);
         }
         if (command === 'PictureStand') {
+        	args[0] = args[0].replace( /4/g , "1" );
         	$gameScreen.standPicture(Number(args[0]),args[1]);
         }
         if (command === 'PictureFadeOut') {
@@ -44,9 +46,15 @@
     	var x;
     	var newx;
     	switch (pictureId) {
+    	case 1:
+    	case 4:
+    	case 5:
+			x = 232;
+			newx = 232;
+			break;
 		case 3:
-			x = 404;
-			newx = 454;
+			x = 415;
+			newx = 465;
 			break;
 		case 2:
 			x = 50;
@@ -116,7 +124,7 @@
 
 Game_Screen.prototype.preLoadPicture = function(name) {
 	var spirit;
-	var spiritList = ['Black', 'Blue', 'Gold', 'Green', 'Red','Silver', 'White'];
+	var spiritList = ['Black', 'Blue', 'Gold', 'Green', 'Red','Silver', 'White', 'Dark', 'Slime'];
 	for (i = 0; i < spiritList.length; i++){
 		if (name.indexOf(spiritList[i]) != -1){
 			spirit = spiritList[i];
@@ -164,6 +172,7 @@ Game_Screen.prototype.pictureList = function(spirit) {
 		list.push('Gold_Spirit_ExWeak');
 		list.push('Gold_Spirit_ExWeak2');
 		list.push('Gold_Spirit_ExThink');
+		list.push('Gold_Spirit_ExDum');
 		break;
 	case 'Green':
 		list.push('Green_Spirit');
@@ -211,6 +220,31 @@ Game_Screen.prototype.pictureList = function(spirit) {
 		list.push('White_Spirit_ExSurprise');
 		list.push('White_Spirit_ExSmile2');
 		list.push('White_Spirit_ExSwap');
+		break;
+	case 'Dark':
+		list.push('Dark_Spirit');
+		list.push('Dark_Spirit_ExDrive');
+		list.push('Dark_Spirit_ExImpress');
+		list.push('Dark_Spirit_ExNormal');
+		list.push('Dark_Spirit_ExNormal2');
+		list.push('Dark_Spirit_ExPanic');
+		list.push('Dark_Spirit_ExPuzzle');
+		list.push('Dark_Spirit_ExSerious');
+		list.push('Dark_Spirit_ExSmile');
+		list.push('Dark_Spirit_ExSmile2');
+		list.push('Dark_Spirit_ExSurprise');
+		list.push('Dark_Spirit_ExSurprise2');
+		list.push('Dark_Spirit_ExUwa');
+		break;
+	case 'Slime':
+		list.push('Slime_Girl');
+		list.push('Slime_Girl_ExAnger');
+		list.push('Slime_Girl_ExDum');
+		list.push('Slime_Girl_ExNormal');
+		list.push('Slime_Girl_ExPuzzle');
+		list.push('Slime_Girl_ExSurprise');
+		list.push('Slime_Girl_ExSurprise2');
+		list.push('Slime_Girl_ExSneer');
 		break;
 	}
 	return list;

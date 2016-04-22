@@ -4751,6 +4751,13 @@ Object.defineProperty(TilingSprite.prototype, 'opacity', {
     configurable: true
 });
 
+TilingSprite.prototype.generateTilingTexture = function(arg) {
+    PIXI.TilingSprite.prototype.generateTilingTexture.call(this, arg);
+    // Purge from Pixi's Cache
+    if (this.tilingTexture.canvasBuffer)
+        PIXI.Texture.removeTextureFromCache(this.tilingTexture.canvasBuffer.canvas._pixiId);
+};
+
 /**
  * Updates the tiling sprite for each frame.
  *

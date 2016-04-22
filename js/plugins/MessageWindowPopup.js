@@ -451,7 +451,9 @@
         		break;
         	case -3:
         		this.x = (Graphics.boxWidth - this.width) - shippo;
-        		this._windowPauseSignSprite.x = this._width - 24;
+        		break;
+        	case -4:
+        		this.x = (Graphics.boxWidth - this.width) / 2;
         		break;
         	}
         	//this.x = (Graphics.boxWidth - this.width) / 2;

@@ -1099,7 +1099,7 @@ Game_Picture.prototype.updateTone = function() {
 };
 
 Game_Picture.prototype.updateRotation = function() {
-    if (this._rotationSpeed > 0) {
+    if (this._rotationSpeed !== 0) {
         this._angle += this._rotationSpeed / 2;
     }
 };
@@ -4137,12 +4137,12 @@ Game_Actor.prototype.onPlayerWalk = function() {
     this.clearResult();
     this.checkFloorEffect();
     if ($gamePlayer.isNormal()) {
-        this.turnEndOnMap();
-        this.states().forEach(function(state) {
-            this.updateStateSteps(state);
-        }, this);
-        this.showAddedStates();
-        this.showRemovedStates();
+        //this.turnEndOnMap();
+        //this.states().forEach(function(state) {
+            //this.updateStateSteps(state);
+        //}, this);
+        //this.showAddedStates();
+        //this.showRemovedStates();
     }
 };
 

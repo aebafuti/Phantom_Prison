@@ -58,6 +58,7 @@ Game_Troop.prototype.setup = function(troopId) {
             var enemyId = member.enemyId;
             if($gameSwitches.value(22)) enemyId += 20; // 強化敵フラグ
             if($gameSwitches.value(23)) enemyId += 30; // HARDフラグ
+            if($gameSwitches.value(25)) enemyId += 1; // 金スライムフラグ
             var x = member.x;
             var y = member.y;
             var enemy = new Game_Enemy(enemyId, x, y);

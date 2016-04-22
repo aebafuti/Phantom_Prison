@@ -116,7 +116,23 @@
         //ANGSettingManager.enable =
         //    angInfo['enable'] !== undefined ? angInfo['enable'] : parameters['disable'].toUpperCase() !== "ON";
     };
+    
+    Scene_Title.prototype.gameClear = function() {
+    	var chikuwa = new Chikuwa();
+    	return chikuwa.get(3);
+    }
 
+	Scene_Title.prototype.createBackground = function() {
+		if(this.gameClear()){
+			this._backSprite1 = new Sprite(ImageManager.loadTitle1('title2'));
+		}else{
+	    	this._backSprite1 = new Sprite(ImageManager.loadTitle1($dataSystem.title1Name));
+	    }
+	    this._backSprite2 = new Sprite(ImageManager.loadTitle2($dataSystem.title2Name));
+	    this.addChild(this._backSprite1);
+	    this.addChild(this._backSprite2);
+	};
+	
     Scene_Title.prototype.commandNewGameSecond = function() {
         var preMapId = $dataSystem.startMapId;
         var preStartX = $dataSystem.startX;

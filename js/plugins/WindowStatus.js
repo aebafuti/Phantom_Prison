@@ -133,7 +133,7 @@ Window_Status.prototype.lineColor = function() {
 Window_Status.prototype.drawBasicInfo = function(x, y) {
     var lineHeight = this.lineHeight();
     this.drawActorLevel(this._actor, x, y + lineHeight * 0);
-    this.drawActorIcons(this._actor, x + 100, y + lineHeight * 0);
+    this.drawActorIcons(this._actor, x + 80, y + lineHeight * 0);
     this.drawActorSkills(this._actor, x + 210, y + lineHeight * 0);
     this.drawActorHp(this._actor, x, y + lineHeight * 1);
     this.drawActorMp(this._actor, x, y + lineHeight * 2);

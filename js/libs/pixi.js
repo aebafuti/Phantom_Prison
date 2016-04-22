@@ -1,10 +1,10 @@
 /**
  * @license
- * pixi.js - v2.2.9
+ * pixi.js - v2.2.10
  * Copyright (c) 2012-2014, Mat Groves
  * http://goodboydigital.com/
  *
- * Compiled: 2015-04-08
+ * Compiled: 2016-01-31
  *
  * pixi.js is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license.php
@@ -274,7 +274,7 @@ PIXI.Point.prototype.clone = function()
 /**
  * Sets the point to a new x and y position.
  * If y is omitted, both x and y will be set to x.
- *
+ * 
  * @method set
  * @param [x=0] {Number} position of the point on the x axis
  * @param [y=0] {Number} position of the point on the y axis
@@ -417,7 +417,7 @@ PIXI.Polygon = function(points)
      * An array of the points of this polygon
      * @property points
      * @type Array(Point)|Array(Number)
-     *
+     * 
      */
     this.points = points;
 
@@ -678,7 +678,7 @@ PIXI.Ellipse.prototype.constructor = PIXI.Ellipse;
  * @param y {Number} The Y coordinate of the upper-left corner of the rounded rectangle
  * @param width {Number} The overall width of this rounded rectangle
  * @param height {Number} The overall height of this rounded rectangle
- * @param radius {Number} Controls the radius of the rounded corners
+ * @param radius {Number} Controls the radius of the rounded corners 
  */
 PIXI.RoundedRectangle = function(x, y, width, height, radius)
 {
@@ -772,8 +772,8 @@ PIXI.RoundedRectangle.prototype.constructor = PIXI.RoundedRectangle;
  */
 
 /**
- * The Matrix class is now an object, which makes it a lot faster,
- * here is a representation of it :
+ * The Matrix class is now an object, which makes it a lot faster, 
+ * here is a representation of it : 
  * | a | b | tx|
  * | c | d | ty|
  * | 0 | 0 | 1 |
@@ -922,7 +922,7 @@ PIXI.Matrix.prototype.applyInverse = function(pos, newPos)
     newPos = newPos || new PIXI.Point();
 
     var id = 1 / (this.a * this.d + this.c * -this.b);
-
+     
     newPos.x = this.d * id * pos.x + -this.c * id * pos.y + (this.ty * this.c - this.tx * this.d) * id;
     newPos.y = this.a * id * pos.y + -this.b * id * pos.x + (-this.ty * this.a + this.tx * this.b) * id;
 
@@ -931,7 +931,7 @@ PIXI.Matrix.prototype.applyInverse = function(pos, newPos)
 
 /**
  * Translates the matrix on the x and y.
- *
+ * 
  * @method translate
  * @param {Number} x
  * @param {Number} y
@@ -941,13 +941,13 @@ PIXI.Matrix.prototype.translate = function(x, y)
 {
     this.tx += x;
     this.ty += y;
-
+    
     return this;
 };
 
 /**
  * Applies a scale transformation to the matrix.
- *
+ * 
  * @method scale
  * @param {Number} x The amount to scale horizontally
  * @param {Number} y The amount to scale vertically
@@ -987,13 +987,13 @@ PIXI.Matrix.prototype.rotate = function(angle)
     this.d = c1 * sin+this.d * cos;
     this.tx = tx1 * cos - this.ty * sin;
     this.ty = tx1 * sin + this.ty * cos;
-
+ 
     return this;
 };
 
 /**
  * Appends the given Matrix to this Matrix.
- *
+ * 
  * @method append
  * @param {Matrix} matrix
  * @return {Matrix} This matrix. Good for chaining method calls.
@@ -1012,13 +1012,13 @@ PIXI.Matrix.prototype.append = function(matrix)
 
     this.tx = matrix.tx * a1 + matrix.ty * c1 + this.tx;
     this.ty = matrix.tx * b1 + matrix.ty * d1 + this.ty;
-
+    
     return this;
 };
 
 /**
  * Resets this Matix to an identity (default) matrix.
- *
+ * 
  * @method identity
  * @return {Matrix} This matrix. Good for chaining method calls.
  */
@@ -1254,7 +1254,7 @@ PIXI.DisplayObject = function()
     /*
      * MOUSE Callbacks
      */
-
+    
     /**
      * A callback that is used when the users mouse rolls over the displayObject
      * @method mouseover
@@ -1515,7 +1515,7 @@ PIXI.DisplayObject.prototype.updateTransform = function()
         d  =  this._cr * this.scale.y;
         tx =  this.position.x;
         ty =  this.position.y;
-
+        
         // check for pivot.. not often used so geared towards that fact!
         if(this.pivot.x || this.pivot.y)
         {
@@ -1531,7 +1531,7 @@ PIXI.DisplayObject.prototype.updateTransform = function()
         wt.tx = tx * pt.a + ty * pt.c + pt.tx;
         wt.ty = tx * pt.b + ty * pt.d + pt.ty;
 
-
+        
     }
     else
     {
@@ -1608,10 +1608,10 @@ PIXI.DisplayObject.prototype.generateTexture = function(resolution, scaleMode, r
     var bounds = this.getLocalBounds();
 
     var renderTexture = new PIXI.RenderTexture(bounds.width | 0, bounds.height | 0, renderer, scaleMode, resolution);
-
+    
     PIXI.DisplayObject._tempMatrix.tx = -bounds.x;
     PIXI.DisplayObject._tempMatrix.ty = -bounds.y;
-
+    
     renderTexture.render(this, PIXI.DisplayObject._tempMatrix);
 
     return renderTexture;
@@ -1651,7 +1651,7 @@ PIXI.DisplayObject.prototype.toGlobal = function(position)
  */
 PIXI.DisplayObject.prototype.toLocal = function(position, from)
 {
-     //
+     // 
     if (from)
     {
         position = from.toGlobal(position);
@@ -1714,7 +1714,7 @@ PIXI.DisplayObject.prototype._generateCachedSprite = function()
 
     PIXI.DisplayObject._tempMatrix.tx = -bounds.x;
     PIXI.DisplayObject._tempMatrix.ty = -bounds.y;
-
+    
     this._cachedSprite.texture.render(this, PIXI.DisplayObject._tempMatrix, true);
 
     this._cachedSprite.anchor.x = -( bounds.x / bounds.width );
@@ -1828,7 +1828,7 @@ PIXI.DisplayObjectContainer = function()
     this.children = [];
 
     // fast access to update transform..
-
+    
 };
 
 // constructor
@@ -1847,7 +1847,7 @@ Object.defineProperty(PIXI.DisplayObjectContainer.prototype, 'width', {
         return this.scale.x * this.getLocalBounds().width;
     },
     set: function(value) {
-
+        
         var width = this.getLocalBounds().width;
 
         if(width !== 0)
@@ -1859,7 +1859,7 @@ Object.defineProperty(PIXI.DisplayObjectContainer.prototype, 'width', {
             this.scale.x = 1;
         }
 
-
+        
         this._width = value;
     }
 });
@@ -2008,7 +2008,7 @@ PIXI.DisplayObjectContainer.prototype.getChildAt = function(index)
         throw new Error('getChildAt: Supplied index '+ index +' does not exist in the child list, or the supplied DisplayObject must be a child of the caller');
     }
     return this.children[index];
-
+    
 };
 
 /**
@@ -2022,7 +2022,7 @@ PIXI.DisplayObjectContainer.prototype.removeChild = function(child)
 {
     var index = this.children.indexOf( child );
     if(index === -1)return;
-
+    
     return this.removeChildAt( index );
 };
 
@@ -2130,13 +2130,13 @@ PIXI.DisplayObjectContainer.prototype.getBounds = function()
     for(var i=0,j=this.children.length; i<j; i++)
     {
         var child = this.children[i];
-
+        
         if(!child.visible)continue;
 
         childVisible = true;
 
         childBounds = this.children[i].getBounds();
-
+     
         minX = minX < childBounds.x ? minX : childBounds.x;
         minY = minY < childBounds.y ? minY : childBounds.y;
 
@@ -2159,7 +2159,7 @@ PIXI.DisplayObjectContainer.prototype.getBounds = function()
 
     // TODO: store a reference so that if this function gets called again in the render cycle we do not have to recalculate
     //this._currentBounds = bounds;
-
+   
     return bounds;
 };
 
@@ -2220,7 +2220,7 @@ PIXI.DisplayObjectContainer.prototype.removeStageReference = function()
     }
 
     if(this._interactive)this.stage.dirty = true;
-
+    
     this.stage = null;
 };
 
@@ -2228,24 +2228,24 @@ PIXI.DisplayObjectContainer.prototype.removeStageReference = function()
 * Renders the object using the WebGL renderer
 *
 * @method _renderWebGL
-* @param renderSession {RenderSession}
+* @param renderSession {RenderSession} 
 * @private
 */
 PIXI.DisplayObjectContainer.prototype._renderWebGL = function(renderSession)
 {
     if(!this.visible || this.alpha <= 0)return;
-
+    
     if(this._cacheAsBitmap)
     {
         this._renderCachedSprite(renderSession);
         return;
     }
-
+    
     var i,j;
 
     if(this._mask || this._filters)
     {
-
+        
         // push filter first as we need to ensure the stencil buffer is correct for any masking
         if(this._filters)
         {
@@ -2270,7 +2270,7 @@ PIXI.DisplayObjectContainer.prototype._renderWebGL = function(renderSession)
 
         if(this._mask)renderSession.maskManager.popMask(this._mask, renderSession);
         if(this._filters)renderSession.filterManager.popFilter();
-
+        
         renderSession.spriteBatch.start();
     }
     else
@@ -2287,7 +2287,7 @@ PIXI.DisplayObjectContainer.prototype._renderWebGL = function(renderSession)
 * Renders the object using the Canvas renderer
 *
 * @method _renderCanvas
-* @param renderSession {RenderSession}
+* @param renderSession {RenderSession} 
 * @private
 */
 PIXI.DisplayObjectContainer.prototype._renderCanvas = function(renderSession)
@@ -2357,7 +2357,7 @@ PIXI.Sprite = function(texture)
      * @type Texture
      */
     this.texture = texture || PIXI.Texture.emptyTexture;
-
+    
     /**
      * The width of the sprite (this is initially set by the texture)
      *
@@ -2520,7 +2520,7 @@ PIXI.Sprite.prototype.getBounds = function(matrix)
         if(d < 0)d *= -1;
 
         // this means there is no rotation going on right? RIGHT?
-        // if thats the case then we can avoid checking the bound values! yay
+        // if thats the case then we can avoid checking the bound values! yay         
         minX = a * w1 + tx;
         maxX = a * w0 + tx;
         minY = d * h1 + ty;
@@ -2704,9 +2704,9 @@ PIXI.Sprite.prototype._renderCanvas = function(renderSession)
                 this.worldTransform.ty * renderSession.resolution);
         }
 
+       
 
-
-
+     
         if (this.tint !== 0xFFFFFF)
         {
             if (this.cachedTint !== this.tint)
@@ -3054,10 +3054,10 @@ PIXI.MovieClip.prototype.constructor = PIXI.MovieClip;
 * @readOnly
 */
 Object.defineProperty( PIXI.MovieClip.prototype, 'totalFrames', {
-    get: function() {
+	get: function() {
 
-        return this.textures.length;
-    }
+		return this.textures.length;
+	}
 });
 
 /**
@@ -3179,12 +3179,46 @@ PIXI.MovieClip.fromImages = function(images)
 };
 
 /**
+ * A short hand way of creating a movieclip from frames number, frame base name, frame number padding and image extension
+ *
+ * @static
+ * @method fromSettings
+ * @param framesNum {Number} Number of movieclip frames
+ * @param baseName {String} Base name of each frame.
+ * @param padding {String} Frames number padding (when each frame is something like 0000, 0001, 0002, 0003, etc. - padding 0000)
+ * @param firstFrame {Number} Which is first frame. Default is 0.
+ * @param frameExtension {String} Extension added to each frame's name.
+ * @return {MovieClip}
+ */
+PIXI.MovieClip.fromSettings = function( framesNum, baseName, padding, firstFrame, frameExtension )
+{
+    var textures = [];
+
+    var generateFrameName = function( frame ) {
+        var name = baseName;
+        if (padding) {
+            name += padding.substring(0, padding.length - frame.length) + frame;
+        }
+        if (frameExtension) {
+            name += frameExtension;
+        }
+        return name;
+    };
+
+    for (var i = firstFrame || 0; i < framesNum; i++) {
+        textures.push(PIXI.Texture.fromFrame( generateFrameName( i.toString() ) ));
+    }
+
+    return new PIXI.MovieClip(textures);
+};
+
+/**
  * @author Mat Groves http://matgroves.com/ @Doormat23
  */
 
 /**
  * A target and pass info object for filters.
- *
+ * 
  * @class FilterBlock
  * @constructor
  */
@@ -3348,7 +3382,7 @@ PIXI.Text.prototype.setStyle = function(style)
     style.strokeThickness = style.strokeThickness || 0;
     style.wordWrap = style.wordWrap || false;
     style.wordWrapWidth = style.wordWrapWidth || 100;
-
+    
     style.dropShadow = style.dropShadow || false;
     style.dropShadowAngle = style.dropShadowAngle || Math.PI / 6;
     style.dropShadowDistance = style.dropShadowDistance || 4;
@@ -3408,10 +3442,10 @@ PIXI.Text.prototype.updateText = function()
     if(this.style.dropShadow)width += this.style.dropShadowDistance;
 
     this.canvas.width = ( width + this.context.lineWidth ) * this.resolution;
-
+    
     //calculate text height
     var lineHeight = this.style.lineHeight || fontProperties.fontSize + this.style.strokeThickness;
-
+ 
     var height = lineHeight * lines.length;
     if(this.style.dropShadow)height += this.style.dropShadowDistance;
 
@@ -3420,7 +3454,7 @@ PIXI.Text.prototype.updateText = function()
     this.context.scale( this.resolution, this.resolution);
 
     if(navigator.isCocoonJS) this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
-
+    
     // used for debugging..
     //this.context.fillStyle ="#FF0000"
     //this.context.fillRect(0, 0, this.canvas.width,this.canvas.height);
@@ -3466,7 +3500,7 @@ PIXI.Text.prototype.updateText = function()
 
     //set canvas text styles
     this.context.fillStyle = this.style.fill;
-
+    
     //draw lines line by line
     for (i = 0; i < lines.length; i++)
     {
@@ -3522,7 +3556,7 @@ PIXI.Text.prototype.updateTexture = function()
 * Renders the object using the WebGL renderer
 *
 * @method _renderWebGL
-* @param renderSession {RenderSession}
+* @param renderSession {RenderSession} 
 * @private
 */
 PIXI.Text.prototype._renderWebGL = function(renderSession)
@@ -3542,7 +3576,7 @@ PIXI.Text.prototype._renderWebGL = function(renderSession)
 * Renders the object using the Canvas renderer
 *
 * @method _renderCanvas
-* @param renderSession {RenderSession}
+* @param renderSession {RenderSession} 
 * @private
 */
 PIXI.Text.prototype._renderCanvas = function(renderSession)
@@ -3554,7 +3588,7 @@ PIXI.Text.prototype._renderCanvas = function(renderSession)
         this.updateText();
         this.dirty = false;
     }
-
+     
     PIXI.Sprite.prototype._renderCanvas.call(this, renderSession);
 };
 
@@ -3572,7 +3606,7 @@ PIXI.Text.prototype.determineFontProperties = function(fontStyle)
     if(!properties)
     {
         properties = {};
-
+        
         var canvas = PIXI.Text.fontPropertiesCanvas;
         var context = PIXI.Text.fontPropertiesContext;
 
@@ -5085,12 +5119,12 @@ PIXI.InteractionManager.prototype.onTouchCancel = function(event)
  * @constructor
  * @param backgroundColor {Number} the background color of the stage, you have to pass this in is in hex format
  *      like: 0xFFFFFF for white
- *
- * Creating a stage is a mandatory process when you use Pixi, which is as simple as this :
+ * 
+ * Creating a stage is a mandatory process when you use Pixi, which is as simple as this : 
  * var stage = new PIXI.Stage(0xFFFFFF);
  * where the parameter given is the background colour of the stage, in hex
  * you will use this stage instance to add your sprites to it and therefore to the renderer
- * Here is how to add a sprite to the stage :
+ * Here is how to add a sprite to the stage : 
  * stage.addChild(sprite);
  */
 PIXI.Stage = function(backgroundColor)
@@ -5212,7 +5246,7 @@ PIXI.Stage.prototype.getMousePosition = function()
 /**
  * @author Mat Groves http://matgroves.com/ @Doormat23
  */
-
+ 
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
 
@@ -5222,7 +5256,7 @@ PIXI.Stage.prototype.getMousePosition = function()
 
 /**
  * A polyfill for requestAnimationFrame
- * You can actually use both requestAnimationFrame and requestAnimFrame,
+ * You can actually use both requestAnimationFrame and requestAnimFrame, 
  * you will still benefit from the polyfill
  *
  * @method requestAnimationFrame
@@ -5358,7 +5392,7 @@ PIXI.packColorRGBA = function(r, g, b, a)//r, g, b, a)
    // var g = (i / 4096.0)%64 / 64;
   //  var b = (i / 64.0)%64 / 64;
   //  var a = (i)%64 / 64;
-
+     
   //  console.log(r, g, b, a);
   //  return i;
 
@@ -5422,7 +5456,7 @@ PIXI.getNextPowerOfTwo = function(number)
  * @method isPowerOfTwo
  * @param width {Number}
  * @param height {Number}
- * @return {Boolean}
+ * @return {Boolean} 
  */
 PIXI.isPowerOfTwo = function(width, height)
 {
@@ -5729,14 +5763,14 @@ PIXI.Event.prototype.stopImmediatePropagation = function stopImmediatePropagatio
  * @static
  * @param width=800 {Number} the width of the renderers view
  * @param height=600 {Number} the height of the renderers view
- *
+ * 
  * @param [options] {Object} The optional renderer parameters
  * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
  * @param [options.transparent=false] {Boolean} If the render view is transparent, default false
  * @param [options.antialias=false] {Boolean} sets antialias (only applicable in chrome at the moment)
  * @param [options.preserveDrawingBuffer=false] {Boolean} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
  * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
- *
+ * 
  */
 PIXI.autoDetectRenderer = function(width, height, options)
 {
@@ -5763,22 +5797,22 @@ PIXI.autoDetectRenderer = function(width, height, options)
 /**
  * This helper function will automatically detect which renderer you should be using.
  * This function is very similar to the autoDetectRenderer function except that is will return a canvas renderer for android.
- * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
+ * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing. 
  * This function will likely change and update as webGL performance improves on these devices.
- *
+ * 
  * @method autoDetectRecommendedRenderer
  * @for PIXI
  * @static
  * @param width=800 {Number} the width of the renderers view
  * @param height=600 {Number} the height of the renderers view
- *
+ * 
  * @param [options] {Object} The optional renderer parameters
  * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
  * @param [options.transparent=false] {Boolean} If the render view is transparent, default false
  * @param [options.antialias=false] {Boolean} sets antialias (only applicable in chrome at the moment)
  * @param [options.preserveDrawingBuffer=false] {Boolean} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
  * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
- *
+ * 
  */
 PIXI.autoDetectRecommendedRenderer = function(width, height, options)
 {
@@ -6468,7 +6502,7 @@ PIXI.PixiFastShader = function(gl)
      * @private
      */
     this._UID = PIXI._UID++;
-
+    
     /**
      * @property gl
      * @type WebGLContext
@@ -6538,7 +6572,7 @@ PIXI.PixiFastShader = function(gl)
      * @type Number
      */
     this.textureCount = 0;
-
+    
     this.init();
 };
 
@@ -6546,7 +6580,7 @@ PIXI.PixiFastShader.prototype.constructor = PIXI.PixiFastShader;
 
 /**
 * Initialises the shader.
-*
+* 
 * @method init
 */
 PIXI.PixiFastShader.prototype.init = function()
@@ -6554,7 +6588,7 @@ PIXI.PixiFastShader.prototype.init = function()
     var gl = this.gl;
 
     var program = PIXI.compileProgram(gl, this.vertexSrc, this.fragmentSrc);
-
+    
     gl.useProgram(program);
 
     // get and store the uniforms for the shader
@@ -6574,7 +6608,7 @@ PIXI.PixiFastShader.prototype.init = function()
 
     this.aTextureCoord = gl.getAttribLocation(program, 'aTextureCoord');
     this.colorAttribute = gl.getAttribLocation(program, 'aColor');
-
+   
     // Begin worst hack eva //
 
     // WHY??? ONLY on my chrome pixel the line above returns -1 when using filters?
@@ -6587,7 +6621,7 @@ PIXI.PixiFastShader.prototype.init = function()
     }
 
     this.attributes = [this.aVertexPosition, this.aPositionCoord,  this.aScale, this.aRotation, this.aTextureCoord, this.colorAttribute];
-
+    
     // End worst hack eva //
 
     this.program = program;
@@ -6595,7 +6629,7 @@ PIXI.PixiFastShader.prototype.init = function()
 
 /**
 * Destroys the shader.
-*
+* 
 * @method destroy
 */
 PIXI.PixiFastShader.prototype.destroy = function()
@@ -6624,7 +6658,7 @@ PIXI.StripShader = function(gl)
      * @private
      */
     this._UID = PIXI._UID++;
-
+    
     /**
      * @property gl
      * @type WebGLContext
@@ -6688,7 +6722,7 @@ PIXI.StripShader.prototype.constructor = PIXI.StripShader;
 
 /**
 * Initialises the shader.
-*
+* 
 * @method init
 */
 PIXI.StripShader.prototype.init = function()
@@ -6719,7 +6753,7 @@ PIXI.StripShader.prototype.init = function()
 
 /**
 * Destroys the shader.
-*
+* 
 * @method destroy
 */
 PIXI.StripShader.prototype.destroy = function()
@@ -6748,7 +6782,7 @@ PIXI.PrimitiveShader = function(gl)
      * @private
      */
     this._UID = PIXI._UID++;
-
+ 
     /**
      * @property gl
      * @type WebGLContext
@@ -6807,7 +6841,7 @@ PIXI.PrimitiveShader.prototype.constructor = PIXI.PrimitiveShader;
 
 /**
 * Initialises the shader.
-*
+* 
 * @method init
 */
 PIXI.PrimitiveShader.prototype.init = function()
@@ -6837,7 +6871,7 @@ PIXI.PrimitiveShader.prototype.init = function()
 
 /**
 * Destroys the shader.
-*
+* 
 * @method destroy
 */
 PIXI.PrimitiveShader.prototype.destroy = function()
@@ -6907,7 +6941,7 @@ PIXI.ComplexPrimitiveShader = function(gl)
         'uniform mat3 translationMatrix;',
         'uniform vec2 projectionVector;',
         'uniform vec2 offsetVector;',
-
+        
         'uniform vec3 tint;',
         'uniform float alpha;',
         'uniform vec3 color;',
@@ -6929,7 +6963,7 @@ PIXI.ComplexPrimitiveShader.prototype.constructor = PIXI.ComplexPrimitiveShader;
 
 /**
 * Initialises the shader.
-*
+* 
 * @method init
 */
 PIXI.ComplexPrimitiveShader.prototype.init = function()
@@ -6960,7 +6994,7 @@ PIXI.ComplexPrimitiveShader.prototype.init = function()
 
 /**
 * Destroys the shader.
-*
+* 
 * @method destroy
 */
 PIXI.ComplexPrimitiveShader.prototype.destroy = function()
@@ -7023,27 +7057,27 @@ PIXI.WebGLGraphics.renderGraphics = function(graphics, renderSession)//projectio
 
             // render quad..
             gl.drawElements(gl.TRIANGLE_FAN, 4, gl.UNSIGNED_SHORT, ( webGLData.indices.length - 4 ) * 2 );
-
+            
             renderSession.stencilManager.popStencil(graphics, webGLData, renderSession);
         }
         else
         {
             webGLData = webGL.data[i];
-
+           
 
             renderSession.shaderManager.setShader( shader );//activatePrimitiveShader();
             shader = renderSession.shaderManager.primitiveShader;
             gl.uniformMatrix3fv(shader.translationMatrix, false, graphics.worldTransform.toArray(true));
-
+            
             gl.uniform1f(shader.flipY, 1);
-
+            
             gl.uniform2f(shader.projectionVector, projection.x, -projection.y);
             gl.uniform2f(shader.offsetVector, -offset.x, -offset.y);
 
             gl.uniform3fv(shader.tintColor, PIXI.hex2rgb(graphics.tint));
 
             gl.uniform1f(shader.alpha, graphics.worldAlpha);
-
+            
 
             gl.bindBuffer(gl.ARRAY_BUFFER, webGLData.buffer);
 
@@ -7091,13 +7125,13 @@ PIXI.WebGLGraphics.updateGraphics = function(graphics, gl)
             PIXI.WebGLGraphics.graphicsDataPool.push( graphicsData );
         }
 
-        // clear the array and reset the index..
+        // clear the array and reset the index.. 
         webGL.data = [];
         webGL.lastIndex = 0;
     }
-
+    
     var webGLData;
-
+    
     // loop through the graphics datas and construct each one..
     // if the object is a complex fill then the new stencil buffer technique will be used
     // other wise graphics objects will be pushed into a batch..
@@ -7126,7 +7160,7 @@ PIXI.WebGLGraphics.updateGraphics = function(graphics, gl)
                     if(data.points.length < 6 * 2)
                     {
                         webGLData = PIXI.WebGLGraphics.switchMode(webGL, 0);
-
+                        
                         var canDrawUsingSimple = PIXI.WebGLGraphics.buildPoly(data, webGLData);
                    //     console.log(canDrawUsingSimple);
 
@@ -7136,7 +7170,7 @@ PIXI.WebGLGraphics.updateGraphics = function(graphics, gl)
                             webGLData = PIXI.WebGLGraphics.switchMode(webGL, 1);
                             PIXI.WebGLGraphics.buildComplexPoly(data, webGLData);
                         }
-
+                        
                     }
                     else
                     {
@@ -7156,7 +7190,7 @@ PIXI.WebGLGraphics.updateGraphics = function(graphics, gl)
         else
         {
             webGLData = PIXI.WebGLGraphics.switchMode(webGL, 0);
-
+            
             if(data.type === PIXI.Graphics.RECT)
             {
                 PIXI.WebGLGraphics.buildRectangle(data, webGLData);
@@ -7325,8 +7359,8 @@ PIXI.WebGLGraphics.buildRoundedRectangle = function(graphicsData, webGLData)
 
         var triangles = PIXI.PolyK.Triangulate(recPoints);
 
-        //
-
+        // 
+        
         var i = 0;
         for (i = 0; i < triangles.length; i+=3)
         {
@@ -7424,7 +7458,7 @@ PIXI.WebGLGraphics.buildCircle = function(graphicsData, webGLData)
     var y = circleData.y;
     var width;
     var height;
-
+    
     // TODO - bit hacky??
     if(graphicsData.type === PIXI.Graphics.CIRC)
     {
@@ -7618,10 +7652,10 @@ PIXI.WebGLGraphics.buildLine = function(graphicsData, webGLData)
 
         denom = a1*b2 - a2*b1;
 
-        if(Math.abs(denom) < 0.1 )
+        if(Math.abs(denom) < 0.00001 )
         {
 
-            denom+=10.1;
+            denom+=10.00001;
             verts.push(p2x - perpx , p2y - perpy,
                 r, g, b, alpha);
 
@@ -7753,8 +7787,8 @@ PIXI.WebGLGraphics.buildComplexPoly = function(graphicsData, webGLData)
                 maxX, maxY,
                 minX, maxY);
 
-    // push a quad onto the end..
-
+    // push a quad onto the end.. 
+    
     //TODO - this aint needed!
     var length = points.length / 2;
     for (i = 0; i < length; i++)
@@ -8390,7 +8424,7 @@ PIXI.WebGLRenderer.prototype.destroy = function()
 };
 
 /**
- * Maps Pixi blend modes to WebGL blend modes.
+ * Maps Pixi blend modes to WebGL blend modes. It works only for pre-multiplied textures.
  *
  * @method mapBlendModes
  */
@@ -8403,9 +8437,9 @@ PIXI.WebGLRenderer.prototype.mapBlendModes = function()
         PIXI.blendModesWebGL = [];
 
         PIXI.blendModesWebGL[PIXI.blendModes.NORMAL]        = [gl.ONE,       gl.ONE_MINUS_SRC_ALPHA];
-        PIXI.blendModesWebGL[PIXI.blendModes.ADD]           = [gl.SRC_ALPHA, gl.DST_ALPHA];
+        PIXI.blendModesWebGL[PIXI.blendModes.ADD]           = [gl.ONE,       gl.DST_ALPHA];
         PIXI.blendModesWebGL[PIXI.blendModes.MULTIPLY]      = [gl.DST_COLOR, gl.ONE_MINUS_SRC_ALPHA];
-        PIXI.blendModesWebGL[PIXI.blendModes.SCREEN]        = [gl.SRC_ALPHA, gl.ONE];
+        PIXI.blendModesWebGL[PIXI.blendModes.SCREEN]        = [gl.ONE,       gl.ONE_MINUS_SRC_COLOR];
         PIXI.blendModesWebGL[PIXI.blendModes.OVERLAY]       = [gl.ONE,       gl.ONE_MINUS_SRC_ALPHA];
         PIXI.blendModesWebGL[PIXI.blendModes.DARKEN]        = [gl.ONE,       gl.ONE_MINUS_SRC_ALPHA];
         PIXI.blendModesWebGL[PIXI.blendModes.LIGHTEN]       = [gl.ONE,       gl.ONE_MINUS_SRC_ALPHA];
@@ -8457,8 +8491,8 @@ PIXI.WebGLBlendModeManager.prototype.setContext = function(gl)
 
 /**
 * Sets-up the given blendMode from WebGL's point of view.
-*
-* @method setBlendMode
+* 
+* @method setBlendMode 
 * @param blendMode {Number} the blendMode, should be a Pixi const, such as PIXI.BlendModes.ADD
 */
 PIXI.WebGLBlendModeManager.prototype.setBlendMode = function(blendMode)
@@ -8466,16 +8500,16 @@ PIXI.WebGLBlendModeManager.prototype.setBlendMode = function(blendMode)
     if(this.currentBlendMode === blendMode)return false;
 
     this.currentBlendMode = blendMode;
-
+    
     var blendModeWebGL = PIXI.blendModesWebGL[this.currentBlendMode];
     this.gl.blendFunc(blendModeWebGL[0], blendModeWebGL[1]);
-
+    
     return true;
 };
 
 /**
 * Destroys this object.
-*
+* 
 * @method destroy
 */
 PIXI.WebGLBlendModeManager.prototype.destroy = function()
@@ -8500,8 +8534,8 @@ PIXI.WebGLMaskManager.prototype.constructor = PIXI.WebGLMaskManager;
 
 /**
 * Sets the drawing context to the one given in parameter.
-*
-* @method setContext
+* 
+* @method setContext 
 * @param gl {WebGLContext} the current WebGL drawing context
 */
 PIXI.WebGLMaskManager.prototype.setContext = function(gl)
@@ -8511,7 +8545,7 @@ PIXI.WebGLMaskManager.prototype.setContext = function(gl)
 
 /**
 * Applies the Mask and adds it to the current filter stack.
-*
+* 
 * @method pushMask
 * @param maskData {Array}
 * @param renderSession {Object}
@@ -8532,7 +8566,7 @@ PIXI.WebGLMaskManager.prototype.pushMask = function(maskData, renderSession)
 
 /**
 * Removes the last filter from the filter stack and doesn't return it.
-*
+* 
 * @method popMask
 * @param maskData {Array}
 * @param renderSession {Object} an object containing all the useful parameters
@@ -8545,7 +8579,7 @@ PIXI.WebGLMaskManager.prototype.popMask = function(maskData, renderSession)
 
 /**
 * Destroys the mask stack.
-*
+* 
 * @method destroy
 */
 PIXI.WebGLMaskManager.prototype.destroy = function()
@@ -8571,8 +8605,8 @@ PIXI.WebGLStencilManager = function()
 
 /**
 * Sets the drawing context to the one given in parameter.
-*
-* @method setContext
+* 
+* @method setContext 
 * @param gl {WebGLContext} the current WebGL drawing context
 */
 PIXI.WebGLStencilManager.prototype.setContext = function(gl)
@@ -8582,7 +8616,7 @@ PIXI.WebGLStencilManager.prototype.setContext = function(gl)
 
 /**
 * Applies the Mask and adds it to the current filter stack.
-*
+* 
 * @method pushMask
 * @param graphics {Graphics}
 * @param webGLData {Array}
@@ -8615,7 +8649,7 @@ PIXI.WebGLStencilManager.prototype.pushStencil = function(graphics, webGLData, r
     if(webGLData.mode === 1)
     {
         gl.drawElements(gl.TRIANGLE_FAN,  webGLData.indices.length - 4, gl.UNSIGNED_SHORT, 0 );
-
+       
         if(this.reverse)
         {
             gl.stencilFunc(gl.EQUAL, 0xFF - level, 0xFF);
@@ -8629,7 +8663,7 @@ PIXI.WebGLStencilManager.prototype.pushStencil = function(graphics, webGLData, r
 
         // draw a quad to increment..
         gl.drawElements(gl.TRIANGLE_FAN, 4, gl.UNSIGNED_SHORT, ( webGLData.indices.length - 4 ) * 2 );
-
+               
         if(this.reverse)
         {
             gl.stencilFunc(gl.EQUAL,0xFF-(level+1), 0xFF);
@@ -8674,7 +8708,7 @@ PIXI.WebGLStencilManager.prototype.pushStencil = function(graphics, webGLData, r
 
 /**
  * TODO this does not belong here!
- *
+ * 
  * @method bindGraphics
  * @param graphics {Graphics}
  * @param webGLData {Array}
@@ -8699,7 +8733,7 @@ PIXI.WebGLStencilManager.prototype.bindGraphics = function(graphics, webGLData, 
         renderSession.shaderManager.setShader( shader );
 
         gl.uniform1f(shader.flipY, renderSession.flipY);
-
+       
         gl.uniformMatrix3fv(shader.translationMatrix, false, graphics.worldTransform.toArray(true));
 
         gl.uniform2f(shader.projectionVector, projection.x, -projection.y);
@@ -8734,7 +8768,7 @@ PIXI.WebGLStencilManager.prototype.bindGraphics = function(graphics, webGLData, 
         gl.uniform3fv(shader.tintColor, PIXI.hex2rgb(graphics.tint));
 
         gl.uniform1f(shader.alpha, graphics.worldAlpha);
-
+        
         gl.bindBuffer(gl.ARRAY_BUFFER, webGLData.buffer);
 
         gl.vertexAttribPointer(shader.aVertexPosition, 2, gl.FLOAT, false, 4 * 6, 0);
@@ -8753,9 +8787,9 @@ PIXI.WebGLStencilManager.prototype.bindGraphics = function(graphics, webGLData, 
  */
 PIXI.WebGLStencilManager.prototype.popStencil = function(graphics, webGLData, renderSession)
 {
-    var gl = this.gl;
+	var gl = this.gl;
     this.stencilStack.pop();
-
+   
     this.count--;
 
     if(this.stencilStack.length === 0)
@@ -8772,7 +8806,7 @@ PIXI.WebGLStencilManager.prototype.popStencil = function(graphics, webGLData, re
         this.bindGraphics(graphics, webGLData, renderSession);
 
         gl.colorMask(false, false, false, false);
-
+    
         if(webGLData.mode === 1)
         {
             this.reverse = !this.reverse;
@@ -8790,13 +8824,13 @@ PIXI.WebGLStencilManager.prototype.popStencil = function(graphics, webGLData, re
 
             // draw a quad to increment..
             gl.drawElements(gl.TRIANGLE_FAN, 4, gl.UNSIGNED_SHORT, ( webGLData.indices.length - 4 ) * 2 );
-
+            
             gl.stencilFunc(gl.ALWAYS,0,0xFF);
             gl.stencilOp(gl.KEEP,gl.KEEP,gl.INVERT);
 
             // draw the triangle strip!
             gl.drawElements(gl.TRIANGLE_FAN,  webGLData.indices.length - 4, gl.UNSIGNED_SHORT, 0 );
-
+           
             if(!this.reverse)
             {
                 gl.stencilFunc(gl.EQUAL,0xFF-(level), 0xFF);
@@ -8842,7 +8876,7 @@ PIXI.WebGLStencilManager.prototype.popStencil = function(graphics, webGLData, re
 
 /**
 * Destroys the mask stack.
-*
+* 
 * @method destroy
 */
 PIXI.WebGLStencilManager.prototype.destroy = function()
@@ -8897,14 +8931,14 @@ PIXI.WebGLShaderManager.prototype.constructor = PIXI.WebGLShaderManager;
 
 /**
 * Initialises the context and the properties.
-*
-* @method setContext
+* 
+* @method setContext 
 * @param gl {WebGLContext} the current WebGL drawing context
 */
 PIXI.WebGLShaderManager.prototype.setContext = function(gl)
 {
     this.gl = gl;
-
+    
     // the next one is used for rendering primitives
     this.primitiveShader = new PIXI.PrimitiveShader(gl);
 
@@ -8924,9 +8958,9 @@ PIXI.WebGLShaderManager.prototype.setContext = function(gl)
 
 /**
 * Takes the attributes given in parameters.
-*
+* 
 * @method setAttribs
-* @param attribs {Array} attribs
+* @param attribs {Array} attribs 
 */
 PIXI.WebGLShaderManager.prototype.setAttribs = function(attribs)
 {
@@ -8967,14 +9001,14 @@ PIXI.WebGLShaderManager.prototype.setAttribs = function(attribs)
 
 /**
 * Sets the current shader.
-*
+* 
 * @method setShader
 * @param shader {Any}
 */
 PIXI.WebGLShaderManager.prototype.setShader = function(shader)
 {
     if(this._currentId === shader._UID)return false;
-
+    
     this._currentId = shader._UID;
 
     this.currentShader = shader;
@@ -8987,7 +9021,7 @@ PIXI.WebGLShaderManager.prototype.setShader = function(shader)
 
 /**
 * Destroys this object.
-*
+* 
 * @method destroy
 */
 PIXI.WebGLShaderManager.prototype.destroy = function()
@@ -9011,11 +9045,11 @@ PIXI.WebGLShaderManager.prototype.destroy = function()
 
 /**
  * @author Mat Groves
- *
+ * 
  * Big thanks to the very clever Matt DesLauriers <mattdesl> https://github.com/mattdesl/
  * for creating the original pixi version!
  * Also a thanks to https://github.com/bchevalier for tweaking the tint and alpha so that they now share 4 bytes on the vertex buffer
- *
+ * 
  * Heavily inspired by LibGDX's WebGLSpriteBatch:
  * https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/WebGLSpriteBatch.java
  */
@@ -9077,7 +9111,7 @@ PIXI.WebGLSpriteBatch = function()
      * @type Uint16Array
      */
     this.indices = new PIXI.Uint16Array(numIndices);
-
+    
     /**
      * @property lastIndexCount
      * @type Number
@@ -9217,7 +9251,7 @@ PIXI.WebGLSpriteBatch.prototype.render = function(sprite)
 {
     var texture = sprite.texture;
 
-   //TODO set blend modes..
+   //TODO set blend modes.. 
     // check texture..
     if(this.currentBatchSize >= this.size)
     {
@@ -9235,7 +9269,7 @@ PIXI.WebGLSpriteBatch.prototype.render = function(sprite)
     var aY = sprite.anchor.y;
 
     var w0, w1, h0, h1;
-
+        
     if (texture.trim)
     {
         // if the sprite is trimmed then we need to add the extra space before transforming the sprite coords..
@@ -9258,7 +9292,7 @@ PIXI.WebGLSpriteBatch.prototype.render = function(sprite)
     }
 
     var index = this.currentBatchSize * 4 * this.vertSize;
-
+    
     var resolution = texture.baseTexture.resolution;
 
     var worldTransform = sprite.worldTransform;
@@ -9309,7 +9343,7 @@ PIXI.WebGLSpriteBatch.prototype.render = function(sprite)
         positions[index+15] = a * w1 + c * h0 + tx;
         positions[index+16] = d * h0 + b * w1 + ty;
     }
-
+    
     // uv
     positions[index+2] = uvs.x0;
     positions[index+3] = uvs.y0;
@@ -9338,7 +9372,7 @@ PIXI.WebGLSpriteBatch.prototype.render = function(sprite)
 
 /**
 * Renders a TilingSprite using the spriteBatch.
-*
+* 
 * @method renderTilingSprite
 * @param sprite {TilingSprite} the tilingSprite to render
 */
@@ -9431,7 +9465,7 @@ PIXI.WebGLSpriteBatch.prototype.renderTilingSprite = function(tilingSprite)
     positions[index++] = uvs.y1;
     // color
     colors[index++] = color;
-
+    
     // xy
     positions[index++] = a * w0 + c * h0 + tx;
     positions[index++] = d * h0 + b * w0 + ty;
@@ -9488,7 +9522,7 @@ PIXI.WebGLSpriteBatch.prototype.flush = function()
         gl.vertexAttribPointer(shader.colorAttribute, 4, gl.UNSIGNED_BYTE, true, stride, 4 * 4);
     }
 
-    // upload the verts to the buffer
+    // upload the verts to the buffer  
     if(this.currentBatchSize > ( this.size * 0.5 ) )
     {
         gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.vertices);
@@ -9512,7 +9546,7 @@ PIXI.WebGLSpriteBatch.prototype.flush = function()
     var sprite;
 
     for (var i = 0, j = this.currentBatchSize; i < j; i++) {
-
+        
         sprite = this.sprites[i];
 
         nextTexture = sprite.texture.baseTexture;
@@ -9539,7 +9573,7 @@ PIXI.WebGLSpriteBatch.prototype.flush = function()
             if( shaderSwap )
             {
                 currentShader = nextShader;
-
+                
                 shader = currentShader.shaders[gl.id];
 
                 if(!shader)
@@ -9557,7 +9591,7 @@ PIXI.WebGLSpriteBatch.prototype.flush = function()
                 this.renderSession.shaderManager.setShader(shader);
 
                 if(shader.dirty)shader.syncUniforms();
-
+                
                 // both thease only need to be set if they are changing..
                 // set the projection
                 var projection = this.renderSession.projection;
@@ -9605,7 +9639,7 @@ PIXI.WebGLSpriteBatch.prototype.renderBatch = function(texture, size, startIndex
 
     // now draw those suckas!
     gl.drawElements(gl.TRIANGLES, size * 6, gl.UNSIGNED_SHORT, startIndex * 6 * 2);
-
+    
     // increment the draw count
     this.renderSession.drawCount++;
 };
@@ -9629,24 +9663,24 @@ PIXI.WebGLSpriteBatch.prototype.start = function()
 
 /**
 * Destroys the SpriteBatch.
-*
+* 
 * @method destroy
 */
 PIXI.WebGLSpriteBatch.prototype.destroy = function()
 {
     this.vertices = null;
     this.indices = null;
-
+    
     this.gl.deleteBuffer( this.vertexBuffer );
     this.gl.deleteBuffer( this.indexBuffer );
-
+    
     this.currentBaseTexture = null;
-
+    
     this.gl = null;
 };
 /**
  * @author Mat Groves
- *
+ * 
  * Big thanks to the very clever Matt DesLauriers <mattdesl> https://github.com/mattdesl/
  * for creating the original pixi version!
  *
@@ -9697,7 +9731,7 @@ PIXI.WebGLFastSpriteBatch = function(gl)
      * @type Uint16Array
      */
     this.indices = new PIXI.Uint16Array(numIndices);
-
+    
     /**
      * @property vertexBuffer
      * @type Object
@@ -9743,7 +9777,7 @@ PIXI.WebGLFastSpriteBatch = function(gl)
      * @type BaseTexture
      */
     this.currentBaseTexture = null;
-
+   
     /**
      * @property currentBlendMode
      * @type Number
@@ -9755,7 +9789,7 @@ PIXI.WebGLFastSpriteBatch = function(gl)
      * @type Object
      */
     this.renderSession = null;
-
+    
     /**
      * @property shader
      * @type Object
@@ -9830,19 +9864,19 @@ PIXI.WebGLFastSpriteBatch.prototype.render = function(spriteBatch)
     var sprite = children[0];
 
     // if the uvs have not updated then no point rendering just yet!
-
+    
     // check texture.
     if(!sprite.texture._uvs)return;
-
+   
     this.currentBaseTexture = sprite.texture.baseTexture;
-
+    
     // check blend mode
     if(sprite.blendMode !== this.renderSession.blendModeManager.currentBlendMode)
     {
         this.flush();
         this.renderSession.blendModeManager.setBlendMode(sprite.blendMode);
     }
-
+    
     for(var i=0,j= children.length; i<j; i++)
     {
         this.renderSprite(children[i]);
@@ -9859,13 +9893,13 @@ PIXI.WebGLFastSpriteBatch.prototype.renderSprite = function(sprite)
 {
     //sprite = children[i];
     if(!sprite.visible)return;
-
+    
     // TODO trim??
     if(sprite.texture.baseTexture !== this.currentBaseTexture)
     {
         this.flush();
         this.currentBaseTexture = sprite.texture.baseTexture;
-
+        
         if(!sprite.texture._uvs)return;
     }
 
@@ -9917,7 +9951,7 @@ PIXI.WebGLFastSpriteBatch.prototype.renderSprite = function(sprite)
     vertices[index++] = uvs.y1;
     // color
     vertices[index++] = sprite.alpha;
-
+ 
 
     // xy
     vertices[index++] = w0;
@@ -9938,7 +9972,7 @@ PIXI.WebGLFastSpriteBatch.prototype.renderSprite = function(sprite)
     vertices[index++] = uvs.y1;
     // color
     vertices[index++] = sprite.alpha;
-
+  
 
     // xy
     vertices[index++] = w0;
@@ -9959,7 +9993,7 @@ PIXI.WebGLFastSpriteBatch.prototype.renderSprite = function(sprite)
     vertices[index++] = uvs.y2;
     // color
     vertices[index++] = sprite.alpha;
-
+ 
 
 
 
@@ -10001,7 +10035,7 @@ PIXI.WebGLFastSpriteBatch.prototype.flush = function()
     if (this.currentBatchSize===0)return;
 
     var gl = this.gl;
-
+    
     // bind the current texture
 
     if(!this.currentBaseTexture._glTextures[gl.id])this.renderSession.renderer.updateTexture(this.currentBaseTexture, gl);
@@ -10009,7 +10043,7 @@ PIXI.WebGLFastSpriteBatch.prototype.flush = function()
     gl.bindTexture(gl.TEXTURE_2D, this.currentBaseTexture._glTextures[gl.id]);
 
     // upload the verts to the buffer
-
+   
     if(this.currentBatchSize > ( this.size * 0.5 ) )
     {
         gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.vertices);
@@ -10020,10 +10054,10 @@ PIXI.WebGLFastSpriteBatch.prototype.flush = function()
 
         gl.bufferSubData(gl.ARRAY_BUFFER, 0, view);
     }
-
+    
     // now draw those suckas!
     gl.drawElements(gl.TRIANGLES, this.currentBatchSize * 6, gl.UNSIGNED_SHORT, 0);
-
+   
     // then reset the batch!
     this.currentBatchSize = 0;
 
@@ -10070,7 +10104,7 @@ PIXI.WebGLFastSpriteBatch.prototype.start = function()
     gl.vertexAttribPointer(this.shader.aRotation, 1, gl.FLOAT, false, stride, 6 * 4);
     gl.vertexAttribPointer(this.shader.aTextureCoord, 2, gl.FLOAT, false, stride, 7 * 4);
     gl.vertexAttribPointer(this.shader.colorAttribute, 1, gl.FLOAT, false, stride, 9 * 4);
-
+    
 };
 
 /**
@@ -10088,7 +10122,7 @@ PIXI.WebGLFilterManager = function()
      * @type Array
      */
     this.filterStack = [];
-
+    
     /**
      * @property offsetX
      * @type Number
@@ -10106,8 +10140,8 @@ PIXI.WebGLFilterManager.prototype.constructor = PIXI.WebGLFilterManager;
 
 /**
 * Initialises the context and the properties.
-*
-* @method setContext
+* 
+* @method setContext 
 * @param gl {WebGLContext} the current WebGL drawing context
 */
 PIXI.WebGLFilterManager.prototype.setContext = function(gl)
@@ -10120,8 +10154,8 @@ PIXI.WebGLFilterManager.prototype.setContext = function(gl)
 
 /**
 * @method begin
-* @param renderSession {RenderSession}
-* @param buffer {ArrayBuffer}
+* @param renderSession {RenderSession} 
+* @param buffer {ArrayBuffer} 
 */
 PIXI.WebGLFilterManager.prototype.begin = function(renderSession, buffer)
 {
@@ -10136,7 +10170,7 @@ PIXI.WebGLFilterManager.prototype.begin = function(renderSession, buffer)
 
 /**
 * Applies the filter and adds it to the current filter stack.
-*
+* 
 * @method pushFilter
 * @param filterBlock {Object} the filter that will be pushed to the current filter stack
 */
@@ -10212,7 +10246,7 @@ PIXI.WebGLFilterManager.prototype.pushFilter = function(filterBlock)
 
 /**
 * Removes the last filter from the filter stack and doesn't return it.
-*
+* 
 * @method popFilter
 */
 PIXI.WebGLFilterManager.prototype.popFilter = function()
@@ -10366,7 +10400,7 @@ PIXI.WebGLFilterManager.prototype.popFilter = function()
     // bind the buffer
     gl.bindFramebuffer(gl.FRAMEBUFFER, buffer );
 
-    // set the blend mode!
+    // set the blend mode! 
     //gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
 
     // set texture
@@ -10389,7 +10423,7 @@ PIXI.WebGLFilterManager.prototype.popFilter = function()
 
 /**
 * Applies the filter to the specified area.
-*
+* 
 * @method applyFilterPass
 * @param filter {AbstractFilter} the filter that needs to be applied
 * @param filterArea {Texture} TODO - might need an update
@@ -10450,7 +10484,7 @@ PIXI.WebGLFilterManager.prototype.applyFilterPass = function(filter, filterArea,
 
 /**
 * Initialises the shader buffers.
-*
+* 
 * @method initShaderBuffers
 */
 PIXI.WebGLFilterManager.prototype.initShaderBuffers = function()
@@ -10498,7 +10532,7 @@ PIXI.WebGLFilterManager.prototype.initShaderBuffers = function()
 
 /**
 * Destroys the filter and removes it from the filter stack.
-*
+* 
 * @method destroy
 */
 PIXI.WebGLFilterManager.prototype.destroy = function()
@@ -10506,7 +10540,7 @@ PIXI.WebGLFilterManager.prototype.destroy = function()
     var gl = this.gl;
 
     this.filterStack = null;
-
+    
     this.offsetX = 0;
     this.offsetY = 0;
 
@@ -10514,7 +10548,7 @@ PIXI.WebGLFilterManager.prototype.destroy = function()
     for (var i = 0; i < this.texturePool.length; i++) {
         this.texturePool[i].destroy();
     }
-
+    
     this.texturePool = null;
 
     //destroy buffers..
@@ -10578,7 +10612,7 @@ PIXI.FilterTexture = function(gl, width, height, scaleMode)
     this.renderBuffer = gl.createRenderbuffer();
     gl.bindRenderbuffer(gl.RENDERBUFFER, this.renderBuffer);
     gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, this.renderBuffer);
-
+  
     this.resize(width, height);
 };
 
@@ -10586,13 +10620,13 @@ PIXI.FilterTexture.prototype.constructor = PIXI.FilterTexture;
 
 /**
 * Clears the filter texture.
-*
+* 
 * @method clear
 */
 PIXI.FilterTexture.prototype.clear = function()
 {
     var gl = this.gl;
-
+    
     gl.clearColor(0,0,0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 };
@@ -10622,7 +10656,7 @@ PIXI.FilterTexture.prototype.resize = function(width, height)
 
 /**
 * Destroys the filter texture.
-*
+* 
 * @method destroy
 */
 PIXI.FilterTexture.prototype.destroy = function()
@@ -10737,10 +10771,10 @@ PIXI.CanvasMaskManager.prototype.constructor = PIXI.CanvasMaskManager;
  */
 PIXI.CanvasMaskManager.prototype.pushMask = function(maskData, renderSession)
 {
-    var context = renderSession.context;
+	var context = renderSession.context;
 
     context.save();
-
+    
     var cacheAlpha = maskData.alpha;
     var transform = maskData.worldTransform;
 
@@ -10787,8 +10821,8 @@ PIXI.CanvasTinter = function()
 
 /**
  * Basically this method just needs a sprite and a color and tints the sprite with the given color.
- *
- * @method getTintedTexture
+ * 
+ * @method getTintedTexture 
  * @static
  * @param sprite {Sprite} the sprite to tint
  * @param color {Number} the color to use to tint the sprite with
@@ -10801,14 +10835,14 @@ PIXI.CanvasTinter.getTintedTexture = function(sprite, color)
     color = PIXI.CanvasTinter.roundColor(color);
 
     var stringColor = "#" + ("00000" + ( color | 0).toString(16)).substr(-6);
-
+   
     texture.tintCache = texture.tintCache || {};
 
     if(texture.tintCache[stringColor]) return texture.tintCache[stringColor];
 
      // clone texture..
     var canvas = PIXI.CanvasTinter.canvas || document.createElement("canvas");
-
+    
     //PIXI.CanvasTinter.tintWithPerPixel(texture, stringColor, canvas);
     PIXI.CanvasTinter.tintMethod(texture, color, canvas);
 
@@ -10832,7 +10866,7 @@ PIXI.CanvasTinter.getTintedTexture = function(sprite, color)
 
 /**
  * Tint a texture using the "multiply" operation.
- *
+ * 
  * @method tintWithMultiply
  * @static
  * @param texture {Texture} the texture to tint
@@ -10849,9 +10883,9 @@ PIXI.CanvasTinter.tintWithMultiply = function(texture, color, canvas)
     canvas.height = crop.height;
 
     context.fillStyle = "#" + ("00000" + ( color | 0).toString(16)).substr(-6);
-
+    
     context.fillRect(0, 0, crop.width, crop.height);
-
+    
     context.globalCompositeOperation = "multiply";
 
     context.drawImage(texture.baseTexture.source,
@@ -10879,7 +10913,7 @@ PIXI.CanvasTinter.tintWithMultiply = function(texture, color, canvas)
 
 /**
  * Tint a texture using the "overlay" operation.
- *
+ * 
  * @method tintWithOverlay
  * @static
  * @param texture {Texture} the texture to tint
@@ -10894,7 +10928,7 @@ PIXI.CanvasTinter.tintWithOverlay = function(texture, color, canvas)
 
     canvas.width = crop.width;
     canvas.height = crop.height;
-
+    
     context.globalCompositeOperation = "copy";
     context.fillStyle = "#" + ("00000" + ( color | 0).toString(16)).substr(-6);
     context.fillRect(0, 0, crop.width, crop.height);
@@ -10909,13 +10943,13 @@ PIXI.CanvasTinter.tintWithOverlay = function(texture, color, canvas)
                            0,
                            crop.width,
                            crop.height);
-
+    
     //context.globalCompositeOperation = "copy";
 };
 
 /**
  * Tint a texture pixel per pixel.
- *
+ * 
  * @method tintPerPixel
  * @static
  * @param texture {Texture} the texture to tint
@@ -10930,7 +10964,7 @@ PIXI.CanvasTinter.tintWithPerPixel = function(texture, color, canvas)
 
     canvas.width = crop.width;
     canvas.height = crop.height;
-
+  
     context.globalCompositeOperation = "copy";
     context.drawImage(texture.baseTexture.source,
                            crop.x,
@@ -10961,7 +10995,7 @@ PIXI.CanvasTinter.tintWithPerPixel = function(texture, color, canvas)
 
 /**
  * Rounds the specified color according to the PIXI.CanvasTinter.cacheStepsPerColorChannel.
- *
+ * 
  * @method roundColor
  * @static
  * @param color {number} the color to round, should be a hex color
@@ -10982,7 +11016,7 @@ PIXI.CanvasTinter.roundColor = function(color)
 /**
  * Number of steps which will be used as a cap when rounding colors.
  *
- * @property cacheStepsPerColorChannel
+ * @property cacheStepsPerColorChannel 
  * @type Number
  * @static
  */
@@ -11008,7 +11042,7 @@ PIXI.CanvasTinter.canUseMultiply = PIXI.canUseNewCanvasBlendModes();
 
 /**
  * The tinting method that will be used.
- *
+ * 
  * @method tintMethod
  * @static
  */
@@ -11179,7 +11213,7 @@ PIXI.CanvasRenderer = function(width, height, options)
     };
 
     this.mapBlendModes();
-
+    
     this.resize(width, height);
 
     if("imageSmoothingEnabled" in this.context)
@@ -11218,7 +11252,7 @@ PIXI.CanvasRenderer.prototype.render = function(stage)
         this.context.fillStyle = "black";
         this.context.clear();
     }
-
+    
     if (this.clearBeforeRender)
     {
         if (this.transparent)
@@ -11231,7 +11265,7 @@ PIXI.CanvasRenderer.prototype.render = function(stage)
             this.context.fillRect(0, 0, this.width , this.height);
         }
     }
-
+    
     this.renderDisplayObject(stage);
 
     // run interaction!
@@ -11392,7 +11426,7 @@ PIXI.CanvasGraphics.renderGraphics = function(graphics, context)
         this.updateGraphicsTint(graphics);
         graphics.dirty = false;
     }
-
+    
 
     for (var i = 0; i < graphics.graphicsData.length; i++)
     {
@@ -11588,9 +11622,9 @@ PIXI.CanvasGraphics.renderGraphicsMask = function(graphics, context)
         if(data.type === PIXI.Graphics.POLY)
         {
             context.beginPath();
-
+        
             var points = shape.points;
-
+        
             context.moveTo(points[0], points[1]);
 
             for (var j=1; j < points.length/2; j++)
@@ -11648,7 +11682,7 @@ PIXI.CanvasGraphics.renderGraphicsMask = function(graphics, context)
         }
         else if (data.type === PIXI.Graphics.RREC)
         {
-
+        
             var pts = shape.points;
             var rx = pts[0];
             var ry = pts[1];
@@ -11692,7 +11726,7 @@ PIXI.CanvasGraphics.updateGraphicsTint = function(graphics)
         /*
         var colorR = (fillColor >> 16 & 0xFF) / 255;
         var colorG = (fillColor >> 8 & 0xFF) / 255;
-        var colorB = (fillColor & 0xFF) / 255;
+        var colorB = (fillColor & 0xFF) / 255; 
 
         colorR *= tintR;
         colorG *= tintG;
@@ -11702,15 +11736,15 @@ PIXI.CanvasGraphics.updateGraphicsTint = function(graphics)
 
         colorR = (lineColor >> 16 & 0xFF) / 255;
         colorG = (lineColor >> 8 & 0xFF) / 255;
-        colorB = (lineColor & 0xFF) / 255;
+        colorB = (lineColor & 0xFF) / 255; 
 
         colorR *= tintR;
         colorG *= tintG;
         colorB *= tintB;
 
-        lineColor = ((colorR*255 << 16) + (colorG*255 << 8) + colorB*255);
+        lineColor = ((colorR*255 << 16) + (colorG*255 << 8) + colorB*255);   
         */
-
+        
         // super inline cos im an optimization NAZI :)
         data._fillTint = (((fillColor >> 16 & 0xFF) / 255 * tintR*255 << 16) + ((fillColor >> 8 & 0xFF) / 255 * tintG*255 << 8) +  (fillColor & 0xFF) / 255 * tintB*255);
         data._lineTint = (((lineColor >> 16 & 0xFF) / 255 * tintR*255 << 16) + ((lineColor >> 8 & 0xFF) / 255 * tintG*255 << 8) +  (lineColor & 0xFF) / 255 * tintB*255);
@@ -14024,2601 +14058,2601 @@ PIXI.TilingSprite.prototype.destroy = function () {
  *****************************************************************************/
 
 var spine = {
-    radDeg: 180 / Math.PI,
-    degRad: Math.PI / 180,
-    temp: [],
+	radDeg: 180 / Math.PI,
+	degRad: Math.PI / 180,
+	temp: [],
     Float32Array: (typeof(Float32Array) === 'undefined') ? Array : Float32Array,
     Uint16Array: (typeof(Uint16Array) === 'undefined') ? Array : Uint16Array
 };
 
 spine.BoneData = function (name, parent) {
-    this.name = name;
-    this.parent = parent;
+	this.name = name;
+	this.parent = parent;
 };
 spine.BoneData.prototype = {
-    length: 0,
-    x: 0, y: 0,
-    rotation: 0,
-    scaleX: 1, scaleY: 1,
-    inheritScale: true,
-    inheritRotation: true,
-    flipX: false, flipY: false
+	length: 0,
+	x: 0, y: 0,
+	rotation: 0,
+	scaleX: 1, scaleY: 1,
+	inheritScale: true,
+	inheritRotation: true,
+	flipX: false, flipY: false
 };
 
 spine.SlotData = function (name, boneData) {
-    this.name = name;
-    this.boneData = boneData;
+	this.name = name;
+	this.boneData = boneData;
 };
 spine.SlotData.prototype = {
-    r: 1, g: 1, b: 1, a: 1,
-    attachmentName: null,
-    additiveBlending: false
+	r: 1, g: 1, b: 1, a: 1,
+	attachmentName: null,
+	additiveBlending: false
 };
 
 spine.IkConstraintData = function (name) {
-    this.name = name;
-    this.bones = [];
+	this.name = name;
+	this.bones = [];
 };
 spine.IkConstraintData.prototype = {
-    target: null,
-    bendDirection: 1,
-    mix: 1
+	target: null,
+	bendDirection: 1,
+	mix: 1
 };
 
 spine.Bone = function (boneData, skeleton, parent) {
-    this.data = boneData;
-    this.skeleton = skeleton;
-    this.parent = parent;
-    this.setToSetupPose();
+	this.data = boneData;
+	this.skeleton = skeleton;
+	this.parent = parent;
+	this.setToSetupPose();
 };
 spine.Bone.yDown = false;
 spine.Bone.prototype = {
-    x: 0, y: 0,
-    rotation: 0, rotationIK: 0,
-    scaleX: 1, scaleY: 1,
-    flipX: false, flipY: false,
-    m00: 0, m01: 0, worldX: 0, // a b x
-    m10: 0, m11: 0, worldY: 0, // c d y
-    worldRotation: 0,
-    worldScaleX: 1, worldScaleY: 1,
-    worldFlipX: false, worldFlipY: false,
-    updateWorldTransform: function () {
-        var parent = this.parent;
-        if (parent) {
-            this.worldX = this.x * parent.m00 + this.y * parent.m01 + parent.worldX;
-            this.worldY = this.x * parent.m10 + this.y * parent.m11 + parent.worldY;
-            if (this.data.inheritScale) {
-                this.worldScaleX = parent.worldScaleX * this.scaleX;
-                this.worldScaleY = parent.worldScaleY * this.scaleY;
-            } else {
-                this.worldScaleX = this.scaleX;
-                this.worldScaleY = this.scaleY;
-            }
-            this.worldRotation = this.data.inheritRotation ? (parent.worldRotation + this.rotationIK) : this.rotationIK;
-            this.worldFlipX = parent.worldFlipX != this.flipX;
-            this.worldFlipY = parent.worldFlipY != this.flipY;
-        } else {
-            var skeletonFlipX = this.skeleton.flipX, skeletonFlipY = this.skeleton.flipY;
-            this.worldX = skeletonFlipX ? -this.x : this.x;
-            this.worldY = (skeletonFlipY != spine.Bone.yDown) ? -this.y : this.y;
-            this.worldScaleX = this.scaleX;
-            this.worldScaleY = this.scaleY;
-            this.worldRotation = this.rotationIK;
-            this.worldFlipX = skeletonFlipX != this.flipX;
-            this.worldFlipY = skeletonFlipY != this.flipY;
-        }
-        var radians = this.worldRotation * spine.degRad;
-        var cos = Math.cos(radians);
-        var sin = Math.sin(radians);
-        if (this.worldFlipX) {
-            this.m00 = -cos * this.worldScaleX;
-            this.m01 = sin * this.worldScaleY;
-        } else {
-            this.m00 = cos * this.worldScaleX;
-            this.m01 = -sin * this.worldScaleY;
-        }
-        if (this.worldFlipY != spine.Bone.yDown) {
-            this.m10 = -sin * this.worldScaleX;
-            this.m11 = -cos * this.worldScaleY;
-        } else {
-            this.m10 = sin * this.worldScaleX;
-            this.m11 = cos * this.worldScaleY;
-        }
-    },
-    setToSetupPose: function () {
-        var data = this.data;
-        this.x = data.x;
-        this.y = data.y;
-        this.rotation = data.rotation;
-        this.rotationIK = this.rotation;
-        this.scaleX = data.scaleX;
-        this.scaleY = data.scaleY;
-        this.flipX = data.flipX;
-        this.flipY = data.flipY;
-    },
-    worldToLocal: function (world) {
-        var dx = world[0] - this.worldX, dy = world[1] - this.worldY;
-        var m00 = this.m00, m10 = this.m10, m01 = this.m01, m11 = this.m11;
-        if (this.worldFlipX != (this.worldFlipY != spine.Bone.yDown)) {
-            m00 = -m00;
-            m11 = -m11;
-        }
-        var invDet = 1 / (m00 * m11 - m01 * m10);
-        world[0] = dx * m00 * invDet - dy * m01 * invDet;
-        world[1] = dy * m11 * invDet - dx * m10 * invDet;
-    },
-    localToWorld: function (local) {
-        var localX = local[0], localY = local[1];
-        local[0] = localX * this.m00 + localY * this.m01 + this.worldX;
-        local[1] = localX * this.m10 + localY * this.m11 + this.worldY;
-    }
+	x: 0, y: 0,
+	rotation: 0, rotationIK: 0,
+	scaleX: 1, scaleY: 1,
+	flipX: false, flipY: false,
+	m00: 0, m01: 0, worldX: 0, // a b x
+	m10: 0, m11: 0, worldY: 0, // c d y
+	worldRotation: 0,
+	worldScaleX: 1, worldScaleY: 1,
+	worldFlipX: false, worldFlipY: false,
+	updateWorldTransform: function () {
+		var parent = this.parent;
+		if (parent) {
+			this.worldX = this.x * parent.m00 + this.y * parent.m01 + parent.worldX;
+			this.worldY = this.x * parent.m10 + this.y * parent.m11 + parent.worldY;
+			if (this.data.inheritScale) {
+				this.worldScaleX = parent.worldScaleX * this.scaleX;
+				this.worldScaleY = parent.worldScaleY * this.scaleY;
+			} else {
+				this.worldScaleX = this.scaleX;
+				this.worldScaleY = this.scaleY;
+			}
+			this.worldRotation = this.data.inheritRotation ? (parent.worldRotation + this.rotationIK) : this.rotationIK;
+			this.worldFlipX = parent.worldFlipX != this.flipX;
+			this.worldFlipY = parent.worldFlipY != this.flipY;
+		} else {
+			var skeletonFlipX = this.skeleton.flipX, skeletonFlipY = this.skeleton.flipY;
+			this.worldX = skeletonFlipX ? -this.x : this.x;
+			this.worldY = (skeletonFlipY != spine.Bone.yDown) ? -this.y : this.y;
+			this.worldScaleX = this.scaleX;
+			this.worldScaleY = this.scaleY;
+			this.worldRotation = this.rotationIK;
+			this.worldFlipX = skeletonFlipX != this.flipX;
+			this.worldFlipY = skeletonFlipY != this.flipY;
+		}
+		var radians = this.worldRotation * spine.degRad;
+		var cos = Math.cos(radians);
+		var sin = Math.sin(radians);
+		if (this.worldFlipX) {
+			this.m00 = -cos * this.worldScaleX;
+			this.m01 = sin * this.worldScaleY;
+		} else {
+			this.m00 = cos * this.worldScaleX;
+			this.m01 = -sin * this.worldScaleY;
+		}
+		if (this.worldFlipY != spine.Bone.yDown) {
+			this.m10 = -sin * this.worldScaleX;
+			this.m11 = -cos * this.worldScaleY;
+		} else {
+			this.m10 = sin * this.worldScaleX;
+			this.m11 = cos * this.worldScaleY;
+		}
+	},
+	setToSetupPose: function () {
+		var data = this.data;
+		this.x = data.x;
+		this.y = data.y;
+		this.rotation = data.rotation;
+		this.rotationIK = this.rotation;
+		this.scaleX = data.scaleX;
+		this.scaleY = data.scaleY;
+		this.flipX = data.flipX;
+		this.flipY = data.flipY;
+	},
+	worldToLocal: function (world) {
+		var dx = world[0] - this.worldX, dy = world[1] - this.worldY;
+		var m00 = this.m00, m10 = this.m10, m01 = this.m01, m11 = this.m11;
+		if (this.worldFlipX != (this.worldFlipY != spine.Bone.yDown)) {
+			m00 = -m00;
+			m11 = -m11;
+		}
+		var invDet = 1 / (m00 * m11 - m01 * m10);
+		world[0] = dx * m00 * invDet - dy * m01 * invDet;
+		world[1] = dy * m11 * invDet - dx * m10 * invDet;
+	},
+	localToWorld: function (local) {
+		var localX = local[0], localY = local[1];
+		local[0] = localX * this.m00 + localY * this.m01 + this.worldX;
+		local[1] = localX * this.m10 + localY * this.m11 + this.worldY;
+	}
 };
 
 spine.Slot = function (slotData, bone) {
-    this.data = slotData;
-    this.bone = bone;
-    this.setToSetupPose();
+	this.data = slotData;
+	this.bone = bone;
+	this.setToSetupPose();
 };
 spine.Slot.prototype = {
-    r: 1, g: 1, b: 1, a: 1,
-    _attachmentTime: 0,
-    attachment: null,
-    attachmentVertices: [],
-    setAttachment: function (attachment) {
-        this.attachment = attachment;
-        this._attachmentTime = this.bone.skeleton.time;
-        this.attachmentVertices.length = 0;
-    },
-    setAttachmentTime: function (time) {
-        this._attachmentTime = this.bone.skeleton.time - time;
-    },
-    getAttachmentTime: function () {
-        return this.bone.skeleton.time - this._attachmentTime;
-    },
-    setToSetupPose: function () {
-        var data = this.data;
-        this.r = data.r;
-        this.g = data.g;
-        this.b = data.b;
-        this.a = data.a;
+	r: 1, g: 1, b: 1, a: 1,
+	_attachmentTime: 0,
+	attachment: null,
+	attachmentVertices: [],
+	setAttachment: function (attachment) {
+		this.attachment = attachment;
+		this._attachmentTime = this.bone.skeleton.time;
+		this.attachmentVertices.length = 0;
+	},
+	setAttachmentTime: function (time) {
+		this._attachmentTime = this.bone.skeleton.time - time;
+	},
+	getAttachmentTime: function () {
+		return this.bone.skeleton.time - this._attachmentTime;
+	},
+	setToSetupPose: function () {
+		var data = this.data;
+		this.r = data.r;
+		this.g = data.g;
+		this.b = data.b;
+		this.a = data.a;
 
-        var slotDatas = this.bone.skeleton.data.slots;
-        for (var i = 0, n = slotDatas.length; i < n; i++) {
-            if (slotDatas[i] == data) {
-                this.setAttachment(!data.attachmentName ? null : this.bone.skeleton.getAttachmentBySlotIndex(i, data.attachmentName));
-                break;
-            }
-        }
-    }
+		var slotDatas = this.bone.skeleton.data.slots;
+		for (var i = 0, n = slotDatas.length; i < n; i++) {
+			if (slotDatas[i] == data) {
+				this.setAttachment(!data.attachmentName ? null : this.bone.skeleton.getAttachmentBySlotIndex(i, data.attachmentName));
+				break;
+			}
+		}
+	}
 };
 
 spine.IkConstraint = function (data, skeleton) {
-    this.data = data;
-    this.mix = data.mix;
-    this.bendDirection = data.bendDirection;
+	this.data = data;
+	this.mix = data.mix;
+	this.bendDirection = data.bendDirection;
 
-    this.bones = [];
-    for (var i = 0, n = data.bones.length; i < n; i++)
-        this.bones.push(skeleton.findBone(data.bones[i].name));
-    this.target = skeleton.findBone(data.target.name);
+	this.bones = [];
+	for (var i = 0, n = data.bones.length; i < n; i++)
+		this.bones.push(skeleton.findBone(data.bones[i].name));
+	this.target = skeleton.findBone(data.target.name);
 };
 spine.IkConstraint.prototype = {
-    apply: function () {
-        var target = this.target;
-        var bones = this.bones;
-        switch (bones.length) {
-        case 1:
-            spine.IkConstraint.apply1(bones[0], target.worldX, target.worldY, this.mix);
-            break;
-        case 2:
-            spine.IkConstraint.apply2(bones[0], bones[1], target.worldX, target.worldY, this.bendDirection, this.mix);
-            break;
-        }
-    }
+	apply: function () {
+		var target = this.target;
+		var bones = this.bones;
+		switch (bones.length) {
+		case 1:
+			spine.IkConstraint.apply1(bones[0], target.worldX, target.worldY, this.mix);
+			break;
+		case 2:
+			spine.IkConstraint.apply2(bones[0], bones[1], target.worldX, target.worldY, this.bendDirection, this.mix);
+			break;
+		}
+	}
 };
 /** Adjusts the bone rotation so the tip is as close to the target position as possible. The target is specified in the world
  * coordinate system. */
 spine.IkConstraint.apply1 = function (bone, targetX, targetY, alpha) {
-    var parentRotation = (!bone.data.inheritRotation || !bone.parent) ? 0 : bone.parent.worldRotation;
-    var rotation = bone.rotation;
-    var rotationIK = Math.atan2(targetY - bone.worldY, targetX - bone.worldX) * spine.radDeg - parentRotation;
-    bone.rotationIK = rotation + (rotationIK - rotation) * alpha;
+	var parentRotation = (!bone.data.inheritRotation || !bone.parent) ? 0 : bone.parent.worldRotation;
+	var rotation = bone.rotation;
+	var rotationIK = Math.atan2(targetY - bone.worldY, targetX - bone.worldX) * spine.radDeg - parentRotation;
+	bone.rotationIK = rotation + (rotationIK - rotation) * alpha;
 };
 /** Adjusts the parent and child bone rotations so the tip of the child is as close to the target position as possible. The
  * target is specified in the world coordinate system.
  * @param child Any descendant bone of the parent. */
 spine.IkConstraint.apply2 = function (parent, child, targetX, targetY, bendDirection, alpha) {
-    var childRotation = child.rotation, parentRotation = parent.rotation;
-    if (!alpha) {
-        child.rotationIK = childRotation;
-        parent.rotationIK = parentRotation;
-        return;
-    }
-    var positionX, positionY, tempPosition = spine.temp;
-    var parentParent = parent.parent;
-    if (parentParent) {
-        tempPosition[0] = targetX;
-        tempPosition[1] = targetY;
-        parentParent.worldToLocal(tempPosition);
-        targetX = (tempPosition[0] - parent.x) * parentParent.worldScaleX;
-        targetY = (tempPosition[1] - parent.y) * parentParent.worldScaleY;
-    } else {
-        targetX -= parent.x;
-        targetY -= parent.y;
-    }
-    if (child.parent == parent) {
-        positionX = child.x;
-        positionY = child.y;
-    } else {
-        tempPosition[0] = child.x;
-        tempPosition[1] = child.y;
-        child.parent.localToWorld(tempPosition);
-        parent.worldToLocal(tempPosition);
-        positionX = tempPosition[0];
-        positionY = tempPosition[1];
-    }
-    var childX = positionX * parent.worldScaleX, childY = positionY * parent.worldScaleY;
-    var offset = Math.atan2(childY, childX);
-    var len1 = Math.sqrt(childX * childX + childY * childY), len2 = child.data.length * child.worldScaleX;
-    // Based on code by Ryan Juckett with permission: Copyright (c) 2008-2009 Ryan Juckett, http://www.ryanjuckett.com/
-    var cosDenom = 2 * len1 * len2;
-    if (cosDenom < 0.0001) {
-        child.rotationIK = childRotation + (Math.atan2(targetY, targetX) * spine.radDeg - parentRotation - childRotation) * alpha;
-        return;
-    }
-    var cos = (targetX * targetX + targetY * targetY - len1 * len1 - len2 * len2) / cosDenom;
-    if (cos < -1)
-        cos = -1;
-    else if (cos > 1)
-        cos = 1;
-    var childAngle = Math.acos(cos) * bendDirection;
-    var adjacent = len1 + len2 * cos, opposite = len2 * Math.sin(childAngle);
-    var parentAngle = Math.atan2(targetY * adjacent - targetX * opposite, targetX * adjacent + targetY * opposite);
-    var rotation = (parentAngle - offset) * spine.radDeg - parentRotation;
-    if (rotation > 180)
-        rotation -= 360;
-    else if (rotation < -180) //
-        rotation += 360;
-    parent.rotationIK = parentRotation + rotation * alpha;
-    rotation = (childAngle + offset) * spine.radDeg - childRotation;
-    if (rotation > 180)
-        rotation -= 360;
-    else if (rotation < -180) //
-        rotation += 360;
-    child.rotationIK = childRotation + (rotation + parent.worldRotation - child.parent.worldRotation) * alpha;
+	var childRotation = child.rotation, parentRotation = parent.rotation;
+	if (!alpha) {
+		child.rotationIK = childRotation;
+		parent.rotationIK = parentRotation;
+		return;
+	}
+	var positionX, positionY, tempPosition = spine.temp;
+	var parentParent = parent.parent;
+	if (parentParent) {
+		tempPosition[0] = targetX;
+		tempPosition[1] = targetY;
+		parentParent.worldToLocal(tempPosition);
+		targetX = (tempPosition[0] - parent.x) * parentParent.worldScaleX;
+		targetY = (tempPosition[1] - parent.y) * parentParent.worldScaleY;
+	} else {
+		targetX -= parent.x;
+		targetY -= parent.y;
+	}
+	if (child.parent == parent) {
+		positionX = child.x;
+		positionY = child.y;
+	} else {
+		tempPosition[0] = child.x;
+		tempPosition[1] = child.y;
+		child.parent.localToWorld(tempPosition);
+		parent.worldToLocal(tempPosition);
+		positionX = tempPosition[0];
+		positionY = tempPosition[1];
+	}
+	var childX = positionX * parent.worldScaleX, childY = positionY * parent.worldScaleY;
+	var offset = Math.atan2(childY, childX);
+	var len1 = Math.sqrt(childX * childX + childY * childY), len2 = child.data.length * child.worldScaleX;
+	// Based on code by Ryan Juckett with permission: Copyright (c) 2008-2009 Ryan Juckett, http://www.ryanjuckett.com/
+	var cosDenom = 2 * len1 * len2;
+	if (cosDenom < 0.0001) {
+		child.rotationIK = childRotation + (Math.atan2(targetY, targetX) * spine.radDeg - parentRotation - childRotation) * alpha;
+		return;
+	}
+	var cos = (targetX * targetX + targetY * targetY - len1 * len1 - len2 * len2) / cosDenom;
+	if (cos < -1)
+		cos = -1;
+	else if (cos > 1)
+		cos = 1;
+	var childAngle = Math.acos(cos) * bendDirection;
+	var adjacent = len1 + len2 * cos, opposite = len2 * Math.sin(childAngle);
+	var parentAngle = Math.atan2(targetY * adjacent - targetX * opposite, targetX * adjacent + targetY * opposite);
+	var rotation = (parentAngle - offset) * spine.radDeg - parentRotation;
+	if (rotation > 180)
+		rotation -= 360;
+	else if (rotation < -180) //
+		rotation += 360;
+	parent.rotationIK = parentRotation + rotation * alpha;
+	rotation = (childAngle + offset) * spine.radDeg - childRotation;
+	if (rotation > 180)
+		rotation -= 360;
+	else if (rotation < -180) //
+		rotation += 360;
+	child.rotationIK = childRotation + (rotation + parent.worldRotation - child.parent.worldRotation) * alpha;
 };
 
 spine.Skin = function (name) {
-    this.name = name;
-    this.attachments = {};
+	this.name = name;
+	this.attachments = {};
 };
 spine.Skin.prototype = {
-    addAttachment: function (slotIndex, name, attachment) {
-        this.attachments[slotIndex + ":" + name] = attachment;
-    },
-    getAttachment: function (slotIndex, name) {
-        return this.attachments[slotIndex + ":" + name];
-    },
-    _attachAll: function (skeleton, oldSkin) {
-        for (var key in oldSkin.attachments) {
-            var colon = key.indexOf(":");
-            var slotIndex = parseInt(key.substring(0, colon));
-            var name = key.substring(colon + 1);
-            var slot = skeleton.slots[slotIndex];
-            if (slot.attachment && slot.attachment.name == name) {
-                var attachment = this.getAttachment(slotIndex, name);
-                if (attachment) slot.setAttachment(attachment);
-            }
-        }
-    }
+	addAttachment: function (slotIndex, name, attachment) {
+		this.attachments[slotIndex + ":" + name] = attachment;
+	},
+	getAttachment: function (slotIndex, name) {
+		return this.attachments[slotIndex + ":" + name];
+	},
+	_attachAll: function (skeleton, oldSkin) {
+		for (var key in oldSkin.attachments) {
+			var colon = key.indexOf(":");
+			var slotIndex = parseInt(key.substring(0, colon));
+			var name = key.substring(colon + 1);
+			var slot = skeleton.slots[slotIndex];
+			if (slot.attachment && slot.attachment.name == name) {
+				var attachment = this.getAttachment(slotIndex, name);
+				if (attachment) slot.setAttachment(attachment);
+			}
+		}
+	}
 };
 
 spine.Animation = function (name, timelines, duration) {
-    this.name = name;
-    this.timelines = timelines;
-    this.duration = duration;
+	this.name = name;
+	this.timelines = timelines;
+	this.duration = duration;
 };
 spine.Animation.prototype = {
-    apply: function (skeleton, lastTime, time, loop, events) {
-        if (loop && this.duration != 0) {
-            time %= this.duration;
-            lastTime %= this.duration;
-        }
-        var timelines = this.timelines;
-        for (var i = 0, n = timelines.length; i < n; i++)
-            timelines[i].apply(skeleton, lastTime, time, events, 1);
-    },
-    mix: function (skeleton, lastTime, time, loop, events, alpha) {
-        if (loop && this.duration != 0) {
-            time %= this.duration;
-            lastTime %= this.duration;
-        }
-        var timelines = this.timelines;
-        for (var i = 0, n = timelines.length; i < n; i++)
-            timelines[i].apply(skeleton, lastTime, time, events, alpha);
-    }
+	apply: function (skeleton, lastTime, time, loop, events) {
+		if (loop && this.duration != 0) {
+			time %= this.duration;
+			lastTime %= this.duration;
+		}
+		var timelines = this.timelines;
+		for (var i = 0, n = timelines.length; i < n; i++)
+			timelines[i].apply(skeleton, lastTime, time, events, 1);
+	},
+	mix: function (skeleton, lastTime, time, loop, events, alpha) {
+		if (loop && this.duration != 0) {
+			time %= this.duration;
+			lastTime %= this.duration;
+		}
+		var timelines = this.timelines;
+		for (var i = 0, n = timelines.length; i < n; i++)
+			timelines[i].apply(skeleton, lastTime, time, events, alpha);
+	}
 };
 spine.Animation.binarySearch = function (values, target, step) {
-    var low = 0;
-    var high = Math.floor(values.length / step) - 2;
-    if (!high) return step;
-    var current = high >>> 1;
-    while (true) {
-        if (values[(current + 1) * step] <= target)
-            low = current + 1;
-        else
-            high = current;
-        if (low == high) return (low + 1) * step;
-        current = (low + high) >>> 1;
-    }
+	var low = 0;
+	var high = Math.floor(values.length / step) - 2;
+	if (!high) return step;
+	var current = high >>> 1;
+	while (true) {
+		if (values[(current + 1) * step] <= target)
+			low = current + 1;
+		else
+			high = current;
+		if (low == high) return (low + 1) * step;
+		current = (low + high) >>> 1;
+	}
 };
 spine.Animation.binarySearch1 = function (values, target) {
-    var low = 0;
-    var high = values.length - 2;
-    if (!high) return 1;
-    var current = high >>> 1;
-    while (true) {
-        if (values[current + 1] <= target)
-            low = current + 1;
-        else
-            high = current;
-        if (low == high) return low + 1;
-        current = (low + high) >>> 1;
-    }
+	var low = 0;
+	var high = values.length - 2;
+	if (!high) return 1;
+	var current = high >>> 1;
+	while (true) {
+		if (values[current + 1] <= target)
+			low = current + 1;
+		else
+			high = current;
+		if (low == high) return low + 1;
+		current = (low + high) >>> 1;
+	}
 };
 spine.Animation.linearSearch = function (values, target, step) {
-    for (var i = 0, last = values.length - step; i <= last; i += step)
-        if (values[i] > target) return i;
-    return -1;
+	for (var i = 0, last = values.length - step; i <= last; i += step)
+		if (values[i] > target) return i;
+	return -1;
 };
 
 spine.Curves = function (frameCount) {
-    this.curves = []; // type, x, y, ...
-    //this.curves.length = (frameCount - 1) * 19/*BEZIER_SIZE*/;
+	this.curves = []; // type, x, y, ...
+	//this.curves.length = (frameCount - 1) * 19/*BEZIER_SIZE*/;
 };
 spine.Curves.prototype = {
-    setLinear: function (frameIndex) {
-        this.curves[frameIndex * 19/*BEZIER_SIZE*/] = 0/*LINEAR*/;
-    },
-    setStepped: function (frameIndex) {
-        this.curves[frameIndex * 19/*BEZIER_SIZE*/] = 1/*STEPPED*/;
-    },
-    /** Sets the control handle positions for an interpolation bezier curve used to transition from this keyframe to the next.
-     * cx1 and cx2 are from 0 to 1, representing the percent of time between the two keyframes. cy1 and cy2 are the percent of
-     * the difference between the keyframe's values. */
-    setCurve: function (frameIndex, cx1, cy1, cx2, cy2) {
-        var subdiv1 = 1 / 10/*BEZIER_SEGMENTS*/, subdiv2 = subdiv1 * subdiv1, subdiv3 = subdiv2 * subdiv1;
-        var pre1 = 3 * subdiv1, pre2 = 3 * subdiv2, pre4 = 6 * subdiv2, pre5 = 6 * subdiv3;
-        var tmp1x = -cx1 * 2 + cx2, tmp1y = -cy1 * 2 + cy2, tmp2x = (cx1 - cx2) * 3 + 1, tmp2y = (cy1 - cy2) * 3 + 1;
-        var dfx = cx1 * pre1 + tmp1x * pre2 + tmp2x * subdiv3, dfy = cy1 * pre1 + tmp1y * pre2 + tmp2y * subdiv3;
-        var ddfx = tmp1x * pre4 + tmp2x * pre5, ddfy = tmp1y * pre4 + tmp2y * pre5;
-        var dddfx = tmp2x * pre5, dddfy = tmp2y * pre5;
+	setLinear: function (frameIndex) {
+		this.curves[frameIndex * 19/*BEZIER_SIZE*/] = 0/*LINEAR*/;
+	},
+	setStepped: function (frameIndex) {
+		this.curves[frameIndex * 19/*BEZIER_SIZE*/] = 1/*STEPPED*/;
+	},
+	/** Sets the control handle positions for an interpolation bezier curve used to transition from this keyframe to the next.
+	 * cx1 and cx2 are from 0 to 1, representing the percent of time between the two keyframes. cy1 and cy2 are the percent of
+	 * the difference between the keyframe's values. */
+	setCurve: function (frameIndex, cx1, cy1, cx2, cy2) {
+		var subdiv1 = 1 / 10/*BEZIER_SEGMENTS*/, subdiv2 = subdiv1 * subdiv1, subdiv3 = subdiv2 * subdiv1;
+		var pre1 = 3 * subdiv1, pre2 = 3 * subdiv2, pre4 = 6 * subdiv2, pre5 = 6 * subdiv3;
+		var tmp1x = -cx1 * 2 + cx2, tmp1y = -cy1 * 2 + cy2, tmp2x = (cx1 - cx2) * 3 + 1, tmp2y = (cy1 - cy2) * 3 + 1;
+		var dfx = cx1 * pre1 + tmp1x * pre2 + tmp2x * subdiv3, dfy = cy1 * pre1 + tmp1y * pre2 + tmp2y * subdiv3;
+		var ddfx = tmp1x * pre4 + tmp2x * pre5, ddfy = tmp1y * pre4 + tmp2y * pre5;
+		var dddfx = tmp2x * pre5, dddfy = tmp2y * pre5;
 
-        var i = frameIndex * 19/*BEZIER_SIZE*/;
-        var curves = this.curves;
-        curves[i++] = 2/*BEZIER*/;
+		var i = frameIndex * 19/*BEZIER_SIZE*/;
+		var curves = this.curves;
+		curves[i++] = 2/*BEZIER*/;
 
-        var x = dfx, y = dfy;
-        for (var n = i + 19/*BEZIER_SIZE*/ - 1; i < n; i += 2) {
-            curves[i] = x;
-            curves[i + 1] = y;
-            dfx += ddfx;
-            dfy += ddfy;
-            ddfx += dddfx;
-            ddfy += dddfy;
-            x += dfx;
-            y += dfy;
-        }
-    },
-    getCurvePercent: function (frameIndex, percent) {
-        percent = percent < 0 ? 0 : (percent > 1 ? 1 : percent);
-        var curves = this.curves;
-        var i = frameIndex * 19/*BEZIER_SIZE*/;
-        var type = curves[i];
-        if (type === 0/*LINEAR*/) return percent;
-        if (type == 1/*STEPPED*/) return 0;
-        i++;
-        var x = 0;
-        for (var start = i, n = i + 19/*BEZIER_SIZE*/ - 1; i < n; i += 2) {
-            x = curves[i];
-            if (x >= percent) {
-                var prevX, prevY;
-                if (i == start) {
-                    prevX = 0;
-                    prevY = 0;
-                } else {
-                    prevX = curves[i - 2];
-                    prevY = curves[i - 1];
-                }
-                return prevY + (curves[i + 1] - prevY) * (percent - prevX) / (x - prevX);
-            }
-        }
-        var y = curves[i - 1];
-        return y + (1 - y) * (percent - x) / (1 - x); // Last point is 1,1.
-    }
+		var x = dfx, y = dfy;
+		for (var n = i + 19/*BEZIER_SIZE*/ - 1; i < n; i += 2) {
+			curves[i] = x;
+			curves[i + 1] = y;
+			dfx += ddfx;
+			dfy += ddfy;
+			ddfx += dddfx;
+			ddfy += dddfy;
+			x += dfx;
+			y += dfy;
+		}
+	},
+	getCurvePercent: function (frameIndex, percent) {
+		percent = percent < 0 ? 0 : (percent > 1 ? 1 : percent);
+		var curves = this.curves;
+		var i = frameIndex * 19/*BEZIER_SIZE*/;
+		var type = curves[i];
+		if (type === 0/*LINEAR*/) return percent;
+		if (type == 1/*STEPPED*/) return 0;
+		i++;
+		var x = 0;
+		for (var start = i, n = i + 19/*BEZIER_SIZE*/ - 1; i < n; i += 2) {
+			x = curves[i];
+			if (x >= percent) {
+				var prevX, prevY;
+				if (i == start) {
+					prevX = 0;
+					prevY = 0;
+				} else {
+					prevX = curves[i - 2];
+					prevY = curves[i - 1];
+				}
+				return prevY + (curves[i + 1] - prevY) * (percent - prevX) / (x - prevX);
+			}
+		}
+		var y = curves[i - 1];
+		return y + (1 - y) * (percent - x) / (1 - x); // Last point is 1,1.
+	}
 };
 
 spine.RotateTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = []; // time, angle, ...
-    this.frames.length = frameCount * 2;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = []; // time, angle, ...
+	this.frames.length = frameCount * 2;
 };
 spine.RotateTimeline.prototype = {
-    boneIndex: 0,
-    getFrameCount: function () {
-        return this.frames.length / 2;
-    },
-    setFrame: function (frameIndex, time, angle) {
-        frameIndex *= 2;
-        this.frames[frameIndex] = time;
-        this.frames[frameIndex + 1] = angle;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) return; // Time is before first frame.
+	boneIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 2;
+	},
+	setFrame: function (frameIndex, time, angle) {
+		frameIndex *= 2;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = angle;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
 
-        var bone = skeleton.bones[this.boneIndex];
+		var bone = skeleton.bones[this.boneIndex];
 
-        if (time >= frames[frames.length - 2]) { // Time is after last frame.
-            var amount = bone.data.rotation + frames[frames.length - 1] - bone.rotation;
-            while (amount > 180)
-                amount -= 360;
-            while (amount < -180)
-                amount += 360;
-            bone.rotation += amount * alpha;
-            return;
-        }
+		if (time >= frames[frames.length - 2]) { // Time is after last frame.
+			var amount = bone.data.rotation + frames[frames.length - 1] - bone.rotation;
+			while (amount > 180)
+				amount -= 360;
+			while (amount < -180)
+				amount += 360;
+			bone.rotation += amount * alpha;
+			return;
+		}
 
-        // Interpolate between the previous frame and the current frame.
-        var frameIndex = spine.Animation.binarySearch(frames, time, 2);
-        var prevFrameValue = frames[frameIndex - 1];
-        var frameTime = frames[frameIndex];
-        var percent = 1 - (time - frameTime) / (frames[frameIndex - 2/*PREV_FRAME_TIME*/] - frameTime);
-        percent = this.curves.getCurvePercent(frameIndex / 2 - 1, percent);
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch(frames, time, 2);
+		var prevFrameValue = frames[frameIndex - 1];
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex - 2/*PREV_FRAME_TIME*/] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex / 2 - 1, percent);
 
-        var amount = frames[frameIndex + 1/*FRAME_VALUE*/] - prevFrameValue;
-        while (amount > 180)
-            amount -= 360;
-        while (amount < -180)
-            amount += 360;
-        amount = bone.data.rotation + (prevFrameValue + amount * percent) - bone.rotation;
-        while (amount > 180)
-            amount -= 360;
-        while (amount < -180)
-            amount += 360;
-        bone.rotation += amount * alpha;
-    }
+		var amount = frames[frameIndex + 1/*FRAME_VALUE*/] - prevFrameValue;
+		while (amount > 180)
+			amount -= 360;
+		while (amount < -180)
+			amount += 360;
+		amount = bone.data.rotation + (prevFrameValue + amount * percent) - bone.rotation;
+		while (amount > 180)
+			amount -= 360;
+		while (amount < -180)
+			amount += 360;
+		bone.rotation += amount * alpha;
+	}
 };
 
 spine.TranslateTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = []; // time, x, y, ...
-    this.frames.length = frameCount * 3;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = []; // time, x, y, ...
+	this.frames.length = frameCount * 3;
 };
 spine.TranslateTimeline.prototype = {
-    boneIndex: 0,
-    getFrameCount: function () {
-        return this.frames.length / 3;
-    },
-    setFrame: function (frameIndex, time, x, y) {
-        frameIndex *= 3;
-        this.frames[frameIndex] = time;
-        this.frames[frameIndex + 1] = x;
-        this.frames[frameIndex + 2] = y;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) return; // Time is before first frame.
+	boneIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 3;
+	},
+	setFrame: function (frameIndex, time, x, y) {
+		frameIndex *= 3;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = x;
+		this.frames[frameIndex + 2] = y;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
 
-        var bone = skeleton.bones[this.boneIndex];
+		var bone = skeleton.bones[this.boneIndex];
 
-        if (time >= frames[frames.length - 3]) { // Time is after last frame.
-            bone.x += (bone.data.x + frames[frames.length - 2] - bone.x) * alpha;
-            bone.y += (bone.data.y + frames[frames.length - 1] - bone.y) * alpha;
-            return;
-        }
+		if (time >= frames[frames.length - 3]) { // Time is after last frame.
+			bone.x += (bone.data.x + frames[frames.length - 2] - bone.x) * alpha;
+			bone.y += (bone.data.y + frames[frames.length - 1] - bone.y) * alpha;
+			return;
+		}
 
-        // Interpolate between the previous frame and the current frame.
-        var frameIndex = spine.Animation.binarySearch(frames, time, 3);
-        var prevFrameX = frames[frameIndex - 2];
-        var prevFrameY = frames[frameIndex - 1];
-        var frameTime = frames[frameIndex];
-        var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
-        percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch(frames, time, 3);
+		var prevFrameX = frames[frameIndex - 2];
+		var prevFrameY = frames[frameIndex - 1];
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
 
-        bone.x += (bone.data.x + prevFrameX + (frames[frameIndex + 1/*FRAME_X*/] - prevFrameX) * percent - bone.x) * alpha;
-        bone.y += (bone.data.y + prevFrameY + (frames[frameIndex + 2/*FRAME_Y*/] - prevFrameY) * percent - bone.y) * alpha;
-    }
+		bone.x += (bone.data.x + prevFrameX + (frames[frameIndex + 1/*FRAME_X*/] - prevFrameX) * percent - bone.x) * alpha;
+		bone.y += (bone.data.y + prevFrameY + (frames[frameIndex + 2/*FRAME_Y*/] - prevFrameY) * percent - bone.y) * alpha;
+	}
 };
 
 spine.ScaleTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = []; // time, x, y, ...
-    this.frames.length = frameCount * 3;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = []; // time, x, y, ...
+	this.frames.length = frameCount * 3;
 };
 spine.ScaleTimeline.prototype = {
-    boneIndex: 0,
-    getFrameCount: function () {
-        return this.frames.length / 3;
-    },
-    setFrame: function (frameIndex, time, x, y) {
-        frameIndex *= 3;
-        this.frames[frameIndex] = time;
-        this.frames[frameIndex + 1] = x;
-        this.frames[frameIndex + 2] = y;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) return; // Time is before first frame.
+	boneIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 3;
+	},
+	setFrame: function (frameIndex, time, x, y) {
+		frameIndex *= 3;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = x;
+		this.frames[frameIndex + 2] = y;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
 
-        var bone = skeleton.bones[this.boneIndex];
+		var bone = skeleton.bones[this.boneIndex];
 
-        if (time >= frames[frames.length - 3]) { // Time is after last frame.
-            bone.scaleX += (bone.data.scaleX * frames[frames.length - 2] - bone.scaleX) * alpha;
-            bone.scaleY += (bone.data.scaleY * frames[frames.length - 1] - bone.scaleY) * alpha;
-            return;
-        }
+		if (time >= frames[frames.length - 3]) { // Time is after last frame.
+			bone.scaleX += (bone.data.scaleX * frames[frames.length - 2] - bone.scaleX) * alpha;
+			bone.scaleY += (bone.data.scaleY * frames[frames.length - 1] - bone.scaleY) * alpha;
+			return;
+		}
 
-        // Interpolate between the previous frame and the current frame.
-        var frameIndex = spine.Animation.binarySearch(frames, time, 3);
-        var prevFrameX = frames[frameIndex - 2];
-        var prevFrameY = frames[frameIndex - 1];
-        var frameTime = frames[frameIndex];
-        var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
-        percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch(frames, time, 3);
+		var prevFrameX = frames[frameIndex - 2];
+		var prevFrameY = frames[frameIndex - 1];
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
 
-        bone.scaleX += (bone.data.scaleX * (prevFrameX + (frames[frameIndex + 1/*FRAME_X*/] - prevFrameX) * percent) - bone.scaleX) * alpha;
-        bone.scaleY += (bone.data.scaleY * (prevFrameY + (frames[frameIndex + 2/*FRAME_Y*/] - prevFrameY) * percent) - bone.scaleY) * alpha;
-    }
+		bone.scaleX += (bone.data.scaleX * (prevFrameX + (frames[frameIndex + 1/*FRAME_X*/] - prevFrameX) * percent) - bone.scaleX) * alpha;
+		bone.scaleY += (bone.data.scaleY * (prevFrameY + (frames[frameIndex + 2/*FRAME_Y*/] - prevFrameY) * percent) - bone.scaleY) * alpha;
+	}
 };
 
 spine.ColorTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = []; // time, r, g, b, a, ...
-    this.frames.length = frameCount * 5;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = []; // time, r, g, b, a, ...
+	this.frames.length = frameCount * 5;
 };
 spine.ColorTimeline.prototype = {
-    slotIndex: 0,
-    getFrameCount: function () {
-        return this.frames.length / 5;
-    },
-    setFrame: function (frameIndex, time, r, g, b, a) {
-        frameIndex *= 5;
-        this.frames[frameIndex] = time;
-        this.frames[frameIndex + 1] = r;
-        this.frames[frameIndex + 2] = g;
-        this.frames[frameIndex + 3] = b;
-        this.frames[frameIndex + 4] = a;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) return; // Time is before first frame.
+	slotIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 5;
+	},
+	setFrame: function (frameIndex, time, r, g, b, a) {
+		frameIndex *= 5;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = r;
+		this.frames[frameIndex + 2] = g;
+		this.frames[frameIndex + 3] = b;
+		this.frames[frameIndex + 4] = a;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
 
-        var r, g, b, a;
-        if (time >= frames[frames.length - 5]) {
-            // Time is after last frame.
-            var i = frames.length - 1;
-            r = frames[i - 3];
-            g = frames[i - 2];
-            b = frames[i - 1];
-            a = frames[i];
-        } else {
-            // Interpolate between the previous frame and the current frame.
-            var frameIndex = spine.Animation.binarySearch(frames, time, 5);
-            var prevFrameR = frames[frameIndex - 4];
-            var prevFrameG = frames[frameIndex - 3];
-            var prevFrameB = frames[frameIndex - 2];
-            var prevFrameA = frames[frameIndex - 1];
-            var frameTime = frames[frameIndex];
-            var percent = 1 - (time - frameTime) / (frames[frameIndex - 5/*PREV_FRAME_TIME*/] - frameTime);
-            percent = this.curves.getCurvePercent(frameIndex / 5 - 1, percent);
+		var r, g, b, a;
+		if (time >= frames[frames.length - 5]) {
+			// Time is after last frame.
+			var i = frames.length - 1;
+			r = frames[i - 3];
+			g = frames[i - 2];
+			b = frames[i - 1];
+			a = frames[i];
+		} else {
+			// Interpolate between the previous frame and the current frame.
+			var frameIndex = spine.Animation.binarySearch(frames, time, 5);
+			var prevFrameR = frames[frameIndex - 4];
+			var prevFrameG = frames[frameIndex - 3];
+			var prevFrameB = frames[frameIndex - 2];
+			var prevFrameA = frames[frameIndex - 1];
+			var frameTime = frames[frameIndex];
+			var percent = 1 - (time - frameTime) / (frames[frameIndex - 5/*PREV_FRAME_TIME*/] - frameTime);
+			percent = this.curves.getCurvePercent(frameIndex / 5 - 1, percent);
 
-            r = prevFrameR + (frames[frameIndex + 1/*FRAME_R*/] - prevFrameR) * percent;
-            g = prevFrameG + (frames[frameIndex + 2/*FRAME_G*/] - prevFrameG) * percent;
-            b = prevFrameB + (frames[frameIndex + 3/*FRAME_B*/] - prevFrameB) * percent;
-            a = prevFrameA + (frames[frameIndex + 4/*FRAME_A*/] - prevFrameA) * percent;
-        }
-        var slot = skeleton.slots[this.slotIndex];
-        if (alpha < 1) {
-            slot.r += (r - slot.r) * alpha;
-            slot.g += (g - slot.g) * alpha;
-            slot.b += (b - slot.b) * alpha;
-            slot.a += (a - slot.a) * alpha;
-        } else {
-            slot.r = r;
-            slot.g = g;
-            slot.b = b;
-            slot.a = a;
-        }
-    }
+			r = prevFrameR + (frames[frameIndex + 1/*FRAME_R*/] - prevFrameR) * percent;
+			g = prevFrameG + (frames[frameIndex + 2/*FRAME_G*/] - prevFrameG) * percent;
+			b = prevFrameB + (frames[frameIndex + 3/*FRAME_B*/] - prevFrameB) * percent;
+			a = prevFrameA + (frames[frameIndex + 4/*FRAME_A*/] - prevFrameA) * percent;
+		}
+		var slot = skeleton.slots[this.slotIndex];
+		if (alpha < 1) {
+			slot.r += (r - slot.r) * alpha;
+			slot.g += (g - slot.g) * alpha;
+			slot.b += (b - slot.b) * alpha;
+			slot.a += (a - slot.a) * alpha;
+		} else {
+			slot.r = r;
+			slot.g = g;
+			slot.b = b;
+			slot.a = a;
+		}
+	}
 };
 
 spine.AttachmentTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = []; // time, ...
-    this.frames.length = frameCount;
-    this.attachmentNames = [];
-    this.attachmentNames.length = frameCount;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = []; // time, ...
+	this.frames.length = frameCount;
+	this.attachmentNames = [];
+	this.attachmentNames.length = frameCount;
 };
 spine.AttachmentTimeline.prototype = {
-    slotIndex: 0,
-    getFrameCount: function () {
-        return this.frames.length;
-    },
-    setFrame: function (frameIndex, time, attachmentName) {
-        this.frames[frameIndex] = time;
-        this.attachmentNames[frameIndex] = attachmentName;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) {
-            if (lastTime > time) this.apply(skeleton, lastTime, Number.MAX_VALUE, null, 0);
-            return;
-        } else if (lastTime > time) //
-            lastTime = -1;
+	slotIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length;
+	},
+	setFrame: function (frameIndex, time, attachmentName) {
+		this.frames[frameIndex] = time;
+		this.attachmentNames[frameIndex] = attachmentName;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) {
+			if (lastTime > time) this.apply(skeleton, lastTime, Number.MAX_VALUE, null, 0);
+			return;
+		} else if (lastTime > time) //
+			lastTime = -1;
 
-        var frameIndex = time >= frames[frames.length - 1] ? frames.length - 1 : spine.Animation.binarySearch1(frames, time) - 1;
-        if (frames[frameIndex] < lastTime) return;
+		var frameIndex = time >= frames[frames.length - 1] ? frames.length - 1 : spine.Animation.binarySearch1(frames, time) - 1;
+		if (frames[frameIndex] < lastTime) return;
 
-        var attachmentName = this.attachmentNames[frameIndex];
-        skeleton.slots[this.slotIndex].setAttachment(
-            !attachmentName ? null : skeleton.getAttachmentBySlotIndex(this.slotIndex, attachmentName));
-    }
+		var attachmentName = this.attachmentNames[frameIndex];
+		skeleton.slots[this.slotIndex].setAttachment(
+			!attachmentName ? null : skeleton.getAttachmentBySlotIndex(this.slotIndex, attachmentName));
+	}
 };
 
 spine.EventTimeline = function (frameCount) {
-    this.frames = []; // time, ...
-    this.frames.length = frameCount;
-    this.events = [];
-    this.events.length = frameCount;
+	this.frames = []; // time, ...
+	this.frames.length = frameCount;
+	this.events = [];
+	this.events.length = frameCount;
 };
 spine.EventTimeline.prototype = {
-    getFrameCount: function () {
-        return this.frames.length;
-    },
-    setFrame: function (frameIndex, time, event) {
-        this.frames[frameIndex] = time;
-        this.events[frameIndex] = event;
-    },
-    /** Fires events for frames > lastTime and <= time. */
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        if (!firedEvents) return;
+	getFrameCount: function () {
+		return this.frames.length;
+	},
+	setFrame: function (frameIndex, time, event) {
+		this.frames[frameIndex] = time;
+		this.events[frameIndex] = event;
+	},
+	/** Fires events for frames > lastTime and <= time. */
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		if (!firedEvents) return;
 
-        var frames = this.frames;
-        var frameCount = frames.length;
+		var frames = this.frames;
+		var frameCount = frames.length;
 
-        if (lastTime > time) { // Fire events after last time for looped animations.
-            this.apply(skeleton, lastTime, Number.MAX_VALUE, firedEvents, alpha);
-            lastTime = -1;
-        } else if (lastTime >= frames[frameCount - 1]) // Last time is after last frame.
-            return;
-        if (time < frames[0]) return; // Time is before first frame.
+		if (lastTime > time) { // Fire events after last time for looped animations.
+			this.apply(skeleton, lastTime, Number.MAX_VALUE, firedEvents, alpha);
+			lastTime = -1;
+		} else if (lastTime >= frames[frameCount - 1]) // Last time is after last frame.
+			return;
+		if (time < frames[0]) return; // Time is before first frame.
 
-        var frameIndex;
-        if (lastTime < frames[0])
-            frameIndex = 0;
-        else {
-            frameIndex = spine.Animation.binarySearch1(frames, lastTime);
-            var frame = frames[frameIndex];
-            while (frameIndex > 0) { // Fire multiple events with the same frame.
-                if (frames[frameIndex - 1] != frame) break;
-                frameIndex--;
-            }
-        }
-        var events = this.events;
-        for (; frameIndex < frameCount && time >= frames[frameIndex]; frameIndex++)
-            firedEvents.push(events[frameIndex]);
-    }
+		var frameIndex;
+		if (lastTime < frames[0])
+			frameIndex = 0;
+		else {
+			frameIndex = spine.Animation.binarySearch1(frames, lastTime);
+			var frame = frames[frameIndex];
+			while (frameIndex > 0) { // Fire multiple events with the same frame.
+				if (frames[frameIndex - 1] != frame) break;
+				frameIndex--;
+			}
+		}
+		var events = this.events;
+		for (; frameIndex < frameCount && time >= frames[frameIndex]; frameIndex++)
+			firedEvents.push(events[frameIndex]);
+	}
 };
 
 spine.DrawOrderTimeline = function (frameCount) {
-    this.frames = []; // time, ...
-    this.frames.length = frameCount;
-    this.drawOrders = [];
-    this.drawOrders.length = frameCount;
+	this.frames = []; // time, ...
+	this.frames.length = frameCount;
+	this.drawOrders = [];
+	this.drawOrders.length = frameCount;
 };
 spine.DrawOrderTimeline.prototype = {
-    getFrameCount: function () {
-        return this.frames.length;
-    },
-    setFrame: function (frameIndex, time, drawOrder) {
-        this.frames[frameIndex] = time;
-        this.drawOrders[frameIndex] = drawOrder;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) return; // Time is before first frame.
+	getFrameCount: function () {
+		return this.frames.length;
+	},
+	setFrame: function (frameIndex, time, drawOrder) {
+		this.frames[frameIndex] = time;
+		this.drawOrders[frameIndex] = drawOrder;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
 
-        var frameIndex;
-        if (time >= frames[frames.length - 1]) // Time is after last frame.
-            frameIndex = frames.length - 1;
-        else
-            frameIndex = spine.Animation.binarySearch1(frames, time) - 1;
+		var frameIndex;
+		if (time >= frames[frames.length - 1]) // Time is after last frame.
+			frameIndex = frames.length - 1;
+		else
+			frameIndex = spine.Animation.binarySearch1(frames, time) - 1;
 
-        var drawOrder = skeleton.drawOrder;
-        var slots = skeleton.slots;
-        var drawOrderToSetupIndex = this.drawOrders[frameIndex];
-        if (drawOrderToSetupIndex) {
-            for (var i = 0, n = drawOrderToSetupIndex.length; i < n; i++)
-                drawOrder[i] = drawOrderToSetupIndex[i];
-        }
+		var drawOrder = skeleton.drawOrder;
+		var slots = skeleton.slots;
+		var drawOrderToSetupIndex = this.drawOrders[frameIndex];
+		if (drawOrderToSetupIndex) {
+			for (var i = 0, n = drawOrderToSetupIndex.length; i < n; i++)
+				drawOrder[i] = drawOrderToSetupIndex[i];
+		}
 
-    }
+	}
 };
 
 spine.FfdTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = [];
-    this.frames.length = frameCount;
-    this.frameVertices = [];
-    this.frameVertices.length = frameCount;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = [];
+	this.frames.length = frameCount;
+	this.frameVertices = [];
+	this.frameVertices.length = frameCount;
 };
 spine.FfdTimeline.prototype = {
-    slotIndex: 0,
-    attachment: 0,
-    getFrameCount: function () {
-        return this.frames.length;
-    },
-    setFrame: function (frameIndex, time, vertices) {
-        this.frames[frameIndex] = time;
-        this.frameVertices[frameIndex] = vertices;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var slot = skeleton.slots[this.slotIndex];
-        if (slot.attachment != this.attachment) return;
+	slotIndex: 0,
+	attachment: 0,
+	getFrameCount: function () {
+		return this.frames.length;
+	},
+	setFrame: function (frameIndex, time, vertices) {
+		this.frames[frameIndex] = time;
+		this.frameVertices[frameIndex] = vertices;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var slot = skeleton.slots[this.slotIndex];
+		if (slot.attachment != this.attachment) return;
 
-        var frames = this.frames;
-        if (time < frames[0]) return; // Time is before first frame.
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
 
-        var frameVertices = this.frameVertices;
-        var vertexCount = frameVertices[0].length;
+		var frameVertices = this.frameVertices;
+		var vertexCount = frameVertices[0].length;
 
-        var vertices = slot.attachmentVertices;
-        if (vertices.length != vertexCount) alpha = 1;
-        vertices.length = vertexCount;
+		var vertices = slot.attachmentVertices;
+		if (vertices.length != vertexCount) alpha = 1;
+		vertices.length = vertexCount;
 
-        if (time >= frames[frames.length - 1]) { // Time is after last frame.
-            var lastVertices = frameVertices[frames.length - 1];
-            if (alpha < 1) {
-                for (var i = 0; i < vertexCount; i++)
-                    vertices[i] += (lastVertices[i] - vertices[i]) * alpha;
-            } else {
-                for (var i = 0; i < vertexCount; i++)
-                    vertices[i] = lastVertices[i];
-            }
-            return;
-        }
+		if (time >= frames[frames.length - 1]) { // Time is after last frame.
+			var lastVertices = frameVertices[frames.length - 1];
+			if (alpha < 1) {
+				for (var i = 0; i < vertexCount; i++)
+					vertices[i] += (lastVertices[i] - vertices[i]) * alpha;
+			} else {
+				for (var i = 0; i < vertexCount; i++)
+					vertices[i] = lastVertices[i];
+			}
+			return;
+		}
 
-        // Interpolate between the previous frame and the current frame.
-        var frameIndex = spine.Animation.binarySearch1(frames, time);
-        var frameTime = frames[frameIndex];
-        var percent = 1 - (time - frameTime) / (frames[frameIndex - 1] - frameTime);
-        percent = this.curves.getCurvePercent(frameIndex - 1, percent < 0 ? 0 : (percent > 1 ? 1 : percent));
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch1(frames, time);
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex - 1] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex - 1, percent < 0 ? 0 : (percent > 1 ? 1 : percent));
 
-        var prevVertices = frameVertices[frameIndex - 1];
-        var nextVertices = frameVertices[frameIndex];
+		var prevVertices = frameVertices[frameIndex - 1];
+		var nextVertices = frameVertices[frameIndex];
 
-        if (alpha < 1) {
-            for (var i = 0; i < vertexCount; i++) {
-                var prev = prevVertices[i];
-                vertices[i] += (prev + (nextVertices[i] - prev) * percent - vertices[i]) * alpha;
-            }
-        } else {
-            for (var i = 0; i < vertexCount; i++) {
-                var prev = prevVertices[i];
-                vertices[i] = prev + (nextVertices[i] - prev) * percent;
-            }
-        }
-    }
+		if (alpha < 1) {
+			for (var i = 0; i < vertexCount; i++) {
+				var prev = prevVertices[i];
+				vertices[i] += (prev + (nextVertices[i] - prev) * percent - vertices[i]) * alpha;
+			}
+		} else {
+			for (var i = 0; i < vertexCount; i++) {
+				var prev = prevVertices[i];
+				vertices[i] = prev + (nextVertices[i] - prev) * percent;
+			}
+		}
+	}
 };
 
 spine.IkConstraintTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = []; // time, mix, bendDirection, ...
-    this.frames.length = frameCount * 3;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = []; // time, mix, bendDirection, ...
+	this.frames.length = frameCount * 3;
 };
 spine.IkConstraintTimeline.prototype = {
-    ikConstraintIndex: 0,
-    getFrameCount: function () {
-        return this.frames.length / 3;
-    },
-    setFrame: function (frameIndex, time, mix, bendDirection) {
-        frameIndex *= 3;
-        this.frames[frameIndex] = time;
-        this.frames[frameIndex + 1] = mix;
-        this.frames[frameIndex + 2] = bendDirection;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) return; // Time is before first frame.
+	ikConstraintIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 3;
+	},
+	setFrame: function (frameIndex, time, mix, bendDirection) {
+		frameIndex *= 3;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = mix;
+		this.frames[frameIndex + 2] = bendDirection;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
 
-        var ikConstraint = skeleton.ikConstraints[this.ikConstraintIndex];
+		var ikConstraint = skeleton.ikConstraints[this.ikConstraintIndex];
 
-        if (time >= frames[frames.length - 3]) { // Time is after last frame.
-            ikConstraint.mix += (frames[frames.length - 2] - ikConstraint.mix) * alpha;
-            ikConstraint.bendDirection = frames[frames.length - 1];
-            return;
-        }
+		if (time >= frames[frames.length - 3]) { // Time is after last frame.
+			ikConstraint.mix += (frames[frames.length - 2] - ikConstraint.mix) * alpha;
+			ikConstraint.bendDirection = frames[frames.length - 1];
+			return;
+		}
 
-        // Interpolate between the previous frame and the current frame.
-        var frameIndex = spine.Animation.binarySearch(frames, time, 3);
-        var prevFrameMix = frames[frameIndex + -2/*PREV_FRAME_MIX*/];
-        var frameTime = frames[frameIndex];
-        var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
-        percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch(frames, time, 3);
+		var prevFrameMix = frames[frameIndex + -2/*PREV_FRAME_MIX*/];
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
 
-        var mix = prevFrameMix + (frames[frameIndex + 1/*FRAME_MIX*/] - prevFrameMix) * percent;
-        ikConstraint.mix += (mix - ikConstraint.mix) * alpha;
-        ikConstraint.bendDirection = frames[frameIndex + -1/*PREV_FRAME_BEND_DIRECTION*/];
-    }
+		var mix = prevFrameMix + (frames[frameIndex + 1/*FRAME_MIX*/] - prevFrameMix) * percent;
+		ikConstraint.mix += (mix - ikConstraint.mix) * alpha;
+		ikConstraint.bendDirection = frames[frameIndex + -1/*PREV_FRAME_BEND_DIRECTION*/];
+	}
 };
 
 spine.FlipXTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = []; // time, flip, ...
-    this.frames.length = frameCount * 2;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = []; // time, flip, ...
+	this.frames.length = frameCount * 2;
 };
 spine.FlipXTimeline.prototype = {
-    boneIndex: 0,
-    getFrameCount: function () {
-        return this.frames.length / 2;
-    },
-    setFrame: function (frameIndex, time, flip) {
-        frameIndex *= 2;
-        this.frames[frameIndex] = time;
-        this.frames[frameIndex + 1] = flip ? 1 : 0;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) {
-            if (lastTime > time) this.apply(skeleton, lastTime, Number.MAX_VALUE, null, 0);
-            return;
-        } else if (lastTime > time) //
-            lastTime = -1;
-        var frameIndex = (time >= frames[frames.length - 2] ? frames.length : spine.Animation.binarySearch(frames, time, 2)) - 2;
-        if (frames[frameIndex] < lastTime) return;
-        skeleton.bones[this.boneIndex].flipX = frames[frameIndex + 1] != 0;
-    }
+	boneIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 2;
+	},
+	setFrame: function (frameIndex, time, flip) {
+		frameIndex *= 2;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = flip ? 1 : 0;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) {
+			if (lastTime > time) this.apply(skeleton, lastTime, Number.MAX_VALUE, null, 0);
+			return;
+		} else if (lastTime > time) //
+			lastTime = -1;
+		var frameIndex = (time >= frames[frames.length - 2] ? frames.length : spine.Animation.binarySearch(frames, time, 2)) - 2;
+		if (frames[frameIndex] < lastTime) return;
+		skeleton.bones[this.boneIndex].flipX = frames[frameIndex + 1] != 0;
+	}
 };
 
 spine.FlipYTimeline = function (frameCount) {
-    this.curves = new spine.Curves(frameCount);
-    this.frames = []; // time, flip, ...
-    this.frames.length = frameCount * 2;
+	this.curves = new spine.Curves(frameCount);
+	this.frames = []; // time, flip, ...
+	this.frames.length = frameCount * 2;
 };
 spine.FlipYTimeline.prototype = {
-    boneIndex: 0,
-    getFrameCount: function () {
-        return this.frames.length / 2;
-    },
-    setFrame: function (frameIndex, time, flip) {
-        frameIndex *= 2;
-        this.frames[frameIndex] = time;
-        this.frames[frameIndex + 1] = flip ? 1 : 0;
-    },
-    apply: function (skeleton, lastTime, time, firedEvents, alpha) {
-        var frames = this.frames;
-        if (time < frames[0]) {
-            if (lastTime > time) this.apply(skeleton, lastTime, Number.MAX_VALUE, null, 0);
-            return;
-        } else if (lastTime > time) //
-            lastTime = -1;
-        var frameIndex = (time >= frames[frames.length - 2] ? frames.length : spine.Animation.binarySearch(frames, time, 2)) - 2;
-        if (frames[frameIndex] < lastTime) return;
-        skeleton.bones[this.boneIndex].flipY = frames[frameIndex + 1] != 0;
-    }
+	boneIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 2;
+	},
+	setFrame: function (frameIndex, time, flip) {
+		frameIndex *= 2;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = flip ? 1 : 0;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) {
+			if (lastTime > time) this.apply(skeleton, lastTime, Number.MAX_VALUE, null, 0);
+			return;
+		} else if (lastTime > time) //
+			lastTime = -1;
+		var frameIndex = (time >= frames[frames.length - 2] ? frames.length : spine.Animation.binarySearch(frames, time, 2)) - 2;
+		if (frames[frameIndex] < lastTime) return;
+		skeleton.bones[this.boneIndex].flipY = frames[frameIndex + 1] != 0;
+	}
 };
 
 spine.SkeletonData = function () {
-    this.bones = [];
-    this.slots = [];
-    this.skins = [];
-    this.events = [];
-    this.animations = [];
-    this.ikConstraints = [];
+	this.bones = [];
+	this.slots = [];
+	this.skins = [];
+	this.events = [];
+	this.animations = [];
+	this.ikConstraints = [];
 };
 spine.SkeletonData.prototype = {
-    name: null,
-    defaultSkin: null,
-    width: 0, height: 0,
-    version: null, hash: null,
-    /** @return May be null. */
-    findBone: function (boneName) {
-        var bones = this.bones;
-        for (var i = 0, n = bones.length; i < n; i++)
-            if (bones[i].name == boneName) return bones[i];
-        return null;
-    },
-    /** @return -1 if the bone was not found. */
-    findBoneIndex: function (boneName) {
-        var bones = this.bones;
-        for (var i = 0, n = bones.length; i < n; i++)
-            if (bones[i].name == boneName) return i;
-        return -1;
-    },
-    /** @return May be null. */
-    findSlot: function (slotName) {
-        var slots = this.slots;
-        for (var i = 0, n = slots.length; i < n; i++) {
-            if (slots[i].name == slotName) return slot[i];
-        }
-        return null;
-    },
-    /** @return -1 if the bone was not found. */
-    findSlotIndex: function (slotName) {
-        var slots = this.slots;
-        for (var i = 0, n = slots.length; i < n; i++)
-            if (slots[i].name == slotName) return i;
-        return -1;
-    },
-    /** @return May be null. */
-    findSkin: function (skinName) {
-        var skins = this.skins;
-        for (var i = 0, n = skins.length; i < n; i++)
-            if (skins[i].name == skinName) return skins[i];
-        return null;
-    },
-    /** @return May be null. */
-    findEvent: function (eventName) {
-        var events = this.events;
-        for (var i = 0, n = events.length; i < n; i++)
-            if (events[i].name == eventName) return events[i];
-        return null;
-    },
-    /** @return May be null. */
-    findAnimation: function (animationName) {
-        var animations = this.animations;
-        for (var i = 0, n = animations.length; i < n; i++)
-            if (animations[i].name == animationName) return animations[i];
-        return null;
-    },
-    /** @return May be null. */
-    findIkConstraint: function (ikConstraintName) {
-        var ikConstraints = this.ikConstraints;
-        for (var i = 0, n = ikConstraints.length; i < n; i++)
-            if (ikConstraints[i].name == ikConstraintName) return ikConstraints[i];
-        return null;
-    }
+	name: null,
+	defaultSkin: null,
+	width: 0, height: 0,
+	version: null, hash: null,
+	/** @return May be null. */
+	findBone: function (boneName) {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			if (bones[i].name == boneName) return bones[i];
+		return null;
+	},
+	/** @return -1 if the bone was not found. */
+	findBoneIndex: function (boneName) {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			if (bones[i].name == boneName) return i;
+		return -1;
+	},
+	/** @return May be null. */
+	findSlot: function (slotName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++) {
+			if (slots[i].name == slotName) return slot[i];
+		}
+		return null;
+	},
+	/** @return -1 if the bone was not found. */
+	findSlotIndex: function (slotName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++)
+			if (slots[i].name == slotName) return i;
+		return -1;
+	},
+	/** @return May be null. */
+	findSkin: function (skinName) {
+		var skins = this.skins;
+		for (var i = 0, n = skins.length; i < n; i++)
+			if (skins[i].name == skinName) return skins[i];
+		return null;
+	},
+	/** @return May be null. */
+	findEvent: function (eventName) {
+		var events = this.events;
+		for (var i = 0, n = events.length; i < n; i++)
+			if (events[i].name == eventName) return events[i];
+		return null;
+	},
+	/** @return May be null. */
+	findAnimation: function (animationName) {
+		var animations = this.animations;
+		for (var i = 0, n = animations.length; i < n; i++)
+			if (animations[i].name == animationName) return animations[i];
+		return null;
+	},
+	/** @return May be null. */
+	findIkConstraint: function (ikConstraintName) {
+		var ikConstraints = this.ikConstraints;
+		for (var i = 0, n = ikConstraints.length; i < n; i++)
+			if (ikConstraints[i].name == ikConstraintName) return ikConstraints[i];
+		return null;
+	}
 };
 
 spine.Skeleton = function (skeletonData) {
-    this.data = skeletonData;
+	this.data = skeletonData;
 
-    this.bones = [];
-    for (var i = 0, n = skeletonData.bones.length; i < n; i++) {
-        var boneData = skeletonData.bones[i];
-        var parent = !boneData.parent ? null : this.bones[skeletonData.bones.indexOf(boneData.parent)];
-        this.bones.push(new spine.Bone(boneData, this, parent));
-    }
+	this.bones = [];
+	for (var i = 0, n = skeletonData.bones.length; i < n; i++) {
+		var boneData = skeletonData.bones[i];
+		var parent = !boneData.parent ? null : this.bones[skeletonData.bones.indexOf(boneData.parent)];
+		this.bones.push(new spine.Bone(boneData, this, parent));
+	}
 
-    this.slots = [];
-    this.drawOrder = [];
-    for (var i = 0, n = skeletonData.slots.length; i < n; i++) {
-        var slotData = skeletonData.slots[i];
-        var bone = this.bones[skeletonData.bones.indexOf(slotData.boneData)];
-        var slot = new spine.Slot(slotData, bone);
-        this.slots.push(slot);
-        this.drawOrder.push(i);
-    }
+	this.slots = [];
+	this.drawOrder = [];
+	for (var i = 0, n = skeletonData.slots.length; i < n; i++) {
+		var slotData = skeletonData.slots[i];
+		var bone = this.bones[skeletonData.bones.indexOf(slotData.boneData)];
+		var slot = new spine.Slot(slotData, bone);
+		this.slots.push(slot);
+		this.drawOrder.push(i);
+	}
 
-    this.ikConstraints = [];
-    for (var i = 0, n = skeletonData.ikConstraints.length; i < n; i++)
-        this.ikConstraints.push(new spine.IkConstraint(skeletonData.ikConstraints[i], this));
+	this.ikConstraints = [];
+	for (var i = 0, n = skeletonData.ikConstraints.length; i < n; i++)
+		this.ikConstraints.push(new spine.IkConstraint(skeletonData.ikConstraints[i], this));
 
-    this.boneCache = [];
-    this.updateCache();
+	this.boneCache = [];
+	this.updateCache();
 };
 spine.Skeleton.prototype = {
-    x: 0, y: 0,
-    skin: null,
-    r: 1, g: 1, b: 1, a: 1,
-    time: 0,
-    flipX: false, flipY: false,
-    /** Caches information about bones and IK constraints. Must be called if bones or IK constraints are added or removed. */
-    updateCache: function () {
-        var ikConstraints = this.ikConstraints;
-        var ikConstraintsCount = ikConstraints.length;
+	x: 0, y: 0,
+	skin: null,
+	r: 1, g: 1, b: 1, a: 1,
+	time: 0,
+	flipX: false, flipY: false,
+	/** Caches information about bones and IK constraints. Must be called if bones or IK constraints are added or removed. */
+	updateCache: function () {
+		var ikConstraints = this.ikConstraints;
+		var ikConstraintsCount = ikConstraints.length;
 
-        var arrayCount = ikConstraintsCount + 1;
-        var boneCache = this.boneCache;
-        if (boneCache.length > arrayCount) boneCache.length = arrayCount;
-        for (var i = 0, n = boneCache.length; i < n; i++)
-            boneCache[i].length = 0;
-        while (boneCache.length < arrayCount)
-            boneCache[boneCache.length] = [];
+		var arrayCount = ikConstraintsCount + 1;
+		var boneCache = this.boneCache;
+		if (boneCache.length > arrayCount) boneCache.length = arrayCount;
+		for (var i = 0, n = boneCache.length; i < n; i++)
+			boneCache[i].length = 0;
+		while (boneCache.length < arrayCount)
+			boneCache[boneCache.length] = [];
 
-        var nonIkBones = boneCache[0];
-        var bones = this.bones;
+		var nonIkBones = boneCache[0];
+		var bones = this.bones;
 
-        outer:
-        for (var i = 0, n = bones.length; i < n; i++) {
-            var bone = bones[i];
-            var current = bone;
-            do {
-                for (var ii = 0; ii < ikConstraintsCount; ii++) {
-                    var ikConstraint = ikConstraints[ii];
-                    var parent = ikConstraint.bones[0];
-                    var child= ikConstraint.bones[ikConstraint.bones.length - 1];
-                    while (true) {
-                        if (current == child) {
-                            boneCache[ii].push(bone);
-                            boneCache[ii + 1].push(bone);
-                            continue outer;
-                        }
-                        if (child == parent) break;
-                        child = child.parent;
-                    }
-                }
-                current = current.parent;
-            } while (current);
-            nonIkBones[nonIkBones.length] = bone;
-        }
-    },
-    /** Updates the world transform for each bone. */
-    updateWorldTransform: function () {
-        var bones = this.bones;
-        for (var i = 0, n = bones.length; i < n; i++) {
-            var bone = bones[i];
-            bone.rotationIK = bone.rotation;
-        }
-        var i = 0, last = this.boneCache.length - 1;
-        while (true) {
-            var cacheBones = this.boneCache[i];
-            for (var ii = 0, nn = cacheBones.length; ii < nn; ii++)
-                cacheBones[ii].updateWorldTransform();
-            if (i == last) break;
-            this.ikConstraints[i].apply();
-            i++;
-        }
-    },
-    /** Sets the bones and slots to their setup pose values. */
-    setToSetupPose: function () {
-        this.setBonesToSetupPose();
-        this.setSlotsToSetupPose();
-    },
-    setBonesToSetupPose: function () {
-        var bones = this.bones;
-        for (var i = 0, n = bones.length; i < n; i++)
-            bones[i].setToSetupPose();
+		outer:
+		for (var i = 0, n = bones.length; i < n; i++) {
+			var bone = bones[i];
+			var current = bone;
+			do {
+				for (var ii = 0; ii < ikConstraintsCount; ii++) {
+					var ikConstraint = ikConstraints[ii];
+					var parent = ikConstraint.bones[0];
+					var child= ikConstraint.bones[ikConstraint.bones.length - 1];
+					while (true) {
+						if (current == child) {
+							boneCache[ii].push(bone);
+							boneCache[ii + 1].push(bone);
+							continue outer;
+						}
+						if (child == parent) break;
+						child = child.parent;
+					}
+				}
+				current = current.parent;
+			} while (current);
+			nonIkBones[nonIkBones.length] = bone;
+		}
+	},
+	/** Updates the world transform for each bone. */
+	updateWorldTransform: function () {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++) {
+			var bone = bones[i];
+			bone.rotationIK = bone.rotation;
+		}
+		var i = 0, last = this.boneCache.length - 1;
+		while (true) {
+			var cacheBones = this.boneCache[i];
+			for (var ii = 0, nn = cacheBones.length; ii < nn; ii++)
+				cacheBones[ii].updateWorldTransform();
+			if (i == last) break;
+			this.ikConstraints[i].apply();
+			i++;
+		}
+	},
+	/** Sets the bones and slots to their setup pose values. */
+	setToSetupPose: function () {
+		this.setBonesToSetupPose();
+		this.setSlotsToSetupPose();
+	},
+	setBonesToSetupPose: function () {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			bones[i].setToSetupPose();
 
-        var ikConstraints = this.ikConstraints;
-        for (var i = 0, n = ikConstraints.length; i < n; i++) {
-            var ikConstraint = ikConstraints[i];
-            ikConstraint.bendDirection = ikConstraint.data.bendDirection;
-            ikConstraint.mix = ikConstraint.data.mix;
-        }
-    },
-    setSlotsToSetupPose: function () {
-        var slots = this.slots;
-        for (var i = 0, n = slots.length; i < n; i++) {
-            slots[i].setToSetupPose(i);
-        }
-        this.resetDrawOrder();
-    },
-    /** @return May return null. */
-    getRootBone: function () {
-        return this.bones.length ? this.bones[0] : null;
-    },
-    /** @return May be null. */
-    findBone: function (boneName) {
-        var bones = this.bones;
-        for (var i = 0, n = bones.length; i < n; i++)
-            if (bones[i].data.name == boneName) return bones[i];
-        return null;
-    },
-    /** @return -1 if the bone was not found. */
-    findBoneIndex: function (boneName) {
-        var bones = this.bones;
-        for (var i = 0, n = bones.length; i < n; i++)
-            if (bones[i].data.name == boneName) return i;
-        return -1;
-    },
-    /** @return May be null. */
-    findSlot: function (slotName) {
-        var slots = this.slots;
-        for (var i = 0, n = slots.length; i < n; i++)
-            if (slots[i].data.name == slotName) return slots[i];
-        return null;
-    },
-    /** @return -1 if the bone was not found. */
-    findSlotIndex: function (slotName) {
-        var slots = this.slots;
-        for (var i = 0, n = slots.length; i < n; i++)
-            if (slots[i].data.name == slotName) return i;
-        return -1;
-    },
-    setSkinByName: function (skinName) {
-        var skin = this.data.findSkin(skinName);
-        if (!skin) throw "Skin not found: " + skinName;
-        this.setSkin(skin);
-    },
-    /** Sets the skin used to look up attachments before looking in the {@link SkeletonData#getDefaultSkin() default skin}.
-     * Attachments from the new skin are attached if the corresponding attachment from the old skin was attached. If there was
-     * no old skin, each slot's setup mode attachment is attached from the new skin.
-     * @param newSkin May be null. */
-    setSkin: function (newSkin) {
-        if (newSkin) {
-            if (this.skin)
-                newSkin._attachAll(this, this.skin);
-            else {
-                var slots = this.slots;
-                for (var i = 0, n = slots.length; i < n; i++) {
-                    var slot = slots[i];
-                    var name = slot.data.attachmentName;
-                    if (name) {
-                        var attachment = newSkin.getAttachment(i, name);
-                        if (attachment) slot.setAttachment(attachment);
-                    }
-                }
-            }
-        }
-        this.skin = newSkin;
-    },
-    /** @return May be null. */
-    getAttachmentBySlotName: function (slotName, attachmentName) {
-        return this.getAttachmentBySlotIndex(this.data.findSlotIndex(slotName), attachmentName);
-    },
-    /** @return May be null. */
-    getAttachmentBySlotIndex: function (slotIndex, attachmentName) {
-        if (this.skin) {
-            var attachment = this.skin.getAttachment(slotIndex, attachmentName);
-            if (attachment) return attachment;
-        }
-        if (this.data.defaultSkin) return this.data.defaultSkin.getAttachment(slotIndex, attachmentName);
-        return null;
-    },
-    /** @param attachmentName May be null. */
-    setAttachment: function (slotName, attachmentName) {
-        var slots = this.slots;
-        for (var i = 0, n = slots.length; i < n; i++) {
-            var slot = slots[i];
-            if (slot.data.name == slotName) {
-                var attachment = null;
-                if (attachmentName) {
-                    attachment = this.getAttachmentBySlotIndex(i, attachmentName);
-                    if (!attachment) throw "Attachment not found: " + attachmentName + ", for slot: " + slotName;
-                }
-                slot.setAttachment(attachment);
-                return;
-            }
-        }
-        throw "Slot not found: " + slotName;
-    },
-    /** @return May be null. */
-    findIkConstraint: function (ikConstraintName) {
-        var ikConstraints = this.ikConstraints;
-        for (var i = 0, n = ikConstraints.length; i < n; i++)
-            if (ikConstraints[i].data.name == ikConstraintName) return ikConstraints[i];
-        return null;
-    },
-    update: function (delta) {
-        this.time += delta;
-    },
-    resetDrawOrder: function() {
-        for (var i = 0, n = this.drawOrder.length; i < n; i++)
-            this.drawOrder[i] = i;
-    }
+		var ikConstraints = this.ikConstraints;
+		for (var i = 0, n = ikConstraints.length; i < n; i++) {
+			var ikConstraint = ikConstraints[i];
+			ikConstraint.bendDirection = ikConstraint.data.bendDirection;
+			ikConstraint.mix = ikConstraint.data.mix;
+		}
+	},
+	setSlotsToSetupPose: function () {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++) {
+			slots[i].setToSetupPose(i);
+		}
+		this.resetDrawOrder();
+	},
+	/** @return May return null. */
+	getRootBone: function () {
+		return this.bones.length ? this.bones[0] : null;
+	},
+	/** @return May be null. */
+	findBone: function (boneName) {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			if (bones[i].data.name == boneName) return bones[i];
+		return null;
+	},
+	/** @return -1 if the bone was not found. */
+	findBoneIndex: function (boneName) {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			if (bones[i].data.name == boneName) return i;
+		return -1;
+	},
+	/** @return May be null. */
+	findSlot: function (slotName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++)
+			if (slots[i].data.name == slotName) return slots[i];
+		return null;
+	},
+	/** @return -1 if the bone was not found. */
+	findSlotIndex: function (slotName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++)
+			if (slots[i].data.name == slotName) return i;
+		return -1;
+	},
+	setSkinByName: function (skinName) {
+		var skin = this.data.findSkin(skinName);
+		if (!skin) throw "Skin not found: " + skinName;
+		this.setSkin(skin);
+	},
+	/** Sets the skin used to look up attachments before looking in the {@link SkeletonData#getDefaultSkin() default skin}.
+	 * Attachments from the new skin are attached if the corresponding attachment from the old skin was attached. If there was
+	 * no old skin, each slot's setup mode attachment is attached from the new skin.
+	 * @param newSkin May be null. */
+	setSkin: function (newSkin) {
+		if (newSkin) {
+			if (this.skin)
+				newSkin._attachAll(this, this.skin);
+			else {
+				var slots = this.slots;
+				for (var i = 0, n = slots.length; i < n; i++) {
+					var slot = slots[i];
+					var name = slot.data.attachmentName;
+					if (name) {
+						var attachment = newSkin.getAttachment(i, name);
+						if (attachment) slot.setAttachment(attachment);
+					}
+				}
+			}
+		}
+		this.skin = newSkin;
+	},
+	/** @return May be null. */
+	getAttachmentBySlotName: function (slotName, attachmentName) {
+		return this.getAttachmentBySlotIndex(this.data.findSlotIndex(slotName), attachmentName);
+	},
+	/** @return May be null. */
+	getAttachmentBySlotIndex: function (slotIndex, attachmentName) {
+		if (this.skin) {
+			var attachment = this.skin.getAttachment(slotIndex, attachmentName);
+			if (attachment) return attachment;
+		}
+		if (this.data.defaultSkin) return this.data.defaultSkin.getAttachment(slotIndex, attachmentName);
+		return null;
+	},
+	/** @param attachmentName May be null. */
+	setAttachment: function (slotName, attachmentName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++) {
+			var slot = slots[i];
+			if (slot.data.name == slotName) {
+				var attachment = null;
+				if (attachmentName) {
+					attachment = this.getAttachmentBySlotIndex(i, attachmentName);
+					if (!attachment) throw "Attachment not found: " + attachmentName + ", for slot: " + slotName;
+				}
+				slot.setAttachment(attachment);
+				return;
+			}
+		}
+		throw "Slot not found: " + slotName;
+	},
+	/** @return May be null. */
+	findIkConstraint: function (ikConstraintName) {
+		var ikConstraints = this.ikConstraints;
+		for (var i = 0, n = ikConstraints.length; i < n; i++)
+			if (ikConstraints[i].data.name == ikConstraintName) return ikConstraints[i];
+		return null;
+	},
+	update: function (delta) {
+		this.time += delta;
+	},
+	resetDrawOrder: function() {
+		for (var i = 0, n = this.drawOrder.length; i < n; i++)
+			this.drawOrder[i] = i;
+	}
 };
 
 spine.EventData = function (name) {
-    this.name = name;
+	this.name = name;
 };
 spine.EventData.prototype = {
-    intValue: 0,
-    floatValue: 0,
-    stringValue: null
+	intValue: 0,
+	floatValue: 0,
+	stringValue: null
 };
 
 spine.Event = function (data) {
-    this.data = data;
+	this.data = data;
 };
 spine.Event.prototype = {
-    intValue: 0,
-    floatValue: 0,
-    stringValue: null
+	intValue: 0,
+	floatValue: 0,
+	stringValue: null
 };
 
 spine.AttachmentType = {
-    region: 0,
-    boundingbox: 1,
-    mesh: 2,
-    skinnedmesh: 3
+	region: 0,
+	boundingbox: 1,
+	mesh: 2,
+	skinnedmesh: 3
 };
 
 spine.RegionAttachment = function (name) {
-    this.name = name;
-    this.offset = [];
-    this.offset.length = 8;
-    this.uvs = [];
-    this.uvs.length = 8;
+	this.name = name;
+	this.offset = [];
+	this.offset.length = 8;
+	this.uvs = [];
+	this.uvs.length = 8;
 };
 spine.RegionAttachment.prototype = {
-    type: spine.AttachmentType.region,
-    x: 0, y: 0,
-    rotation: 0,
-    scaleX: 1, scaleY: 1,
-    width: 0, height: 0,
-    r: 1, g: 1, b: 1, a: 1,
-    path: null,
-    rendererObject: null,
-    regionOffsetX: 0, regionOffsetY: 0,
-    regionWidth: 0, regionHeight: 0,
-    regionOriginalWidth: 0, regionOriginalHeight: 0,
-    setUVs: function (u, v, u2, v2, rotate) {
-        var uvs = this.uvs;
-        if (rotate) {
-            uvs[2/*X2*/] = u;
-            uvs[3/*Y2*/] = v2;
-            uvs[4/*X3*/] = u;
-            uvs[5/*Y3*/] = v;
-            uvs[6/*X4*/] = u2;
-            uvs[7/*Y4*/] = v;
-            uvs[0/*X1*/] = u2;
-            uvs[1/*Y1*/] = v2;
-        } else {
-            uvs[0/*X1*/] = u;
-            uvs[1/*Y1*/] = v2;
-            uvs[2/*X2*/] = u;
-            uvs[3/*Y2*/] = v;
-            uvs[4/*X3*/] = u2;
-            uvs[5/*Y3*/] = v;
-            uvs[6/*X4*/] = u2;
-            uvs[7/*Y4*/] = v2;
-        }
-    },
-    updateOffset: function () {
-        var regionScaleX = this.width / this.regionOriginalWidth * this.scaleX;
-        var regionScaleY = this.height / this.regionOriginalHeight * this.scaleY;
-        var localX = -this.width / 2 * this.scaleX + this.regionOffsetX * regionScaleX;
-        var localY = -this.height / 2 * this.scaleY + this.regionOffsetY * regionScaleY;
-        var localX2 = localX + this.regionWidth * regionScaleX;
-        var localY2 = localY + this.regionHeight * regionScaleY;
-        var radians = this.rotation * spine.degRad;
-        var cos = Math.cos(radians);
-        var sin = Math.sin(radians);
-        var localXCos = localX * cos + this.x;
-        var localXSin = localX * sin;
-        var localYCos = localY * cos + this.y;
-        var localYSin = localY * sin;
-        var localX2Cos = localX2 * cos + this.x;
-        var localX2Sin = localX2 * sin;
-        var localY2Cos = localY2 * cos + this.y;
-        var localY2Sin = localY2 * sin;
-        var offset = this.offset;
-        offset[0/*X1*/] = localXCos - localYSin;
-        offset[1/*Y1*/] = localYCos + localXSin;
-        offset[2/*X2*/] = localXCos - localY2Sin;
-        offset[3/*Y2*/] = localY2Cos + localXSin;
-        offset[4/*X3*/] = localX2Cos - localY2Sin;
-        offset[5/*Y3*/] = localY2Cos + localX2Sin;
-        offset[6/*X4*/] = localX2Cos - localYSin;
-        offset[7/*Y4*/] = localYCos + localX2Sin;
-    },
-    computeVertices: function (x, y, bone, vertices) {
-        x += bone.worldX;
-        y += bone.worldY;
-        var m00 = bone.m00, m01 = bone.m01, m10 = bone.m10, m11 = bone.m11;
-        var offset = this.offset;
-        vertices[0/*X1*/] = offset[0/*X1*/] * m00 + offset[1/*Y1*/] * m01 + x;
-        vertices[1/*Y1*/] = offset[0/*X1*/] * m10 + offset[1/*Y1*/] * m11 + y;
-        vertices[2/*X2*/] = offset[2/*X2*/] * m00 + offset[3/*Y2*/] * m01 + x;
-        vertices[3/*Y2*/] = offset[2/*X2*/] * m10 + offset[3/*Y2*/] * m11 + y;
-        vertices[4/*X3*/] = offset[4/*X3*/] * m00 + offset[5/*X3*/] * m01 + x;
-        vertices[5/*X3*/] = offset[4/*X3*/] * m10 + offset[5/*X3*/] * m11 + y;
-        vertices[6/*X4*/] = offset[6/*X4*/] * m00 + offset[7/*Y4*/] * m01 + x;
-        vertices[7/*Y4*/] = offset[6/*X4*/] * m10 + offset[7/*Y4*/] * m11 + y;
-    }
+	type: spine.AttachmentType.region,
+	x: 0, y: 0,
+	rotation: 0,
+	scaleX: 1, scaleY: 1,
+	width: 0, height: 0,
+	r: 1, g: 1, b: 1, a: 1,
+	path: null,
+	rendererObject: null,
+	regionOffsetX: 0, regionOffsetY: 0,
+	regionWidth: 0, regionHeight: 0,
+	regionOriginalWidth: 0, regionOriginalHeight: 0,
+	setUVs: function (u, v, u2, v2, rotate) {
+		var uvs = this.uvs;
+		if (rotate) {
+			uvs[2/*X2*/] = u;
+			uvs[3/*Y2*/] = v2;
+			uvs[4/*X3*/] = u;
+			uvs[5/*Y3*/] = v;
+			uvs[6/*X4*/] = u2;
+			uvs[7/*Y4*/] = v;
+			uvs[0/*X1*/] = u2;
+			uvs[1/*Y1*/] = v2;
+		} else {
+			uvs[0/*X1*/] = u;
+			uvs[1/*Y1*/] = v2;
+			uvs[2/*X2*/] = u;
+			uvs[3/*Y2*/] = v;
+			uvs[4/*X3*/] = u2;
+			uvs[5/*Y3*/] = v;
+			uvs[6/*X4*/] = u2;
+			uvs[7/*Y4*/] = v2;
+		}
+	},
+	updateOffset: function () {
+		var regionScaleX = this.width / this.regionOriginalWidth * this.scaleX;
+		var regionScaleY = this.height / this.regionOriginalHeight * this.scaleY;
+		var localX = -this.width / 2 * this.scaleX + this.regionOffsetX * regionScaleX;
+		var localY = -this.height / 2 * this.scaleY + this.regionOffsetY * regionScaleY;
+		var localX2 = localX + this.regionWidth * regionScaleX;
+		var localY2 = localY + this.regionHeight * regionScaleY;
+		var radians = this.rotation * spine.degRad;
+		var cos = Math.cos(radians);
+		var sin = Math.sin(radians);
+		var localXCos = localX * cos + this.x;
+		var localXSin = localX * sin;
+		var localYCos = localY * cos + this.y;
+		var localYSin = localY * sin;
+		var localX2Cos = localX2 * cos + this.x;
+		var localX2Sin = localX2 * sin;
+		var localY2Cos = localY2 * cos + this.y;
+		var localY2Sin = localY2 * sin;
+		var offset = this.offset;
+		offset[0/*X1*/] = localXCos - localYSin;
+		offset[1/*Y1*/] = localYCos + localXSin;
+		offset[2/*X2*/] = localXCos - localY2Sin;
+		offset[3/*Y2*/] = localY2Cos + localXSin;
+		offset[4/*X3*/] = localX2Cos - localY2Sin;
+		offset[5/*Y3*/] = localY2Cos + localX2Sin;
+		offset[6/*X4*/] = localX2Cos - localYSin;
+		offset[7/*Y4*/] = localYCos + localX2Sin;
+	},
+	computeVertices: function (x, y, bone, vertices) {
+		x += bone.worldX;
+		y += bone.worldY;
+		var m00 = bone.m00, m01 = bone.m01, m10 = bone.m10, m11 = bone.m11;
+		var offset = this.offset;
+		vertices[0/*X1*/] = offset[0/*X1*/] * m00 + offset[1/*Y1*/] * m01 + x;
+		vertices[1/*Y1*/] = offset[0/*X1*/] * m10 + offset[1/*Y1*/] * m11 + y;
+		vertices[2/*X2*/] = offset[2/*X2*/] * m00 + offset[3/*Y2*/] * m01 + x;
+		vertices[3/*Y2*/] = offset[2/*X2*/] * m10 + offset[3/*Y2*/] * m11 + y;
+		vertices[4/*X3*/] = offset[4/*X3*/] * m00 + offset[5/*X3*/] * m01 + x;
+		vertices[5/*X3*/] = offset[4/*X3*/] * m10 + offset[5/*X3*/] * m11 + y;
+		vertices[6/*X4*/] = offset[6/*X4*/] * m00 + offset[7/*Y4*/] * m01 + x;
+		vertices[7/*Y4*/] = offset[6/*X4*/] * m10 + offset[7/*Y4*/] * m11 + y;
+	}
 };
 
 spine.MeshAttachment = function (name) {
-    this.name = name;
+	this.name = name;
 };
 spine.MeshAttachment.prototype = {
-    type: spine.AttachmentType.mesh,
-    vertices: null,
-    uvs: null,
-    regionUVs: null,
-    triangles: null,
-    hullLength: 0,
-    r: 1, g: 1, b: 1, a: 1,
-    path: null,
-    rendererObject: null,
-    regionU: 0, regionV: 0, regionU2: 0, regionV2: 0, regionRotate: false,
-    regionOffsetX: 0, regionOffsetY: 0,
-    regionWidth: 0, regionHeight: 0,
-    regionOriginalWidth: 0, regionOriginalHeight: 0,
-    edges: null,
-    width: 0, height: 0,
-    updateUVs: function () {
-        var width = this.regionU2 - this.regionU, height = this.regionV2 - this.regionV;
-        var n = this.regionUVs.length;
-        if (!this.uvs || this.uvs.length != n) {
+	type: spine.AttachmentType.mesh,
+	vertices: null,
+	uvs: null,
+	regionUVs: null,
+	triangles: null,
+	hullLength: 0,
+	r: 1, g: 1, b: 1, a: 1,
+	path: null,
+	rendererObject: null,
+	regionU: 0, regionV: 0, regionU2: 0, regionV2: 0, regionRotate: false,
+	regionOffsetX: 0, regionOffsetY: 0,
+	regionWidth: 0, regionHeight: 0,
+	regionOriginalWidth: 0, regionOriginalHeight: 0,
+	edges: null,
+	width: 0, height: 0,
+	updateUVs: function () {
+		var width = this.regionU2 - this.regionU, height = this.regionV2 - this.regionV;
+		var n = this.regionUVs.length;
+		if (!this.uvs || this.uvs.length != n) {
             this.uvs = new spine.Float32Array(n);
-        }
-        if (this.regionRotate) {
-            for (var i = 0; i < n; i += 2) {
+		}
+		if (this.regionRotate) {
+			for (var i = 0; i < n; i += 2) {
                 this.uvs[i] = this.regionU + this.regionUVs[i + 1] * width;
                 this.uvs[i + 1] = this.regionV + height - this.regionUVs[i] * height;
-            }
-        } else {
-            for (var i = 0; i < n; i += 2) {
+			}
+		} else {
+			for (var i = 0; i < n; i += 2) {
                 this.uvs[i] = this.regionU + this.regionUVs[i] * width;
                 this.uvs[i + 1] = this.regionV + this.regionUVs[i + 1] * height;
-            }
-        }
-    },
-    computeWorldVertices: function (x, y, slot, worldVertices) {
-        var bone = slot.bone;
-        x += bone.worldX;
-        y += bone.worldY;
-        var m00 = bone.m00, m01 = bone.m01, m10 = bone.m10, m11 = bone.m11;
-        var vertices = this.vertices;
-        var verticesCount = vertices.length;
-        if (slot.attachmentVertices.length == verticesCount) vertices = slot.attachmentVertices;
-        for (var i = 0; i < verticesCount; i += 2) {
-            var vx = vertices[i];
-            var vy = vertices[i + 1];
-            worldVertices[i] = vx * m00 + vy * m01 + x;
-            worldVertices[i + 1] = vx * m10 + vy * m11 + y;
-        }
-    }
+			}
+		}
+	},
+	computeWorldVertices: function (x, y, slot, worldVertices) {
+		var bone = slot.bone;
+		x += bone.worldX;
+		y += bone.worldY;
+		var m00 = bone.m00, m01 = bone.m01, m10 = bone.m10, m11 = bone.m11;
+		var vertices = this.vertices;
+		var verticesCount = vertices.length;
+		if (slot.attachmentVertices.length == verticesCount) vertices = slot.attachmentVertices;
+		for (var i = 0; i < verticesCount; i += 2) {
+			var vx = vertices[i];
+			var vy = vertices[i + 1];
+			worldVertices[i] = vx * m00 + vy * m01 + x;
+			worldVertices[i + 1] = vx * m10 + vy * m11 + y;
+		}
+	}
 };
 
 spine.SkinnedMeshAttachment = function (name) {
-    this.name = name;
+	this.name = name;
 };
 spine.SkinnedMeshAttachment.prototype = {
-    type: spine.AttachmentType.skinnedmesh,
-    bones: null,
-    weights: null,
-    uvs: null,
-    regionUVs: null,
-    triangles: null,
-    hullLength: 0,
-    r: 1, g: 1, b: 1, a: 1,
-    path: null,
-    rendererObject: null,
-    regionU: 0, regionV: 0, regionU2: 0, regionV2: 0, regionRotate: false,
-    regionOffsetX: 0, regionOffsetY: 0,
-    regionWidth: 0, regionHeight: 0,
-    regionOriginalWidth: 0, regionOriginalHeight: 0,
-    edges: null,
-    width: 0, height: 0,
-    updateUVs: function (u, v, u2, v2, rotate) {
-        var width = this.regionU2 - this.regionU, height = this.regionV2 - this.regionV;
-        var n = this.regionUVs.length;
-        if (!this.uvs || this.uvs.length != n) {
+	type: spine.AttachmentType.skinnedmesh,
+	bones: null,
+	weights: null,
+	uvs: null,
+	regionUVs: null,
+	triangles: null,
+	hullLength: 0,
+	r: 1, g: 1, b: 1, a: 1,
+	path: null,
+	rendererObject: null,
+	regionU: 0, regionV: 0, regionU2: 0, regionV2: 0, regionRotate: false,
+	regionOffsetX: 0, regionOffsetY: 0,
+	regionWidth: 0, regionHeight: 0,
+	regionOriginalWidth: 0, regionOriginalHeight: 0,
+	edges: null,
+	width: 0, height: 0,
+	updateUVs: function (u, v, u2, v2, rotate) {
+		var width = this.regionU2 - this.regionU, height = this.regionV2 - this.regionV;
+		var n = this.regionUVs.length;
+		if (!this.uvs || this.uvs.length != n) {
             this.uvs = new spine.Float32Array(n);
-        }
-        if (this.regionRotate) {
-            for (var i = 0; i < n; i += 2) {
+		}
+		if (this.regionRotate) {
+			for (var i = 0; i < n; i += 2) {
                 this.uvs[i] = this.regionU + this.regionUVs[i + 1] * width;
                 this.uvs[i + 1] = this.regionV + height - this.regionUVs[i] * height;
-            }
-        } else {
-            for (var i = 0; i < n; i += 2) {
+			}
+		} else {
+			for (var i = 0; i < n; i += 2) {
                 this.uvs[i] = this.regionU + this.regionUVs[i] * width;
                 this.uvs[i + 1] = this.regionV + this.regionUVs[i + 1] * height;
-            }
-        }
-    },
-    computeWorldVertices: function (x, y, slot, worldVertices) {
-        var skeletonBones = slot.bone.skeleton.bones;
-        var weights = this.weights;
-        var bones = this.bones;
+			}
+		}
+	},
+	computeWorldVertices: function (x, y, slot, worldVertices) {
+		var skeletonBones = slot.bone.skeleton.bones;
+		var weights = this.weights;
+		var bones = this.bones;
 
-        var w = 0, v = 0, b = 0, f = 0, n = bones.length, nn;
-        var wx, wy, bone, vx, vy, weight;
-        if (!slot.attachmentVertices.length) {
-            for (; v < n; w += 2) {
-                wx = 0;
-                wy = 0;
-                nn = bones[v++] + v;
-                for (; v < nn; v++, b += 3) {
-                    bone = skeletonBones[bones[v]];
-                    vx = weights[b];
-                    vy = weights[b + 1];
-                    weight = weights[b + 2];
-                    wx += (vx * bone.m00 + vy * bone.m01 + bone.worldX) * weight;
-                    wy += (vx * bone.m10 + vy * bone.m11 + bone.worldY) * weight;
-                }
-                worldVertices[w] = wx + x;
-                worldVertices[w + 1] = wy + y;
-            }
-        } else {
-            var ffd = slot.attachmentVertices;
-            for (; v < n; w += 2) {
-                wx = 0;
-                wy = 0;
-                nn = bones[v++] + v;
-                for (; v < nn; v++, b += 3, f += 2) {
-                    bone = skeletonBones[bones[v]];
-                    vx = weights[b] + ffd[f];
-                    vy = weights[b + 1] + ffd[f + 1];
-                    weight = weights[b + 2];
-                    wx += (vx * bone.m00 + vy * bone.m01 + bone.worldX) * weight;
-                    wy += (vx * bone.m10 + vy * bone.m11 + bone.worldY) * weight;
-                }
-                worldVertices[w] = wx + x;
-                worldVertices[w + 1] = wy + y;
-            }
-        }
-    }
+		var w = 0, v = 0, b = 0, f = 0, n = bones.length, nn;
+		var wx, wy, bone, vx, vy, weight;
+		if (!slot.attachmentVertices.length) {
+			for (; v < n; w += 2) {
+				wx = 0;
+				wy = 0;
+				nn = bones[v++] + v;
+				for (; v < nn; v++, b += 3) {
+					bone = skeletonBones[bones[v]];
+					vx = weights[b];
+					vy = weights[b + 1];
+					weight = weights[b + 2];
+					wx += (vx * bone.m00 + vy * bone.m01 + bone.worldX) * weight;
+					wy += (vx * bone.m10 + vy * bone.m11 + bone.worldY) * weight;
+				}
+				worldVertices[w] = wx + x;
+				worldVertices[w + 1] = wy + y;
+			}
+		} else {
+			var ffd = slot.attachmentVertices;
+			for (; v < n; w += 2) {
+				wx = 0;
+				wy = 0;
+				nn = bones[v++] + v;
+				for (; v < nn; v++, b += 3, f += 2) {
+					bone = skeletonBones[bones[v]];
+					vx = weights[b] + ffd[f];
+					vy = weights[b + 1] + ffd[f + 1];
+					weight = weights[b + 2];
+					wx += (vx * bone.m00 + vy * bone.m01 + bone.worldX) * weight;
+					wy += (vx * bone.m10 + vy * bone.m11 + bone.worldY) * weight;
+				}
+				worldVertices[w] = wx + x;
+				worldVertices[w + 1] = wy + y;
+			}
+		}
+	}
 };
 
 spine.BoundingBoxAttachment = function (name) {
-    this.name = name;
-    this.vertices = [];
+	this.name = name;
+	this.vertices = [];
 };
 spine.BoundingBoxAttachment.prototype = {
-    type: spine.AttachmentType.boundingbox,
-    computeWorldVertices: function (x, y, bone, worldVertices) {
-        x += bone.worldX;
-        y += bone.worldY;
-        var m00 = bone.m00, m01 = bone.m01, m10 = bone.m10, m11 = bone.m11;
-        var vertices = this.vertices;
-        for (var i = 0, n = vertices.length; i < n; i += 2) {
-            var px = vertices[i];
-            var py = vertices[i + 1];
-            worldVertices[i] = px * m00 + py * m01 + x;
-            worldVertices[i + 1] = px * m10 + py * m11 + y;
-        }
-    }
+	type: spine.AttachmentType.boundingbox,
+	computeWorldVertices: function (x, y, bone, worldVertices) {
+		x += bone.worldX;
+		y += bone.worldY;
+		var m00 = bone.m00, m01 = bone.m01, m10 = bone.m10, m11 = bone.m11;
+		var vertices = this.vertices;
+		for (var i = 0, n = vertices.length; i < n; i += 2) {
+			var px = vertices[i];
+			var py = vertices[i + 1];
+			worldVertices[i] = px * m00 + py * m01 + x;
+			worldVertices[i + 1] = px * m10 + py * m11 + y;
+		}
+	}
 };
 
 spine.AnimationStateData = function (skeletonData) {
-    this.skeletonData = skeletonData;
-    this.animationToMixTime = {};
+	this.skeletonData = skeletonData;
+	this.animationToMixTime = {};
 };
 spine.AnimationStateData.prototype = {
-    defaultMix: 0,
-    setMixByName: function (fromName, toName, duration) {
-        var from = this.skeletonData.findAnimation(fromName);
-        if (!from) throw "Animation not found: " + fromName;
-        var to = this.skeletonData.findAnimation(toName);
-        if (!to) throw "Animation not found: " + toName;
-        this.setMix(from, to, duration);
-    },
-    setMix: function (from, to, duration) {
-        this.animationToMixTime[from.name + ":" + to.name] = duration;
-    },
-    getMix: function (from, to) {
-        var key = from.name + ":" + to.name;
-        return this.animationToMixTime.hasOwnProperty(key) ? this.animationToMixTime[key] : this.defaultMix;
-    }
+	defaultMix: 0,
+	setMixByName: function (fromName, toName, duration) {
+		var from = this.skeletonData.findAnimation(fromName);
+		if (!from) throw "Animation not found: " + fromName;
+		var to = this.skeletonData.findAnimation(toName);
+		if (!to) throw "Animation not found: " + toName;
+		this.setMix(from, to, duration);
+	},
+	setMix: function (from, to, duration) {
+		this.animationToMixTime[from.name + ":" + to.name] = duration;
+	},
+	getMix: function (from, to) {
+		var key = from.name + ":" + to.name;
+		return this.animationToMixTime.hasOwnProperty(key) ? this.animationToMixTime[key] : this.defaultMix;
+	}
 };
 
 spine.TrackEntry = function () {};
 spine.TrackEntry.prototype = {
-    next: null, previous: null,
-    animation: null,
-    loop: false,
-    delay: 0, time: 0, lastTime: -1, endTime: 0,
-    timeScale: 1,
-    mixTime: 0, mixDuration: 0, mix: 1,
-    onStart: null, onEnd: null, onComplete: null, onEvent: null
+	next: null, previous: null,
+	animation: null,
+	loop: false,
+	delay: 0, time: 0, lastTime: -1, endTime: 0,
+	timeScale: 1,
+	mixTime: 0, mixDuration: 0, mix: 1,
+	onStart: null, onEnd: null, onComplete: null, onEvent: null
 };
 
 spine.AnimationState = function (stateData) {
-    this.data = stateData;
-    this.tracks = [];
-    this.events = [];
+	this.data = stateData;
+	this.tracks = [];
+	this.events = [];
 };
 spine.AnimationState.prototype = {
-    onStart: null,
-    onEnd: null,
-    onComplete: null,
-    onEvent: null,
-    timeScale: 1,
-    update: function (delta) {
-        delta *= this.timeScale;
-        for (var i = 0; i < this.tracks.length; i++) {
-            var current = this.tracks[i];
-            if (!current) continue;
+	onStart: null,
+	onEnd: null,
+	onComplete: null,
+	onEvent: null,
+	timeScale: 1,
+	update: function (delta) {
+		delta *= this.timeScale;
+		for (var i = 0; i < this.tracks.length; i++) {
+			var current = this.tracks[i];
+			if (!current) continue;
 
-            current.time += delta * current.timeScale;
-            if (current.previous) {
-                var previousDelta = delta * current.previous.timeScale;
-                current.previous.time += previousDelta;
-                current.mixTime += previousDelta;
-            }
+			current.time += delta * current.timeScale;
+			if (current.previous) {
+				var previousDelta = delta * current.previous.timeScale;
+				current.previous.time += previousDelta;
+				current.mixTime += previousDelta;
+			}
 
-            var next = current.next;
-            if (next) {
-                next.time = current.lastTime - next.delay;
-                if (next.time >= 0) this.setCurrent(i, next);
-            } else {
-                // End non-looping animation when it reaches its end time and there is no next entry.
-                if (!current.loop && current.lastTime >= current.endTime) this.clearTrack(i);
-            }
-        }
-    },
-    apply: function (skeleton) {
-        skeleton.resetDrawOrder();
-        for (var i = 0; i < this.tracks.length; i++) {
-            var current = this.tracks[i];
-            if (!current) continue;
+			var next = current.next;
+			if (next) {
+				next.time = current.lastTime - next.delay;
+				if (next.time >= 0) this.setCurrent(i, next);
+			} else {
+				// End non-looping animation when it reaches its end time and there is no next entry.
+				if (!current.loop && current.lastTime >= current.endTime) this.clearTrack(i);
+			}
+		}
+	},
+	apply: function (skeleton) {
+		skeleton.resetDrawOrder();
+		for (var i = 0; i < this.tracks.length; i++) {
+			var current = this.tracks[i];
+			if (!current) continue;
 
-            this.events.length = 0;
+			this.events.length = 0;
 
-            var time = current.time;
-            var lastTime = current.lastTime;
-            var endTime = current.endTime;
-            var loop = current.loop;
-            if (!loop && time > endTime) time = endTime;
+			var time = current.time;
+			var lastTime = current.lastTime;
+			var endTime = current.endTime;
+			var loop = current.loop;
+			if (!loop && time > endTime) time = endTime;
 
-            var previous = current.previous;
-            if (!previous) {
-                if (current.mix == 1)
-                    current.animation.apply(skeleton, current.lastTime, time, loop, this.events);
-                else
-                    current.animation.mix(skeleton, current.lastTime, time, loop, this.events, current.mix);
-            } else {
-                var previousTime = previous.time;
-                if (!previous.loop && previousTime > previous.endTime) previousTime = previous.endTime;
-                previous.animation.apply(skeleton, previousTime, previousTime, previous.loop, null);
+			var previous = current.previous;
+			if (!previous) {
+				if (current.mix == 1)
+					current.animation.apply(skeleton, current.lastTime, time, loop, this.events);
+				else
+					current.animation.mix(skeleton, current.lastTime, time, loop, this.events, current.mix);
+			} else {
+				var previousTime = previous.time;
+				if (!previous.loop && previousTime > previous.endTime) previousTime = previous.endTime;
+				previous.animation.apply(skeleton, previousTime, previousTime, previous.loop, null);
 
-                var alpha = current.mixTime / current.mixDuration * current.mix;
-                if (alpha >= 1) {
-                    alpha = 1;
-                    current.previous = null;
-                }
-                current.animation.mix(skeleton, current.lastTime, time, loop, this.events, alpha);
-            }
+				var alpha = current.mixTime / current.mixDuration * current.mix;
+				if (alpha >= 1) {
+					alpha = 1;
+					current.previous = null;
+				}
+				current.animation.mix(skeleton, current.lastTime, time, loop, this.events, alpha);
+			}
 
-            for (var ii = 0, nn = this.events.length; ii < nn; ii++) {
-                var event = this.events[ii];
-                if (current.onEvent) current.onEvent(i, event);
-                if (this.onEvent) this.onEvent(i, event);
-            }
+			for (var ii = 0, nn = this.events.length; ii < nn; ii++) {
+				var event = this.events[ii];
+				if (current.onEvent) current.onEvent(i, event);
+				if (this.onEvent) this.onEvent(i, event);
+			}
 
-            // Check if completed the animation or a loop iteration.
-            if (loop ? (lastTime % endTime > time % endTime) : (lastTime < endTime && time >= endTime)) {
-                var count = Math.floor(time / endTime);
-                if (current.onComplete) current.onComplete(i, count);
-                if (this.onComplete) this.onComplete(i, count);
-            }
+			// Check if completed the animation or a loop iteration.
+			if (loop ? (lastTime % endTime > time % endTime) : (lastTime < endTime && time >= endTime)) {
+				var count = Math.floor(time / endTime);
+				if (current.onComplete) current.onComplete(i, count);
+				if (this.onComplete) this.onComplete(i, count);
+			}
 
-            current.lastTime = current.time;
-        }
-    },
-    clearTracks: function () {
-        for (var i = 0, n = this.tracks.length; i < n; i++)
-            this.clearTrack(i);
-        this.tracks.length = 0;
-    },
-    clearTrack: function (trackIndex) {
-        if (trackIndex >= this.tracks.length) return;
-        var current = this.tracks[trackIndex];
-        if (!current) return;
+			current.lastTime = current.time;
+		}
+	},
+	clearTracks: function () {
+		for (var i = 0, n = this.tracks.length; i < n; i++)
+			this.clearTrack(i);
+		this.tracks.length = 0;
+	},
+	clearTrack: function (trackIndex) {
+		if (trackIndex >= this.tracks.length) return;
+		var current = this.tracks[trackIndex];
+		if (!current) return;
 
-        if (current.onEnd) current.onEnd(trackIndex);
-        if (this.onEnd) this.onEnd(trackIndex);
+		if (current.onEnd) current.onEnd(trackIndex);
+		if (this.onEnd) this.onEnd(trackIndex);
 
-        this.tracks[trackIndex] = null;
-    },
-    _expandToIndex: function (index) {
-        if (index < this.tracks.length) return this.tracks[index];
-        while (index >= this.tracks.length)
-            this.tracks.push(null);
-        return null;
-    },
-    setCurrent: function (index, entry) {
-        var current = this._expandToIndex(index);
-        if (current) {
-            var previous = current.previous;
-            current.previous = null;
+		this.tracks[trackIndex] = null;
+	},
+	_expandToIndex: function (index) {
+		if (index < this.tracks.length) return this.tracks[index];
+		while (index >= this.tracks.length)
+			this.tracks.push(null);
+		return null;
+	},
+	setCurrent: function (index, entry) {
+		var current = this._expandToIndex(index);
+		if (current) {
+			var previous = current.previous;
+			current.previous = null;
 
-            if (current.onEnd) current.onEnd(index);
-            if (this.onEnd) this.onEnd(index);
+			if (current.onEnd) current.onEnd(index);
+			if (this.onEnd) this.onEnd(index);
 
-            entry.mixDuration = this.data.getMix(current.animation, entry.animation);
-            if (entry.mixDuration > 0) {
-                entry.mixTime = 0;
-                // If a mix is in progress, mix from the closest animation.
-                if (previous && current.mixTime / current.mixDuration < 0.5)
-                    entry.previous = previous;
-                else
-                    entry.previous = current;
-            }
-        }
+			entry.mixDuration = this.data.getMix(current.animation, entry.animation);
+			if (entry.mixDuration > 0) {
+				entry.mixTime = 0;
+				// If a mix is in progress, mix from the closest animation.
+				if (previous && current.mixTime / current.mixDuration < 0.5)
+					entry.previous = previous;
+				else
+					entry.previous = current;
+			}
+		}
 
-        this.tracks[index] = entry;
+		this.tracks[index] = entry;
 
-        if (entry.onStart) entry.onStart(index);
-        if (this.onStart) this.onStart(index);
-    },
-    setAnimationByName: function (trackIndex, animationName, loop) {
-        var animation = this.data.skeletonData.findAnimation(animationName);
-        if (!animation) throw "Animation not found: " + animationName;
-        return this.setAnimation(trackIndex, animation, loop);
-    },
-    /** Set the current animation. Any queued animations are cleared. */
-    setAnimation: function (trackIndex, animation, loop) {
-        var entry = new spine.TrackEntry();
-        entry.animation = animation;
-        entry.loop = loop;
-        entry.endTime = animation.duration;
-        this.setCurrent(trackIndex, entry);
-        return entry;
-    },
-    addAnimationByName: function (trackIndex, animationName, loop, delay) {
-        var animation = this.data.skeletonData.findAnimation(animationName);
-        if (!animation) throw "Animation not found: " + animationName;
-        return this.addAnimation(trackIndex, animation, loop, delay);
-    },
-    /** Adds an animation to be played delay seconds after the current or last queued animation.
-     * @param delay May be <= 0 to use duration of previous animation minus any mix duration plus the negative delay. */
-    addAnimation: function (trackIndex, animation, loop, delay) {
-        var entry = new spine.TrackEntry();
-        entry.animation = animation;
-        entry.loop = loop;
-        entry.endTime = animation.duration;
+		if (entry.onStart) entry.onStart(index);
+		if (this.onStart) this.onStart(index);
+	},
+	setAnimationByName: function (trackIndex, animationName, loop) {
+		var animation = this.data.skeletonData.findAnimation(animationName);
+		if (!animation) throw "Animation not found: " + animationName;
+		return this.setAnimation(trackIndex, animation, loop);
+	},
+	/** Set the current animation. Any queued animations are cleared. */
+	setAnimation: function (trackIndex, animation, loop) {
+		var entry = new spine.TrackEntry();
+		entry.animation = animation;
+		entry.loop = loop;
+		entry.endTime = animation.duration;
+		this.setCurrent(trackIndex, entry);
+		return entry;
+	},
+	addAnimationByName: function (trackIndex, animationName, loop, delay) {
+		var animation = this.data.skeletonData.findAnimation(animationName);
+		if (!animation) throw "Animation not found: " + animationName;
+		return this.addAnimation(trackIndex, animation, loop, delay);
+	},
+	/** Adds an animation to be played delay seconds after the current or last queued animation.
+	 * @param delay May be <= 0 to use duration of previous animation minus any mix duration plus the negative delay. */
+	addAnimation: function (trackIndex, animation, loop, delay) {
+		var entry = new spine.TrackEntry();
+		entry.animation = animation;
+		entry.loop = loop;
+		entry.endTime = animation.duration;
 
-        var last = this._expandToIndex(trackIndex);
-        if (last) {
-            while (last.next)
-                last = last.next;
-            last.next = entry;
-        } else
-            this.tracks[trackIndex] = entry;
+		var last = this._expandToIndex(trackIndex);
+		if (last) {
+			while (last.next)
+				last = last.next;
+			last.next = entry;
+		} else
+			this.tracks[trackIndex] = entry;
 
-        if (delay <= 0) {
-            if (last)
-                delay += last.endTime - this.data.getMix(last.animation, animation);
-            else
-                delay = 0;
-        }
-        entry.delay = delay;
+		if (delay <= 0) {
+			if (last)
+				delay += last.endTime - this.data.getMix(last.animation, animation);
+			else
+				delay = 0;
+		}
+		entry.delay = delay;
 
-        return entry;
-    },
-    /** May be null. */
-    getCurrent: function (trackIndex) {
-        if (trackIndex >= this.tracks.length) return null;
-        return this.tracks[trackIndex];
-    }
+		return entry;
+	},
+	/** May be null. */
+	getCurrent: function (trackIndex) {
+		if (trackIndex >= this.tracks.length) return null;
+		return this.tracks[trackIndex];
+	}
 };
 
 spine.SkeletonJson = function (attachmentLoader) {
-    this.attachmentLoader = attachmentLoader;
+	this.attachmentLoader = attachmentLoader;
 };
 spine.SkeletonJson.prototype = {
-    scale: 1,
-    readSkeletonData: function (root, name) {
-        var skeletonData = new spine.SkeletonData();
-        skeletonData.name = name;
+	scale: 1,
+	readSkeletonData: function (root, name) {
+		var skeletonData = new spine.SkeletonData();
+		skeletonData.name = name;
 
-        // Skeleton.
-        var skeletonMap = root["skeleton"];
-        if (skeletonMap) {
-            skeletonData.hash = skeletonMap["hash"];
-            skeletonData.version = skeletonMap["spine"];
-            skeletonData.width = skeletonMap["width"] || 0;
-            skeletonData.height = skeletonMap["height"] || 0;
-        }
+		// Skeleton.
+		var skeletonMap = root["skeleton"];
+		if (skeletonMap) {
+			skeletonData.hash = skeletonMap["hash"];
+			skeletonData.version = skeletonMap["spine"];
+			skeletonData.width = skeletonMap["width"] || 0;
+			skeletonData.height = skeletonMap["height"] || 0;
+		}
 
-        // Bones.
-        var bones = root["bones"];
-        for (var i = 0, n = bones.length; i < n; i++) {
-            var boneMap = bones[i];
-            var parent = null;
-            if (boneMap["parent"]) {
-                parent = skeletonData.findBone(boneMap["parent"]);
-                if (!parent) throw "Parent bone not found: " + boneMap["parent"];
-            }
-            var boneData = new spine.BoneData(boneMap["name"], parent);
-            boneData.length = (boneMap["length"] || 0) * this.scale;
-            boneData.x = (boneMap["x"] || 0) * this.scale;
-            boneData.y = (boneMap["y"] || 0) * this.scale;
-            boneData.rotation = (boneMap["rotation"] || 0);
-            boneData.scaleX = boneMap.hasOwnProperty("scaleX") ? boneMap["scaleX"] : 1;
-            boneData.scaleY = boneMap.hasOwnProperty("scaleY") ? boneMap["scaleY"] : 1;
-            boneData.inheritScale = boneMap.hasOwnProperty("inheritScale") ? boneMap["inheritScale"] : true;
-            boneData.inheritRotation = boneMap.hasOwnProperty("inheritRotation") ? boneMap["inheritRotation"] : true;
-            skeletonData.bones.push(boneData);
-        }
+		// Bones.
+		var bones = root["bones"];
+		for (var i = 0, n = bones.length; i < n; i++) {
+			var boneMap = bones[i];
+			var parent = null;
+			if (boneMap["parent"]) {
+				parent = skeletonData.findBone(boneMap["parent"]);
+				if (!parent) throw "Parent bone not found: " + boneMap["parent"];
+			}
+			var boneData = new spine.BoneData(boneMap["name"], parent);
+			boneData.length = (boneMap["length"] || 0) * this.scale;
+			boneData.x = (boneMap["x"] || 0) * this.scale;
+			boneData.y = (boneMap["y"] || 0) * this.scale;
+			boneData.rotation = (boneMap["rotation"] || 0);
+			boneData.scaleX = boneMap.hasOwnProperty("scaleX") ? boneMap["scaleX"] : 1;
+			boneData.scaleY = boneMap.hasOwnProperty("scaleY") ? boneMap["scaleY"] : 1;
+			boneData.inheritScale = boneMap.hasOwnProperty("inheritScale") ? boneMap["inheritScale"] : true;
+			boneData.inheritRotation = boneMap.hasOwnProperty("inheritRotation") ? boneMap["inheritRotation"] : true;
+			skeletonData.bones.push(boneData);
+		}
 
-        // IK constraints.
-        var ik = root["ik"];
-        if (ik) {
-            for (var i = 0, n = ik.length; i < n; i++) {
-                var ikMap = ik[i];
-                var ikConstraintData = new spine.IkConstraintData(ikMap["name"]);
+		// IK constraints.
+		var ik = root["ik"];
+		if (ik) {
+			for (var i = 0, n = ik.length; i < n; i++) {
+				var ikMap = ik[i];
+				var ikConstraintData = new spine.IkConstraintData(ikMap["name"]);
 
-                var bones = ikMap["bones"];
-                for (var ii = 0, nn = bones.length; ii < nn; ii++) {
-                    var bone = skeletonData.findBone(bones[ii]);
-                    if (!bone) throw "IK bone not found: " + bones[ii];
-                    ikConstraintData.bones.push(bone);
-                }
+				var bones = ikMap["bones"];
+				for (var ii = 0, nn = bones.length; ii < nn; ii++) {
+					var bone = skeletonData.findBone(bones[ii]);
+					if (!bone) throw "IK bone not found: " + bones[ii];
+					ikConstraintData.bones.push(bone);
+				}
 
-                ikConstraintData.target = skeletonData.findBone(ikMap["target"]);
-                if (!ikConstraintData.target) throw "Target bone not found: " + ikMap["target"];
+				ikConstraintData.target = skeletonData.findBone(ikMap["target"]);
+				if (!ikConstraintData.target) throw "Target bone not found: " + ikMap["target"];
 
-                ikConstraintData.bendDirection = (!ikMap.hasOwnProperty("bendPositive") || ikMap["bendPositive"]) ? 1 : -1;
-                ikConstraintData.mix = ikMap.hasOwnProperty("mix") ? ikMap["mix"] : 1;
+				ikConstraintData.bendDirection = (!ikMap.hasOwnProperty("bendPositive") || ikMap["bendPositive"]) ? 1 : -1;
+				ikConstraintData.mix = ikMap.hasOwnProperty("mix") ? ikMap["mix"] : 1;
 
-                skeletonData.ikConstraints.push(ikConstraintData);
-            }
-        }
+				skeletonData.ikConstraints.push(ikConstraintData);
+			}
+		}
 
-        // Slots.
-        var slots = root["slots"];
-        for (var i = 0, n = slots.length; i < n; i++) {
-            var slotMap = slots[i];
-            var boneData = skeletonData.findBone(slotMap["bone"]);
-            if (!boneData) throw "Slot bone not found: " + slotMap["bone"];
-            var slotData = new spine.SlotData(slotMap["name"], boneData);
+		// Slots.
+		var slots = root["slots"];
+		for (var i = 0, n = slots.length; i < n; i++) {
+			var slotMap = slots[i];
+			var boneData = skeletonData.findBone(slotMap["bone"]);
+			if (!boneData) throw "Slot bone not found: " + slotMap["bone"];
+			var slotData = new spine.SlotData(slotMap["name"], boneData);
 
-            var color = slotMap["color"];
-            if (color) {
-                slotData.r = this.toColor(color, 0);
-                slotData.g = this.toColor(color, 1);
-                slotData.b = this.toColor(color, 2);
-                slotData.a = this.toColor(color, 3);
-            }
+			var color = slotMap["color"];
+			if (color) {
+				slotData.r = this.toColor(color, 0);
+				slotData.g = this.toColor(color, 1);
+				slotData.b = this.toColor(color, 2);
+				slotData.a = this.toColor(color, 3);
+			}
 
-            slotData.attachmentName = slotMap["attachment"];
-            slotData.additiveBlending = slotMap["additive"] && slotMap["additive"] == "true";
+			slotData.attachmentName = slotMap["attachment"];
+			slotData.additiveBlending = slotMap["additive"] && slotMap["additive"] == "true";
 
-            skeletonData.slots.push(slotData);
-        }
+			skeletonData.slots.push(slotData);
+		}
 
-        // Skins.
-        var skins = root["skins"];
-        for (var skinName in skins) {
-            if (!skins.hasOwnProperty(skinName)) continue;
-            var skinMap = skins[skinName];
-            var skin = new spine.Skin(skinName);
-            for (var slotName in skinMap) {
-                if (!skinMap.hasOwnProperty(slotName)) continue;
-                var slotIndex = skeletonData.findSlotIndex(slotName);
-                var slotEntry = skinMap[slotName];
-                for (var attachmentName in slotEntry) {
-                    if (!slotEntry.hasOwnProperty(attachmentName)) continue;
-                    var attachment = this.readAttachment(skin, attachmentName, slotEntry[attachmentName]);
-                    if (attachment) skin.addAttachment(slotIndex, attachmentName, attachment);
-                }
-            }
-            skeletonData.skins.push(skin);
-            if (skin.name == "default") skeletonData.defaultSkin = skin;
-        }
+		// Skins.
+		var skins = root["skins"];
+		for (var skinName in skins) {
+			if (!skins.hasOwnProperty(skinName)) continue;
+			var skinMap = skins[skinName];
+			var skin = new spine.Skin(skinName);
+			for (var slotName in skinMap) {
+				if (!skinMap.hasOwnProperty(slotName)) continue;
+				var slotIndex = skeletonData.findSlotIndex(slotName);
+				var slotEntry = skinMap[slotName];
+				for (var attachmentName in slotEntry) {
+					if (!slotEntry.hasOwnProperty(attachmentName)) continue;
+					var attachment = this.readAttachment(skin, attachmentName, slotEntry[attachmentName]);
+					if (attachment) skin.addAttachment(slotIndex, attachmentName, attachment);
+				}
+			}
+			skeletonData.skins.push(skin);
+			if (skin.name == "default") skeletonData.defaultSkin = skin;
+		}
 
-        // Events.
-        var events = root["events"];
-        for (var eventName in events) {
-            if (!events.hasOwnProperty(eventName)) continue;
-            var eventMap = events[eventName];
-            var eventData = new spine.EventData(eventName);
-            eventData.intValue = eventMap["int"] || 0;
-            eventData.floatValue = eventMap["float"] || 0;
-            eventData.stringValue = eventMap["string"] || null;
-            skeletonData.events.push(eventData);
-        }
+		// Events.
+		var events = root["events"];
+		for (var eventName in events) {
+			if (!events.hasOwnProperty(eventName)) continue;
+			var eventMap = events[eventName];
+			var eventData = new spine.EventData(eventName);
+			eventData.intValue = eventMap["int"] || 0;
+			eventData.floatValue = eventMap["float"] || 0;
+			eventData.stringValue = eventMap["string"] || null;
+			skeletonData.events.push(eventData);
+		}
 
-        // Animations.
-        var animations = root["animations"];
-        for (var animationName in animations) {
-            if (!animations.hasOwnProperty(animationName)) continue;
-            this.readAnimation(animationName, animations[animationName], skeletonData);
-        }
+		// Animations.
+		var animations = root["animations"];
+		for (var animationName in animations) {
+			if (!animations.hasOwnProperty(animationName)) continue;
+			this.readAnimation(animationName, animations[animationName], skeletonData);
+		}
 
-        return skeletonData;
-    },
-    readAttachment: function (skin, name, map) {
-        name = map["name"] || name;
+		return skeletonData;
+	},
+	readAttachment: function (skin, name, map) {
+		name = map["name"] || name;
 
-        var type = spine.AttachmentType[map["type"] || "region"];
-        var path = map["path"] || name;
+		var type = spine.AttachmentType[map["type"] || "region"];
+		var path = map["path"] || name;
 
-        var scale = this.scale;
-        if (type == spine.AttachmentType.region) {
-            var region = this.attachmentLoader.newRegionAttachment(skin, name, path);
-            if (!region) return null;
-            region.path = path;
-            region.x = (map["x"] || 0) * scale;
-            region.y = (map["y"] || 0) * scale;
-            region.scaleX = map.hasOwnProperty("scaleX") ? map["scaleX"] : 1;
-            region.scaleY = map.hasOwnProperty("scaleY") ? map["scaleY"] : 1;
-            region.rotation = map["rotation"] || 0;
-            region.width = (map["width"] || 0) * scale;
-            region.height = (map["height"] || 0) * scale;
+		var scale = this.scale;
+		if (type == spine.AttachmentType.region) {
+			var region = this.attachmentLoader.newRegionAttachment(skin, name, path);
+			if (!region) return null;
+			region.path = path;
+			region.x = (map["x"] || 0) * scale;
+			region.y = (map["y"] || 0) * scale;
+			region.scaleX = map.hasOwnProperty("scaleX") ? map["scaleX"] : 1;
+			region.scaleY = map.hasOwnProperty("scaleY") ? map["scaleY"] : 1;
+			region.rotation = map["rotation"] || 0;
+			region.width = (map["width"] || 0) * scale;
+			region.height = (map["height"] || 0) * scale;
 
-            var color = map["color"];
-            if (color) {
-                region.r = this.toColor(color, 0);
-                region.g = this.toColor(color, 1);
-                region.b = this.toColor(color, 2);
-                region.a = this.toColor(color, 3);
-            }
+			var color = map["color"];
+			if (color) {
+				region.r = this.toColor(color, 0);
+				region.g = this.toColor(color, 1);
+				region.b = this.toColor(color, 2);
+				region.a = this.toColor(color, 3);
+			}
 
-            region.updateOffset();
-            return region;
-        } else if (type == spine.AttachmentType.mesh) {
-            var mesh = this.attachmentLoader.newMeshAttachment(skin, name, path);
-            if (!mesh) return null;
-            mesh.path = path;
-            mesh.vertices = this.getFloatArray(map, "vertices", scale);
-            mesh.triangles = this.getIntArray(map, "triangles");
-            mesh.regionUVs = this.getFloatArray(map, "uvs", 1);
-            mesh.updateUVs();
+			region.updateOffset();
+			return region;
+		} else if (type == spine.AttachmentType.mesh) {
+			var mesh = this.attachmentLoader.newMeshAttachment(skin, name, path);
+			if (!mesh) return null;
+			mesh.path = path;
+			mesh.vertices = this.getFloatArray(map, "vertices", scale);
+			mesh.triangles = this.getIntArray(map, "triangles");
+			mesh.regionUVs = this.getFloatArray(map, "uvs", 1);
+			mesh.updateUVs();
 
-            color = map["color"];
-            if (color) {
-                mesh.r = this.toColor(color, 0);
-                mesh.g = this.toColor(color, 1);
-                mesh.b = this.toColor(color, 2);
-                mesh.a = this.toColor(color, 3);
-            }
+			color = map["color"];
+			if (color) {
+				mesh.r = this.toColor(color, 0);
+				mesh.g = this.toColor(color, 1);
+				mesh.b = this.toColor(color, 2);
+				mesh.a = this.toColor(color, 3);
+			}
 
-            mesh.hullLength = (map["hull"] || 0) * 2;
-            if (map["edges"]) mesh.edges = this.getIntArray(map, "edges");
-            mesh.width = (map["width"] || 0) * scale;
-            mesh.height = (map["height"] || 0) * scale;
-            return mesh;
-        } else if (type == spine.AttachmentType.skinnedmesh) {
-            var mesh = this.attachmentLoader.newSkinnedMeshAttachment(skin, name, path);
-            if (!mesh) return null;
-            mesh.path = path;
+			mesh.hullLength = (map["hull"] || 0) * 2;
+			if (map["edges"]) mesh.edges = this.getIntArray(map, "edges");
+			mesh.width = (map["width"] || 0) * scale;
+			mesh.height = (map["height"] || 0) * scale;
+			return mesh;
+		} else if (type == spine.AttachmentType.skinnedmesh) {
+			var mesh = this.attachmentLoader.newSkinnedMeshAttachment(skin, name, path);
+			if (!mesh) return null;
+			mesh.path = path;
 
-            var uvs = this.getFloatArray(map, "uvs", 1);
-            var vertices = this.getFloatArray(map, "vertices", 1);
-            var weights = [];
-            var bones = [];
-            for (var i = 0, n = vertices.length; i < n; ) {
-                var boneCount = vertices[i++] | 0;
-                bones[bones.length] = boneCount;
-                for (var nn = i + boneCount * 4; i < nn; ) {
-                    bones[bones.length] = vertices[i];
-                    weights[weights.length] = vertices[i + 1] * scale;
-                    weights[weights.length] = vertices[i + 2] * scale;
-                    weights[weights.length] = vertices[i + 3];
-                    i += 4;
-                }
-            }
-            mesh.bones = bones;
-            mesh.weights = weights;
-            mesh.triangles = this.getIntArray(map, "triangles");
-            mesh.regionUVs = uvs;
-            mesh.updateUVs();
+			var uvs = this.getFloatArray(map, "uvs", 1);
+			var vertices = this.getFloatArray(map, "vertices", 1);
+			var weights = [];
+			var bones = [];
+			for (var i = 0, n = vertices.length; i < n; ) {
+				var boneCount = vertices[i++] | 0;
+				bones[bones.length] = boneCount;
+				for (var nn = i + boneCount * 4; i < nn; ) {
+					bones[bones.length] = vertices[i];
+					weights[weights.length] = vertices[i + 1] * scale;
+					weights[weights.length] = vertices[i + 2] * scale;
+					weights[weights.length] = vertices[i + 3];
+					i += 4;
+				}
+			}
+			mesh.bones = bones;
+			mesh.weights = weights;
+			mesh.triangles = this.getIntArray(map, "triangles");
+			mesh.regionUVs = uvs;
+			mesh.updateUVs();
 
-            color = map["color"];
-            if (color) {
-                mesh.r = this.toColor(color, 0);
-                mesh.g = this.toColor(color, 1);
-                mesh.b = this.toColor(color, 2);
-                mesh.a = this.toColor(color, 3);
-            }
+			color = map["color"];
+			if (color) {
+				mesh.r = this.toColor(color, 0);
+				mesh.g = this.toColor(color, 1);
+				mesh.b = this.toColor(color, 2);
+				mesh.a = this.toColor(color, 3);
+			}
 
-            mesh.hullLength = (map["hull"] || 0) * 2;
-            if (map["edges"]) mesh.edges = this.getIntArray(map, "edges");
-            mesh.width = (map["width"] || 0) * scale;
-            mesh.height = (map["height"] || 0) * scale;
-            return mesh;
-        } else if (type == spine.AttachmentType.boundingbox) {
-            var attachment = this.attachmentLoader.newBoundingBoxAttachment(skin, name);
-            var vertices = map["vertices"];
-            for (var i = 0, n = vertices.length; i < n; i++)
-                attachment.vertices.push(vertices[i] * scale);
-            return attachment;
-        }
-        throw "Unknown attachment type: " + type;
-    },
-    readAnimation: function (name, map, skeletonData) {
-        var timelines = [];
-        var duration = 0;
+			mesh.hullLength = (map["hull"] || 0) * 2;
+			if (map["edges"]) mesh.edges = this.getIntArray(map, "edges");
+			mesh.width = (map["width"] || 0) * scale;
+			mesh.height = (map["height"] || 0) * scale;
+			return mesh;
+		} else if (type == spine.AttachmentType.boundingbox) {
+			var attachment = this.attachmentLoader.newBoundingBoxAttachment(skin, name);
+			var vertices = map["vertices"];
+			for (var i = 0, n = vertices.length; i < n; i++)
+				attachment.vertices.push(vertices[i] * scale);
+			return attachment;
+		}
+		throw "Unknown attachment type: " + type;
+	},
+	readAnimation: function (name, map, skeletonData) {
+		var timelines = [];
+		var duration = 0;
 
-        var slots = map["slots"];
-        for (var slotName in slots) {
-            if (!slots.hasOwnProperty(slotName)) continue;
-            var slotMap = slots[slotName];
-            var slotIndex = skeletonData.findSlotIndex(slotName);
+		var slots = map["slots"];
+		for (var slotName in slots) {
+			if (!slots.hasOwnProperty(slotName)) continue;
+			var slotMap = slots[slotName];
+			var slotIndex = skeletonData.findSlotIndex(slotName);
 
-            for (var timelineName in slotMap) {
-                if (!slotMap.hasOwnProperty(timelineName)) continue;
-                var values = slotMap[timelineName];
-                if (timelineName == "color") {
-                    var timeline = new spine.ColorTimeline(values.length);
-                    timeline.slotIndex = slotIndex;
+			for (var timelineName in slotMap) {
+				if (!slotMap.hasOwnProperty(timelineName)) continue;
+				var values = slotMap[timelineName];
+				if (timelineName == "color") {
+					var timeline = new spine.ColorTimeline(values.length);
+					timeline.slotIndex = slotIndex;
 
-                    var frameIndex = 0;
-                    for (var i = 0, n = values.length; i < n; i++) {
-                        var valueMap = values[i];
-                        var color = valueMap["color"];
-                        var r = this.toColor(color, 0);
-                        var g = this.toColor(color, 1);
-                        var b = this.toColor(color, 2);
-                        var a = this.toColor(color, 3);
-                        timeline.setFrame(frameIndex, valueMap["time"], r, g, b, a);
-                        this.readCurve(timeline, frameIndex, valueMap);
-                        frameIndex++;
-                    }
-                    timelines.push(timeline);
-                    duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 5 - 5]);
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						var color = valueMap["color"];
+						var r = this.toColor(color, 0);
+						var g = this.toColor(color, 1);
+						var b = this.toColor(color, 2);
+						var a = this.toColor(color, 3);
+						timeline.setFrame(frameIndex, valueMap["time"], r, g, b, a);
+						this.readCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines.push(timeline);
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 5 - 5]);
 
-                } else if (timelineName == "attachment") {
-                    var timeline = new spine.AttachmentTimeline(values.length);
-                    timeline.slotIndex = slotIndex;
+				} else if (timelineName == "attachment") {
+					var timeline = new spine.AttachmentTimeline(values.length);
+					timeline.slotIndex = slotIndex;
 
-                    var frameIndex = 0;
-                    for (var i = 0, n = values.length; i < n; i++) {
-                        var valueMap = values[i];
-                        timeline.setFrame(frameIndex++, valueMap["time"], valueMap["name"]);
-                    }
-                    timelines.push(timeline);
-                    duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						timeline.setFrame(frameIndex++, valueMap["time"], valueMap["name"]);
+					}
+					timelines.push(timeline);
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
 
-                } else
-                    throw "Invalid timeline type for a slot: " + timelineName + " (" + slotName + ")";
-            }
-        }
+				} else
+					throw "Invalid timeline type for a slot: " + timelineName + " (" + slotName + ")";
+			}
+		}
 
-        var bones = map["bones"];
-        for (var boneName in bones) {
-            if (!bones.hasOwnProperty(boneName)) continue;
-            var boneIndex = skeletonData.findBoneIndex(boneName);
-            if (boneIndex == -1) throw "Bone not found: " + boneName;
-            var boneMap = bones[boneName];
+		var bones = map["bones"];
+		for (var boneName in bones) {
+			if (!bones.hasOwnProperty(boneName)) continue;
+			var boneIndex = skeletonData.findBoneIndex(boneName);
+			if (boneIndex == -1) throw "Bone not found: " + boneName;
+			var boneMap = bones[boneName];
 
-            for (var timelineName in boneMap) {
-                if (!boneMap.hasOwnProperty(timelineName)) continue;
-                var values = boneMap[timelineName];
-                if (timelineName == "rotate") {
-                    var timeline = new spine.RotateTimeline(values.length);
-                    timeline.boneIndex = boneIndex;
+			for (var timelineName in boneMap) {
+				if (!boneMap.hasOwnProperty(timelineName)) continue;
+				var values = boneMap[timelineName];
+				if (timelineName == "rotate") {
+					var timeline = new spine.RotateTimeline(values.length);
+					timeline.boneIndex = boneIndex;
 
-                    var frameIndex = 0;
-                    for (var i = 0, n = values.length; i < n; i++) {
-                        var valueMap = values[i];
-                        timeline.setFrame(frameIndex, valueMap["time"], valueMap["angle"]);
-                        this.readCurve(timeline, frameIndex, valueMap);
-                        frameIndex++;
-                    }
-                    timelines.push(timeline);
-                    duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 2 - 2]);
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						timeline.setFrame(frameIndex, valueMap["time"], valueMap["angle"]);
+						this.readCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines.push(timeline);
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 2 - 2]);
 
-                } else if (timelineName == "translate" || timelineName == "scale") {
-                    var timeline;
-                    var timelineScale = 1;
-                    if (timelineName == "scale")
-                        timeline = new spine.ScaleTimeline(values.length);
-                    else {
-                        timeline = new spine.TranslateTimeline(values.length);
-                        timelineScale = this.scale;
-                    }
-                    timeline.boneIndex = boneIndex;
+				} else if (timelineName == "translate" || timelineName == "scale") {
+					var timeline;
+					var timelineScale = 1;
+					if (timelineName == "scale")
+						timeline = new spine.ScaleTimeline(values.length);
+					else {
+						timeline = new spine.TranslateTimeline(values.length);
+						timelineScale = this.scale;
+					}
+					timeline.boneIndex = boneIndex;
 
-                    var frameIndex = 0;
-                    for (var i = 0, n = values.length; i < n; i++) {
-                        var valueMap = values[i];
-                        var x = (valueMap["x"] || 0) * timelineScale;
-                        var y = (valueMap["y"] || 0) * timelineScale;
-                        timeline.setFrame(frameIndex, valueMap["time"], x, y);
-                        this.readCurve(timeline, frameIndex, valueMap);
-                        frameIndex++;
-                    }
-                    timelines.push(timeline);
-                    duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 3 - 3]);
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						var x = (valueMap["x"] || 0) * timelineScale;
+						var y = (valueMap["y"] || 0) * timelineScale;
+						timeline.setFrame(frameIndex, valueMap["time"], x, y);
+						this.readCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines.push(timeline);
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 3 - 3]);
 
-                } else if (timelineName == "flipX" || timelineName == "flipY") {
-                    var x = timelineName == "flipX";
-                    var timeline = x ? new spine.FlipXTimeline(values.length) : new spine.FlipYTimeline(values.length);
-                    timeline.boneIndex = boneIndex;
+				} else if (timelineName == "flipX" || timelineName == "flipY") {
+					var x = timelineName == "flipX";
+					var timeline = x ? new spine.FlipXTimeline(values.length) : new spine.FlipYTimeline(values.length);
+					timeline.boneIndex = boneIndex;
 
-                    var field = x ? "x" : "y";
-                    var frameIndex = 0;
-                    for (var i = 0, n = values.length; i < n; i++) {
-                        var valueMap = values[i];
-                        timeline.setFrame(frameIndex, valueMap["time"], valueMap[field] || false);
-                        frameIndex++;
-                    }
-                    timelines.push(timeline);
-                    duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 2 - 2]);
-                } else
-                    throw "Invalid timeline type for a bone: " + timelineName + " (" + boneName + ")";
-            }
-        }
+					var field = x ? "x" : "y";
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						timeline.setFrame(frameIndex, valueMap["time"], valueMap[field] || false);
+						frameIndex++;
+					}
+					timelines.push(timeline);
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 2 - 2]);
+				} else
+					throw "Invalid timeline type for a bone: " + timelineName + " (" + boneName + ")";
+			}
+		}
 
-        var ikMap = map["ik"];
-        for (var ikConstraintName in ikMap) {
-            if (!ikMap.hasOwnProperty(ikConstraintName)) continue;
-            var ikConstraint = skeletonData.findIkConstraint(ikConstraintName);
-            var values = ikMap[ikConstraintName];
-            var timeline = new spine.IkConstraintTimeline(values.length);
-            timeline.ikConstraintIndex = skeletonData.ikConstraints.indexOf(ikConstraint);
-            var frameIndex = 0;
-            for (var i = 0, n = values.length; i < n; i++) {
-                var valueMap = values[i];
-                var mix = valueMap.hasOwnProperty("mix") ? valueMap["mix"] : 1;
-                var bendDirection = (!valueMap.hasOwnProperty("bendPositive") || valueMap["bendPositive"]) ? 1 : -1;
-                timeline.setFrame(frameIndex, valueMap["time"], mix, bendDirection);
-                this.readCurve(timeline, frameIndex, valueMap);
-                frameIndex++;
-            }
-            timelines.push(timeline);
-            duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 3 - 3]);
-        }
+		var ikMap = map["ik"];
+		for (var ikConstraintName in ikMap) {
+			if (!ikMap.hasOwnProperty(ikConstraintName)) continue;
+			var ikConstraint = skeletonData.findIkConstraint(ikConstraintName);
+			var values = ikMap[ikConstraintName];
+			var timeline = new spine.IkConstraintTimeline(values.length);
+			timeline.ikConstraintIndex = skeletonData.ikConstraints.indexOf(ikConstraint);
+			var frameIndex = 0;
+			for (var i = 0, n = values.length; i < n; i++) {
+				var valueMap = values[i];
+				var mix = valueMap.hasOwnProperty("mix") ? valueMap["mix"] : 1;
+				var bendDirection = (!valueMap.hasOwnProperty("bendPositive") || valueMap["bendPositive"]) ? 1 : -1;
+				timeline.setFrame(frameIndex, valueMap["time"], mix, bendDirection);
+				this.readCurve(timeline, frameIndex, valueMap);
+				frameIndex++;
+			}
+			timelines.push(timeline);
+			duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 3 - 3]);
+		}
 
-        var ffd = map["ffd"];
-        for (var skinName in ffd) {
-            var skin = skeletonData.findSkin(skinName);
-            var slotMap = ffd[skinName];
-            for (slotName in slotMap) {
-                var slotIndex = skeletonData.findSlotIndex(slotName);
-                var meshMap = slotMap[slotName];
-                for (var meshName in meshMap) {
-                    var values = meshMap[meshName];
-                    var timeline = new spine.FfdTimeline(values.length);
-                    var attachment = skin.getAttachment(slotIndex, meshName);
-                    if (!attachment) throw "FFD attachment not found: " + meshName;
-                    timeline.slotIndex = slotIndex;
-                    timeline.attachment = attachment;
+		var ffd = map["ffd"];
+		for (var skinName in ffd) {
+			var skin = skeletonData.findSkin(skinName);
+			var slotMap = ffd[skinName];
+			for (slotName in slotMap) {
+				var slotIndex = skeletonData.findSlotIndex(slotName);
+				var meshMap = slotMap[slotName];
+				for (var meshName in meshMap) {
+					var values = meshMap[meshName];
+					var timeline = new spine.FfdTimeline(values.length);
+					var attachment = skin.getAttachment(slotIndex, meshName);
+					if (!attachment) throw "FFD attachment not found: " + meshName;
+					timeline.slotIndex = slotIndex;
+					timeline.attachment = attachment;
 
-                    var isMesh = attachment.type == spine.AttachmentType.mesh;
-                    var vertexCount;
-                    if (isMesh)
-                        vertexCount = attachment.vertices.length;
-                    else
-                        vertexCount = attachment.weights.length / 3 * 2;
+					var isMesh = attachment.type == spine.AttachmentType.mesh;
+					var vertexCount;
+					if (isMesh)
+						vertexCount = attachment.vertices.length;
+					else
+						vertexCount = attachment.weights.length / 3 * 2;
 
-                    var frameIndex = 0;
-                    for (var i = 0, n = values.length; i < n; i++) {
-                        var valueMap = values[i];
-                        var vertices;
-                        if (!valueMap["vertices"]) {
-                            if (isMesh)
-                                vertices = attachment.vertices;
-                            else {
-                                vertices = [];
-                                vertices.length = vertexCount;
-                            }
-                        } else {
-                            var verticesValue = valueMap["vertices"];
-                            var vertices = [];
-                            vertices.length = vertexCount;
-                            var start = valueMap["offset"] || 0;
-                            var nn = verticesValue.length;
-                            if (this.scale == 1) {
-                                for (var ii = 0; ii < nn; ii++)
-                                    vertices[ii + start] = verticesValue[ii];
-                            } else {
-                                for (var ii = 0; ii < nn; ii++)
-                                    vertices[ii + start] = verticesValue[ii] * this.scale;
-                            }
-                            if (isMesh) {
-                                var meshVertices = attachment.vertices;
-                                for (var ii = 0, nn = vertices.length; ii < nn; ii++)
-                                    vertices[ii] += meshVertices[ii];
-                            }
-                        }
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						var vertices;
+						if (!valueMap["vertices"]) {
+							if (isMesh)
+								vertices = attachment.vertices;
+							else {
+								vertices = [];
+								vertices.length = vertexCount;
+							}
+						} else {
+							var verticesValue = valueMap["vertices"];
+							var vertices = [];
+							vertices.length = vertexCount;
+							var start = valueMap["offset"] || 0;
+							var nn = verticesValue.length;
+							if (this.scale == 1) {
+								for (var ii = 0; ii < nn; ii++)
+									vertices[ii + start] = verticesValue[ii];
+							} else {
+								for (var ii = 0; ii < nn; ii++)
+									vertices[ii + start] = verticesValue[ii] * this.scale;
+							}
+							if (isMesh) {
+								var meshVertices = attachment.vertices;
+								for (var ii = 0, nn = vertices.length; ii < nn; ii++)
+									vertices[ii] += meshVertices[ii];
+							}
+						}
 
-                        timeline.setFrame(frameIndex, valueMap["time"], vertices);
-                        this.readCurve(timeline, frameIndex, valueMap);
-                        frameIndex++;
-                    }
-                    timelines[timelines.length] = timeline;
-                    duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
-                }
-            }
-        }
+						timeline.setFrame(frameIndex, valueMap["time"], vertices);
+						this.readCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines[timelines.length] = timeline;
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
+				}
+			}
+		}
 
-        var drawOrderValues = map["drawOrder"];
-        if (!drawOrderValues) drawOrderValues = map["draworder"];
-        if (drawOrderValues) {
-            var timeline = new spine.DrawOrderTimeline(drawOrderValues.length);
-            var slotCount = skeletonData.slots.length;
-            var frameIndex = 0;
-            for (var i = 0, n = drawOrderValues.length; i < n; i++) {
-                var drawOrderMap = drawOrderValues[i];
-                var drawOrder = null;
-                if (drawOrderMap["offsets"]) {
-                    drawOrder = [];
-                    drawOrder.length = slotCount;
-                    for (var ii = slotCount - 1; ii >= 0; ii--)
-                        drawOrder[ii] = -1;
-                    var offsets = drawOrderMap["offsets"];
-                    var unchanged = [];
-                    unchanged.length = slotCount - offsets.length;
-                    var originalIndex = 0, unchangedIndex = 0;
-                    for (var ii = 0, nn = offsets.length; ii < nn; ii++) {
-                        var offsetMap = offsets[ii];
-                        var slotIndex = skeletonData.findSlotIndex(offsetMap["slot"]);
-                        if (slotIndex == -1) throw "Slot not found: " + offsetMap["slot"];
-                        // Collect unchanged items.
-                        while (originalIndex != slotIndex)
-                            unchanged[unchangedIndex++] = originalIndex++;
-                        // Set changed items.
-                        drawOrder[originalIndex + offsetMap["offset"]] = originalIndex++;
-                    }
-                    // Collect remaining unchanged items.
-                    while (originalIndex < slotCount)
-                        unchanged[unchangedIndex++] = originalIndex++;
-                    // Fill in unchanged items.
-                    for (var ii = slotCount - 1; ii >= 0; ii--)
-                        if (drawOrder[ii] == -1) drawOrder[ii] = unchanged[--unchangedIndex];
-                }
-                timeline.setFrame(frameIndex++, drawOrderMap["time"], drawOrder);
-            }
-            timelines.push(timeline);
-            duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
-        }
+		var drawOrderValues = map["drawOrder"];
+		if (!drawOrderValues) drawOrderValues = map["draworder"];
+		if (drawOrderValues) {
+			var timeline = new spine.DrawOrderTimeline(drawOrderValues.length);
+			var slotCount = skeletonData.slots.length;
+			var frameIndex = 0;
+			for (var i = 0, n = drawOrderValues.length; i < n; i++) {
+				var drawOrderMap = drawOrderValues[i];
+				var drawOrder = null;
+				if (drawOrderMap["offsets"]) {
+					drawOrder = [];
+					drawOrder.length = slotCount;
+					for (var ii = slotCount - 1; ii >= 0; ii--)
+						drawOrder[ii] = -1;
+					var offsets = drawOrderMap["offsets"];
+					var unchanged = [];
+					unchanged.length = slotCount - offsets.length;
+					var originalIndex = 0, unchangedIndex = 0;
+					for (var ii = 0, nn = offsets.length; ii < nn; ii++) {
+						var offsetMap = offsets[ii];
+						var slotIndex = skeletonData.findSlotIndex(offsetMap["slot"]);
+						if (slotIndex == -1) throw "Slot not found: " + offsetMap["slot"];
+						// Collect unchanged items.
+						while (originalIndex != slotIndex)
+							unchanged[unchangedIndex++] = originalIndex++;
+						// Set changed items.
+						drawOrder[originalIndex + offsetMap["offset"]] = originalIndex++;
+					}
+					// Collect remaining unchanged items.
+					while (originalIndex < slotCount)
+						unchanged[unchangedIndex++] = originalIndex++;
+					// Fill in unchanged items.
+					for (var ii = slotCount - 1; ii >= 0; ii--)
+						if (drawOrder[ii] == -1) drawOrder[ii] = unchanged[--unchangedIndex];
+				}
+				timeline.setFrame(frameIndex++, drawOrderMap["time"], drawOrder);
+			}
+			timelines.push(timeline);
+			duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
+		}
 
-        var events = map["events"];
-        if (events) {
-            var timeline = new spine.EventTimeline(events.length);
-            var frameIndex = 0;
-            for (var i = 0, n = events.length; i < n; i++) {
-                var eventMap = events[i];
-                var eventData = skeletonData.findEvent(eventMap["name"]);
-                if (!eventData) throw "Event not found: " + eventMap["name"];
-                var event = new spine.Event(eventData);
-                event.intValue = eventMap.hasOwnProperty("int") ? eventMap["int"] : eventData.intValue;
-                event.floatValue = eventMap.hasOwnProperty("float") ? eventMap["float"] : eventData.floatValue;
-                event.stringValue = eventMap.hasOwnProperty("string") ? eventMap["string"] : eventData.stringValue;
-                timeline.setFrame(frameIndex++, eventMap["time"], event);
-            }
-            timelines.push(timeline);
-            duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
-        }
+		var events = map["events"];
+		if (events) {
+			var timeline = new spine.EventTimeline(events.length);
+			var frameIndex = 0;
+			for (var i = 0, n = events.length; i < n; i++) {
+				var eventMap = events[i];
+				var eventData = skeletonData.findEvent(eventMap["name"]);
+				if (!eventData) throw "Event not found: " + eventMap["name"];
+				var event = new spine.Event(eventData);
+				event.intValue = eventMap.hasOwnProperty("int") ? eventMap["int"] : eventData.intValue;
+				event.floatValue = eventMap.hasOwnProperty("float") ? eventMap["float"] : eventData.floatValue;
+				event.stringValue = eventMap.hasOwnProperty("string") ? eventMap["string"] : eventData.stringValue;
+				timeline.setFrame(frameIndex++, eventMap["time"], event);
+			}
+			timelines.push(timeline);
+			duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
+		}
 
-        skeletonData.animations.push(new spine.Animation(name, timelines, duration));
-    },
-    readCurve: function (timeline, frameIndex, valueMap) {
-        var curve = valueMap["curve"];
-        if (!curve)
-            timeline.curves.setLinear(frameIndex);
-        else if (curve == "stepped")
-            timeline.curves.setStepped(frameIndex);
-        else if (curve instanceof Array)
-            timeline.curves.setCurve(frameIndex, curve[0], curve[1], curve[2], curve[3]);
-    },
-    toColor: function (hexString, colorIndex) {
-        if (hexString.length != 8) throw "Color hexidecimal length must be 8, recieved: " + hexString;
-        return parseInt(hexString.substring(colorIndex * 2, (colorIndex * 2) + 2), 16) / 255;
-    },
-    getFloatArray: function (map, name, scale) {
-        var list = map[name];
-        var values = new spine.Float32Array(list.length);
-        var i = 0, n = list.length;
-        if (scale == 1) {
-            for (; i < n; i++)
-                values[i] = list[i];
-        } else {
-            for (; i < n; i++)
-                values[i] = list[i] * scale;
-        }
-        return values;
-    },
-    getIntArray: function (map, name) {
-        var list = map[name];
-        var values = new spine.Uint16Array(list.length);
-        for (var i = 0, n = list.length; i < n; i++)
-            values[i] = list[i] | 0;
-        return values;
-    }
+		skeletonData.animations.push(new spine.Animation(name, timelines, duration));
+	},
+	readCurve: function (timeline, frameIndex, valueMap) {
+		var curve = valueMap["curve"];
+		if (!curve)
+			timeline.curves.setLinear(frameIndex);
+		else if (curve == "stepped")
+			timeline.curves.setStepped(frameIndex);
+		else if (curve instanceof Array)
+			timeline.curves.setCurve(frameIndex, curve[0], curve[1], curve[2], curve[3]);
+	},
+	toColor: function (hexString, colorIndex) {
+		if (hexString.length != 8) throw "Color hexidecimal length must be 8, recieved: " + hexString;
+		return parseInt(hexString.substring(colorIndex * 2, (colorIndex * 2) + 2), 16) / 255;
+	},
+	getFloatArray: function (map, name, scale) {
+		var list = map[name];
+		var values = new spine.Float32Array(list.length);
+		var i = 0, n = list.length;
+		if (scale == 1) {
+			for (; i < n; i++)
+				values[i] = list[i];
+		} else {
+			for (; i < n; i++)
+				values[i] = list[i] * scale;
+		}
+		return values;
+	},
+	getIntArray: function (map, name) {
+		var list = map[name];
+		var values = new spine.Uint16Array(list.length);
+		for (var i = 0, n = list.length; i < n; i++)
+			values[i] = list[i] | 0;
+		return values;
+	}
 };
 
 spine.Atlas = function (atlasText, textureLoader) {
-    this.textureLoader = textureLoader;
-    this.pages = [];
-    this.regions = [];
+	this.textureLoader = textureLoader;
+	this.pages = [];
+	this.regions = [];
 
-    var reader = new spine.AtlasReader(atlasText);
-    var tuple = [];
-    tuple.length = 4;
-    var page = null;
-    while (true) {
-        var line = reader.readLine();
-        if (line === null) break;
-        line = reader.trim(line);
-        if (!line.length)
-            page = null;
-        else if (!page) {
-            page = new spine.AtlasPage();
-            page.name = line;
+	var reader = new spine.AtlasReader(atlasText);
+	var tuple = [];
+	tuple.length = 4;
+	var page = null;
+	while (true) {
+		var line = reader.readLine();
+		if (line === null) break;
+		line = reader.trim(line);
+		if (!line.length)
+			page = null;
+		else if (!page) {
+			page = new spine.AtlasPage();
+			page.name = line;
 
-            if (reader.readTuple(tuple) == 2) { // size is only optional for an atlas packed with an old TexturePacker.
-                page.width = parseInt(tuple[0]);
-                page.height = parseInt(tuple[1]);
-                reader.readTuple(tuple);
-            }
-            page.format = spine.Atlas.Format[tuple[0]];
+			if (reader.readTuple(tuple) == 2) { // size is only optional for an atlas packed with an old TexturePacker.
+				page.width = parseInt(tuple[0]);
+				page.height = parseInt(tuple[1]);
+				reader.readTuple(tuple);
+			}
+			page.format = spine.Atlas.Format[tuple[0]];
 
-            reader.readTuple(tuple);
-            page.minFilter = spine.Atlas.TextureFilter[tuple[0]];
-            page.magFilter = spine.Atlas.TextureFilter[tuple[1]];
+			reader.readTuple(tuple);
+			page.minFilter = spine.Atlas.TextureFilter[tuple[0]];
+			page.magFilter = spine.Atlas.TextureFilter[tuple[1]];
 
-            var direction = reader.readValue();
-            page.uWrap = spine.Atlas.TextureWrap.clampToEdge;
-            page.vWrap = spine.Atlas.TextureWrap.clampToEdge;
-            if (direction == "x")
-                page.uWrap = spine.Atlas.TextureWrap.repeat;
-            else if (direction == "y")
-                page.vWrap = spine.Atlas.TextureWrap.repeat;
-            else if (direction == "xy")
-                page.uWrap = page.vWrap = spine.Atlas.TextureWrap.repeat;
+			var direction = reader.readValue();
+			page.uWrap = spine.Atlas.TextureWrap.clampToEdge;
+			page.vWrap = spine.Atlas.TextureWrap.clampToEdge;
+			if (direction == "x")
+				page.uWrap = spine.Atlas.TextureWrap.repeat;
+			else if (direction == "y")
+				page.vWrap = spine.Atlas.TextureWrap.repeat;
+			else if (direction == "xy")
+				page.uWrap = page.vWrap = spine.Atlas.TextureWrap.repeat;
 
-            textureLoader.load(page, line, this);
+			textureLoader.load(page, line, this);
 
-            this.pages.push(page);
+			this.pages.push(page);
 
-        } else {
-            var region = new spine.AtlasRegion();
-            region.name = line;
-            region.page = page;
+		} else {
+			var region = new spine.AtlasRegion();
+			region.name = line;
+			region.page = page;
 
-            region.rotate = reader.readValue() == "true";
+			region.rotate = reader.readValue() == "true";
 
-            reader.readTuple(tuple);
-            var x = parseInt(tuple[0]);
-            var y = parseInt(tuple[1]);
+			reader.readTuple(tuple);
+			var x = parseInt(tuple[0]);
+			var y = parseInt(tuple[1]);
 
-            reader.readTuple(tuple);
-            var width = parseInt(tuple[0]);
-            var height = parseInt(tuple[1]);
+			reader.readTuple(tuple);
+			var width = parseInt(tuple[0]);
+			var height = parseInt(tuple[1]);
 
-            region.u = x / page.width;
-            region.v = y / page.height;
-            if (region.rotate) {
-                region.u2 = (x + height) / page.width;
-                region.v2 = (y + width) / page.height;
-            } else {
-                region.u2 = (x + width) / page.width;
-                region.v2 = (y + height) / page.height;
-            }
-            region.x = x;
-            region.y = y;
-            region.width = Math.abs(width);
-            region.height = Math.abs(height);
+			region.u = x / page.width;
+			region.v = y / page.height;
+			if (region.rotate) {
+				region.u2 = (x + height) / page.width;
+				region.v2 = (y + width) / page.height;
+			} else {
+				region.u2 = (x + width) / page.width;
+				region.v2 = (y + height) / page.height;
+			}
+			region.x = x;
+			region.y = y;
+			region.width = Math.abs(width);
+			region.height = Math.abs(height);
 
-            if (reader.readTuple(tuple) == 4) { // split is optional
-                region.splits = [parseInt(tuple[0]), parseInt(tuple[1]), parseInt(tuple[2]), parseInt(tuple[3])];
+			if (reader.readTuple(tuple) == 4) { // split is optional
+				region.splits = [parseInt(tuple[0]), parseInt(tuple[1]), parseInt(tuple[2]), parseInt(tuple[3])];
 
-                if (reader.readTuple(tuple) == 4) { // pad is optional, but only present with splits
-                    region.pads = [parseInt(tuple[0]), parseInt(tuple[1]), parseInt(tuple[2]), parseInt(tuple[3])];
+				if (reader.readTuple(tuple) == 4) { // pad is optional, but only present with splits
+					region.pads = [parseInt(tuple[0]), parseInt(tuple[1]), parseInt(tuple[2]), parseInt(tuple[3])];
 
-                    reader.readTuple(tuple);
-                }
-            }
+					reader.readTuple(tuple);
+				}
+			}
 
-            region.originalWidth = parseInt(tuple[0]);
-            region.originalHeight = parseInt(tuple[1]);
+			region.originalWidth = parseInt(tuple[0]);
+			region.originalHeight = parseInt(tuple[1]);
 
-            reader.readTuple(tuple);
-            region.offsetX = parseInt(tuple[0]);
-            region.offsetY = parseInt(tuple[1]);
+			reader.readTuple(tuple);
+			region.offsetX = parseInt(tuple[0]);
+			region.offsetY = parseInt(tuple[1]);
 
-            region.index = parseInt(reader.readValue());
+			region.index = parseInt(reader.readValue());
 
-            this.regions.push(region);
-        }
-    }
+			this.regions.push(region);
+		}
+	}
 };
 spine.Atlas.prototype = {
-    findRegion: function (name) {
-        var regions = this.regions;
-        for (var i = 0, n = regions.length; i < n; i++)
-            if (regions[i].name == name) return regions[i];
-        return null;
-    },
-    dispose: function () {
-        var pages = this.pages;
-        for (var i = 0, n = pages.length; i < n; i++)
-            this.textureLoader.unload(pages[i].rendererObject);
-    },
-    updateUVs: function (page) {
-        var regions = this.regions;
-        for (var i = 0, n = regions.length; i < n; i++) {
-            var region = regions[i];
-            if (region.page != page) continue;
-            region.u = region.x / page.width;
-            region.v = region.y / page.height;
-            if (region.rotate) {
-                region.u2 = (region.x + region.height) / page.width;
-                region.v2 = (region.y + region.width) / page.height;
-            } else {
-                region.u2 = (region.x + region.width) / page.width;
-                region.v2 = (region.y + region.height) / page.height;
-            }
-        }
-    }
+	findRegion: function (name) {
+		var regions = this.regions;
+		for (var i = 0, n = regions.length; i < n; i++)
+			if (regions[i].name == name) return regions[i];
+		return null;
+	},
+	dispose: function () {
+		var pages = this.pages;
+		for (var i = 0, n = pages.length; i < n; i++)
+			this.textureLoader.unload(pages[i].rendererObject);
+	},
+	updateUVs: function (page) {
+		var regions = this.regions;
+		for (var i = 0, n = regions.length; i < n; i++) {
+			var region = regions[i];
+			if (region.page != page) continue;
+			region.u = region.x / page.width;
+			region.v = region.y / page.height;
+			if (region.rotate) {
+				region.u2 = (region.x + region.height) / page.width;
+				region.v2 = (region.y + region.width) / page.height;
+			} else {
+				region.u2 = (region.x + region.width) / page.width;
+				region.v2 = (region.y + region.height) / page.height;
+			}
+		}
+	}
 };
 
 spine.Atlas.Format = {
-    alpha: 0,
-    intensity: 1,
-    luminanceAlpha: 2,
-    rgb565: 3,
-    rgba4444: 4,
-    rgb888: 5,
-    rgba8888: 6
+	alpha: 0,
+	intensity: 1,
+	luminanceAlpha: 2,
+	rgb565: 3,
+	rgba4444: 4,
+	rgb888: 5,
+	rgba8888: 6
 };
 
 spine.Atlas.TextureFilter = {
-    nearest: 0,
-    linear: 1,
-    mipMap: 2,
-    mipMapNearestNearest: 3,
-    mipMapLinearNearest: 4,
-    mipMapNearestLinear: 5,
-    mipMapLinearLinear: 6
+	nearest: 0,
+	linear: 1,
+	mipMap: 2,
+	mipMapNearestNearest: 3,
+	mipMapLinearNearest: 4,
+	mipMapNearestLinear: 5,
+	mipMapLinearLinear: 6
 };
 
 spine.Atlas.TextureWrap = {
-    mirroredRepeat: 0,
-    clampToEdge: 1,
-    repeat: 2
+	mirroredRepeat: 0,
+	clampToEdge: 1,
+	repeat: 2
 };
 
 spine.AtlasPage = function () {};
 spine.AtlasPage.prototype = {
-    name: null,
-    format: null,
-    minFilter: null,
-    magFilter: null,
-    uWrap: null,
-    vWrap: null,
-    rendererObject: null,
-    width: 0,
-    height: 0
+	name: null,
+	format: null,
+	minFilter: null,
+	magFilter: null,
+	uWrap: null,
+	vWrap: null,
+	rendererObject: null,
+	width: 0,
+	height: 0
 };
 
 spine.AtlasRegion = function () {};
 spine.AtlasRegion.prototype = {
-    page: null,
-    name: null,
-    x: 0, y: 0,
-    width: 0, height: 0,
-    u: 0, v: 0, u2: 0, v2: 0,
-    offsetX: 0, offsetY: 0,
-    originalWidth: 0, originalHeight: 0,
-    index: 0,
-    rotate: false,
-    splits: null,
-    pads: null
+	page: null,
+	name: null,
+	x: 0, y: 0,
+	width: 0, height: 0,
+	u: 0, v: 0, u2: 0, v2: 0,
+	offsetX: 0, offsetY: 0,
+	originalWidth: 0, originalHeight: 0,
+	index: 0,
+	rotate: false,
+	splits: null,
+	pads: null
 };
 
 spine.AtlasReader = function (text) {
-    this.lines = text.split(/\r\n|\r|\n/);
+	this.lines = text.split(/\r\n|\r|\n/);
 };
 spine.AtlasReader.prototype = {
-    index: 0,
-    trim: function (value) {
-        return value.replace(/^\s+|\s+$/g, "");
-    },
-    readLine: function () {
-        if (this.index >= this.lines.length) return null;
-        return this.lines[this.index++];
-    },
-    readValue: function () {
-        var line = this.readLine();
-        var colon = line.indexOf(":");
-        if (colon == -1) throw "Invalid line: " + line;
-        return this.trim(line.substring(colon + 1));
-    },
-    /** Returns the number of tuple values read (1, 2 or 4). */
-    readTuple: function (tuple) {
-        var line = this.readLine();
-        var colon = line.indexOf(":");
-        if (colon == -1) throw "Invalid line: " + line;
-        var i = 0, lastMatch = colon + 1;
-        for (; i < 3; i++) {
-            var comma = line.indexOf(",", lastMatch);
-            if (comma == -1) break;
-            tuple[i] = this.trim(line.substr(lastMatch, comma - lastMatch));
-            lastMatch = comma + 1;
-        }
-        tuple[i] = this.trim(line.substring(lastMatch));
-        return i + 1;
-    }
+	index: 0,
+	trim: function (value) {
+		return value.replace(/^\s+|\s+$/g, "");
+	},
+	readLine: function () {
+		if (this.index >= this.lines.length) return null;
+		return this.lines[this.index++];
+	},
+	readValue: function () {
+		var line = this.readLine();
+		var colon = line.indexOf(":");
+		if (colon == -1) throw "Invalid line: " + line;
+		return this.trim(line.substring(colon + 1));
+	},
+	/** Returns the number of tuple values read (1, 2 or 4). */
+	readTuple: function (tuple) {
+		var line = this.readLine();
+		var colon = line.indexOf(":");
+		if (colon == -1) throw "Invalid line: " + line;
+		var i = 0, lastMatch = colon + 1;
+		for (; i < 3; i++) {
+			var comma = line.indexOf(",", lastMatch);
+			if (comma == -1) break;
+			tuple[i] = this.trim(line.substr(lastMatch, comma - lastMatch));
+			lastMatch = comma + 1;
+		}
+		tuple[i] = this.trim(line.substring(lastMatch));
+		return i + 1;
+	}
 };
 
 spine.AtlasAttachmentLoader = function (atlas) {
-    this.atlas = atlas;
+	this.atlas = atlas;
 };
 spine.AtlasAttachmentLoader.prototype = {
-    newRegionAttachment: function (skin, name, path) {
-        var region = this.atlas.findRegion(path);
-        if (!region) throw "Region not found in atlas: " + path + " (region attachment: " + name + ")";
-        var attachment = new spine.RegionAttachment(name);
-        attachment.rendererObject = region;
-        attachment.setUVs(region.u, region.v, region.u2, region.v2, region.rotate);
-        attachment.regionOffsetX = region.offsetX;
-        attachment.regionOffsetY = region.offsetY;
-        attachment.regionWidth = region.width;
-        attachment.regionHeight = region.height;
-        attachment.regionOriginalWidth = region.originalWidth;
-        attachment.regionOriginalHeight = region.originalHeight;
-        return attachment;
-    },
-    newMeshAttachment: function (skin, name, path) {
-        var region = this.atlas.findRegion(path);
-        if (!region) throw "Region not found in atlas: " + path + " (mesh attachment: " + name + ")";
-        var attachment = new spine.MeshAttachment(name);
-        attachment.rendererObject = region;
-        attachment.regionU = region.u;
-        attachment.regionV = region.v;
-        attachment.regionU2 = region.u2;
-        attachment.regionV2 = region.v2;
-        attachment.regionRotate = region.rotate;
-        attachment.regionOffsetX = region.offsetX;
-        attachment.regionOffsetY = region.offsetY;
-        attachment.regionWidth = region.width;
-        attachment.regionHeight = region.height;
-        attachment.regionOriginalWidth = region.originalWidth;
-        attachment.regionOriginalHeight = region.originalHeight;
-        return attachment;
-    },
-    newSkinnedMeshAttachment: function (skin, name, path) {
-        var region = this.atlas.findRegion(path);
-        if (!region) throw "Region not found in atlas: " + path + " (skinned mesh attachment: " + name + ")";
-        var attachment = new spine.SkinnedMeshAttachment(name);
-        attachment.rendererObject = region;
-        attachment.regionU = region.u;
-        attachment.regionV = region.v;
-        attachment.regionU2 = region.u2;
-        attachment.regionV2 = region.v2;
-        attachment.regionRotate = region.rotate;
-        attachment.regionOffsetX = region.offsetX;
-        attachment.regionOffsetY = region.offsetY;
-        attachment.regionWidth = region.width;
-        attachment.regionHeight = region.height;
-        attachment.regionOriginalWidth = region.originalWidth;
-        attachment.regionOriginalHeight = region.originalHeight;
-        return attachment;
-    },
-    newBoundingBoxAttachment: function (skin, name) {
-        return new spine.BoundingBoxAttachment(name);
-    }
+	newRegionAttachment: function (skin, name, path) {
+		var region = this.atlas.findRegion(path);
+		if (!region) throw "Region not found in atlas: " + path + " (region attachment: " + name + ")";
+		var attachment = new spine.RegionAttachment(name);
+		attachment.rendererObject = region;
+		attachment.setUVs(region.u, region.v, region.u2, region.v2, region.rotate);
+		attachment.regionOffsetX = region.offsetX;
+		attachment.regionOffsetY = region.offsetY;
+		attachment.regionWidth = region.width;
+		attachment.regionHeight = region.height;
+		attachment.regionOriginalWidth = region.originalWidth;
+		attachment.regionOriginalHeight = region.originalHeight;
+		return attachment;
+	},
+	newMeshAttachment: function (skin, name, path) {
+		var region = this.atlas.findRegion(path);
+		if (!region) throw "Region not found in atlas: " + path + " (mesh attachment: " + name + ")";
+		var attachment = new spine.MeshAttachment(name);
+		attachment.rendererObject = region;
+		attachment.regionU = region.u;
+		attachment.regionV = region.v;
+		attachment.regionU2 = region.u2;
+		attachment.regionV2 = region.v2;
+		attachment.regionRotate = region.rotate;
+		attachment.regionOffsetX = region.offsetX;
+		attachment.regionOffsetY = region.offsetY;
+		attachment.regionWidth = region.width;
+		attachment.regionHeight = region.height;
+		attachment.regionOriginalWidth = region.originalWidth;
+		attachment.regionOriginalHeight = region.originalHeight;
+		return attachment;
+	},
+	newSkinnedMeshAttachment: function (skin, name, path) {
+		var region = this.atlas.findRegion(path);
+		if (!region) throw "Region not found in atlas: " + path + " (skinned mesh attachment: " + name + ")";
+		var attachment = new spine.SkinnedMeshAttachment(name);
+		attachment.rendererObject = region;
+		attachment.regionU = region.u;
+		attachment.regionV = region.v;
+		attachment.regionU2 = region.u2;
+		attachment.regionV2 = region.v2;
+		attachment.regionRotate = region.rotate;
+		attachment.regionOffsetX = region.offsetX;
+		attachment.regionOffsetY = region.offsetY;
+		attachment.regionWidth = region.width;
+		attachment.regionHeight = region.height;
+		attachment.regionOriginalWidth = region.originalWidth;
+		attachment.regionOriginalHeight = region.originalHeight;
+		return attachment;
+	},
+	newBoundingBoxAttachment: function (skin, name) {
+		return new spine.BoundingBoxAttachment(name);
+	}
 };
 
 spine.SkeletonBounds = function () {
-    this.polygonPool = [];
-    this.polygons = [];
-    this.boundingBoxes = [];
+	this.polygonPool = [];
+	this.polygons = [];
+	this.boundingBoxes = [];
 };
 spine.SkeletonBounds.prototype = {
-    minX: 0, minY: 0, maxX: 0, maxY: 0,
-    update: function (skeleton, updateAabb) {
-        var slots = skeleton.slots;
-        var slotCount = slots.length;
-        var x = skeleton.x, y = skeleton.y;
-        var boundingBoxes = this.boundingBoxes;
-        var polygonPool = this.polygonPool;
-        var polygons = this.polygons;
+	minX: 0, minY: 0, maxX: 0, maxY: 0,
+	update: function (skeleton, updateAabb) {
+		var slots = skeleton.slots;
+		var slotCount = slots.length;
+		var x = skeleton.x, y = skeleton.y;
+		var boundingBoxes = this.boundingBoxes;
+		var polygonPool = this.polygonPool;
+		var polygons = this.polygons;
 
-        boundingBoxes.length = 0;
-        for (var i = 0, n = polygons.length; i < n; i++)
-            polygonPool.push(polygons[i]);
-        polygons.length = 0;
+		boundingBoxes.length = 0;
+		for (var i = 0, n = polygons.length; i < n; i++)
+			polygonPool.push(polygons[i]);
+		polygons.length = 0;
 
-        for (var i = 0; i < slotCount; i++) {
-            var slot = slots[i];
-            var boundingBox = slot.attachment;
-            if (boundingBox.type != spine.AttachmentType.boundingbox) continue;
-            boundingBoxes.push(boundingBox);
+		for (var i = 0; i < slotCount; i++) {
+			var slot = slots[i];
+			var boundingBox = slot.attachment;
+			if (boundingBox.type != spine.AttachmentType.boundingbox) continue;
+			boundingBoxes.push(boundingBox);
 
-            var poolCount = polygonPool.length, polygon;
-            if (poolCount > 0) {
-                polygon = polygonPool[poolCount - 1];
-                polygonPool.splice(poolCount - 1, 1);
-            } else
-                polygon = [];
-            polygons.push(polygon);
+			var poolCount = polygonPool.length, polygon;
+			if (poolCount > 0) {
+				polygon = polygonPool[poolCount - 1];
+				polygonPool.splice(poolCount - 1, 1);
+			} else
+				polygon = [];
+			polygons.push(polygon);
 
-            polygon.length = boundingBox.vertices.length;
-            boundingBox.computeWorldVertices(x, y, slot.bone, polygon);
-        }
+			polygon.length = boundingBox.vertices.length;
+			boundingBox.computeWorldVertices(x, y, slot.bone, polygon);
+		}
 
-        if (updateAabb) this.aabbCompute();
-    },
-    aabbCompute: function () {
-        var polygons = this.polygons;
-        var minX = Number.MAX_VALUE, minY = Number.MAX_VALUE, maxX = Number.MIN_VALUE, maxY = Number.MIN_VALUE;
-        for (var i = 0, n = polygons.length; i < n; i++) {
-            var vertices = polygons[i];
-            for (var ii = 0, nn = vertices.length; ii < nn; ii += 2) {
-                var x = vertices[ii];
-                var y = vertices[ii + 1];
-                minX = Math.min(minX, x);
-                minY = Math.min(minY, y);
-                maxX = Math.max(maxX, x);
-                maxY = Math.max(maxY, y);
-            }
-        }
-        this.minX = minX;
-        this.minY = minY;
-        this.maxX = maxX;
-        this.maxY = maxY;
-    },
-    /** Returns true if the axis aligned bounding box contains the point. */
-    aabbContainsPoint: function (x, y) {
-        return x >= this.minX && x <= this.maxX && y >= this.minY && y <= this.maxY;
-    },
-    /** Returns true if the axis aligned bounding box intersects the line segment. */
-    aabbIntersectsSegment: function (x1, y1, x2, y2) {
-        var minX = this.minX, minY = this.minY, maxX = this.maxX, maxY = this.maxY;
-        if ((x1 <= minX && x2 <= minX) || (y1 <= minY && y2 <= minY) || (x1 >= maxX && x2 >= maxX) || (y1 >= maxY && y2 >= maxY))
-            return false;
-        var m = (y2 - y1) / (x2 - x1);
-        var y = m * (minX - x1) + y1;
-        if (y > minY && y < maxY) return true;
-        y = m * (maxX - x1) + y1;
-        if (y > minY && y < maxY) return true;
-        var x = (minY - y1) / m + x1;
-        if (x > minX && x < maxX) return true;
-        x = (maxY - y1) / m + x1;
-        if (x > minX && x < maxX) return true;
-        return false;
-    },
-    /** Returns true if the axis aligned bounding box intersects the axis aligned bounding box of the specified bounds. */
-    aabbIntersectsSkeleton: function (bounds) {
-        return this.minX < bounds.maxX && this.maxX > bounds.minX && this.minY < bounds.maxY && this.maxY > bounds.minY;
-    },
-    /** Returns the first bounding box attachment that contains the point, or null. When doing many checks, it is usually more
-     * efficient to only call this method if {@link #aabbContainsPoint(float, float)} returns true. */
-    containsPoint: function (x, y) {
-        var polygons = this.polygons;
-        for (var i = 0, n = polygons.length; i < n; i++)
-            if (this.polygonContainsPoint(polygons[i], x, y)) return this.boundingBoxes[i];
-        return null;
-    },
-    /** Returns the first bounding box attachment that contains the line segment, or null. When doing many checks, it is usually
-     * more efficient to only call this method if {@link #aabbIntersectsSegment(float, float, float, float)} returns true. */
-    intersectsSegment: function (x1, y1, x2, y2) {
-        var polygons = this.polygons;
-        for (var i = 0, n = polygons.length; i < n; i++)
-            if (polygons[i].intersectsSegment(x1, y1, x2, y2)) return this.boundingBoxes[i];
-        return null;
-    },
-    /** Returns true if the polygon contains the point. */
-    polygonContainsPoint: function (polygon, x, y) {
-        var nn = polygon.length;
-        var prevIndex = nn - 2;
-        var inside = false;
-        for (var ii = 0; ii < nn; ii += 2) {
-            var vertexY = polygon[ii + 1];
-            var prevY = polygon[prevIndex + 1];
-            if ((vertexY < y && prevY >= y) || (prevY < y && vertexY >= y)) {
-                var vertexX = polygon[ii];
-                if (vertexX + (y - vertexY) / (prevY - vertexY) * (polygon[prevIndex] - vertexX) < x) inside = !inside;
-            }
-            prevIndex = ii;
-        }
-        return inside;
-    },
-    /** Returns true if the polygon contains the line segment. */
-    polygonIntersectsSegment: function (polygon, x1, y1, x2, y2) {
-        var nn = polygon.length;
-        var width12 = x1 - x2, height12 = y1 - y2;
-        var det1 = x1 * y2 - y1 * x2;
-        var x3 = polygon[nn - 2], y3 = polygon[nn - 1];
-        for (var ii = 0; ii < nn; ii += 2) {
-            var x4 = polygon[ii], y4 = polygon[ii + 1];
-            var det2 = x3 * y4 - y3 * x4;
-            var width34 = x3 - x4, height34 = y3 - y4;
-            var det3 = width12 * height34 - height12 * width34;
-            var x = (det1 * width34 - width12 * det2) / det3;
-            if (((x >= x3 && x <= x4) || (x >= x4 && x <= x3)) && ((x >= x1 && x <= x2) || (x >= x2 && x <= x1))) {
-                var y = (det1 * height34 - height12 * det2) / det3;
-                if (((y >= y3 && y <= y4) || (y >= y4 && y <= y3)) && ((y >= y1 && y <= y2) || (y >= y2 && y <= y1))) return true;
-            }
-            x3 = x4;
-            y3 = y4;
-        }
-        return false;
-    },
-    getPolygon: function (attachment) {
-        var index = this.boundingBoxes.indexOf(attachment);
-        return index == -1 ? null : this.polygons[index];
-    },
-    getWidth: function () {
-        return this.maxX - this.minX;
-    },
-    getHeight: function () {
-        return this.maxY - this.minY;
-    }
+		if (updateAabb) this.aabbCompute();
+	},
+	aabbCompute: function () {
+		var polygons = this.polygons;
+		var minX = Number.MAX_VALUE, minY = Number.MAX_VALUE, maxX = Number.MIN_VALUE, maxY = Number.MIN_VALUE;
+		for (var i = 0, n = polygons.length; i < n; i++) {
+			var vertices = polygons[i];
+			for (var ii = 0, nn = vertices.length; ii < nn; ii += 2) {
+				var x = vertices[ii];
+				var y = vertices[ii + 1];
+				minX = Math.min(minX, x);
+				minY = Math.min(minY, y);
+				maxX = Math.max(maxX, x);
+				maxY = Math.max(maxY, y);
+			}
+		}
+		this.minX = minX;
+		this.minY = minY;
+		this.maxX = maxX;
+		this.maxY = maxY;
+	},
+	/** Returns true if the axis aligned bounding box contains the point. */
+	aabbContainsPoint: function (x, y) {
+		return x >= this.minX && x <= this.maxX && y >= this.minY && y <= this.maxY;
+	},
+	/** Returns true if the axis aligned bounding box intersects the line segment. */
+	aabbIntersectsSegment: function (x1, y1, x2, y2) {
+		var minX = this.minX, minY = this.minY, maxX = this.maxX, maxY = this.maxY;
+		if ((x1 <= minX && x2 <= minX) || (y1 <= minY && y2 <= minY) || (x1 >= maxX && x2 >= maxX) || (y1 >= maxY && y2 >= maxY))
+			return false;
+		var m = (y2 - y1) / (x2 - x1);
+		var y = m * (minX - x1) + y1;
+		if (y > minY && y < maxY) return true;
+		y = m * (maxX - x1) + y1;
+		if (y > minY && y < maxY) return true;
+		var x = (minY - y1) / m + x1;
+		if (x > minX && x < maxX) return true;
+		x = (maxY - y1) / m + x1;
+		if (x > minX && x < maxX) return true;
+		return false;
+	},
+	/** Returns true if the axis aligned bounding box intersects the axis aligned bounding box of the specified bounds. */
+	aabbIntersectsSkeleton: function (bounds) {
+		return this.minX < bounds.maxX && this.maxX > bounds.minX && this.minY < bounds.maxY && this.maxY > bounds.minY;
+	},
+	/** Returns the first bounding box attachment that contains the point, or null. When doing many checks, it is usually more
+	 * efficient to only call this method if {@link #aabbContainsPoint(float, float)} returns true. */
+	containsPoint: function (x, y) {
+		var polygons = this.polygons;
+		for (var i = 0, n = polygons.length; i < n; i++)
+			if (this.polygonContainsPoint(polygons[i], x, y)) return this.boundingBoxes[i];
+		return null;
+	},
+	/** Returns the first bounding box attachment that contains the line segment, or null. When doing many checks, it is usually
+	 * more efficient to only call this method if {@link #aabbIntersectsSegment(float, float, float, float)} returns true. */
+	intersectsSegment: function (x1, y1, x2, y2) {
+		var polygons = this.polygons;
+		for (var i = 0, n = polygons.length; i < n; i++)
+			if (polygons[i].intersectsSegment(x1, y1, x2, y2)) return this.boundingBoxes[i];
+		return null;
+	},
+	/** Returns true if the polygon contains the point. */
+	polygonContainsPoint: function (polygon, x, y) {
+		var nn = polygon.length;
+		var prevIndex = nn - 2;
+		var inside = false;
+		for (var ii = 0; ii < nn; ii += 2) {
+			var vertexY = polygon[ii + 1];
+			var prevY = polygon[prevIndex + 1];
+			if ((vertexY < y && prevY >= y) || (prevY < y && vertexY >= y)) {
+				var vertexX = polygon[ii];
+				if (vertexX + (y - vertexY) / (prevY - vertexY) * (polygon[prevIndex] - vertexX) < x) inside = !inside;
+			}
+			prevIndex = ii;
+		}
+		return inside;
+	},
+	/** Returns true if the polygon contains the line segment. */
+	polygonIntersectsSegment: function (polygon, x1, y1, x2, y2) {
+		var nn = polygon.length;
+		var width12 = x1 - x2, height12 = y1 - y2;
+		var det1 = x1 * y2 - y1 * x2;
+		var x3 = polygon[nn - 2], y3 = polygon[nn - 1];
+		for (var ii = 0; ii < nn; ii += 2) {
+			var x4 = polygon[ii], y4 = polygon[ii + 1];
+			var det2 = x3 * y4 - y3 * x4;
+			var width34 = x3 - x4, height34 = y3 - y4;
+			var det3 = width12 * height34 - height12 * width34;
+			var x = (det1 * width34 - width12 * det2) / det3;
+			if (((x >= x3 && x <= x4) || (x >= x4 && x <= x3)) && ((x >= x1 && x <= x2) || (x >= x2 && x <= x1))) {
+				var y = (det1 * height34 - height12 * det2) / det3;
+				if (((y >= y3 && y <= y4) || (y >= y4 && y <= y3)) && ((y >= y1 && y <= y2) || (y >= y2 && y <= y1))) return true;
+			}
+			x3 = x4;
+			y3 = y4;
+		}
+		return false;
+	},
+	getPolygon: function (attachment) {
+		var index = this.boundingBoxes.indexOf(attachment);
+		return index == -1 ? null : this.polygons[index];
+	},
+	getWidth: function () {
+		return this.maxX - this.minX;
+	},
+	getHeight: function () {
+		return this.maxY - this.minY;
+	}
 };
 
 /* Esoteric Software SPINE wrapper for pixi.js */
@@ -16957,13 +16991,13 @@ PIXI.BaseTextureCacheIdGenerator = 0;
 PIXI.BaseTexture = function(source, scaleMode)
 {
     /**
-     * The Resolution of the texture.
+     * The Resolution of the texture. 
      *
      * @property resolution
      * @type Number
      */
     this.resolution = 1;
-
+    
     /**
      * [read-only] The width of the base texture set when the image has loaded
      *
@@ -16984,7 +17018,7 @@ PIXI.BaseTexture = function(source, scaleMode)
 
     /**
      * The scale mode to apply when scaling this texture
-     *
+     * 
      * @property scaleMode
      * @type {Number}
      * @default PIXI.scaleModes.LINEAR
@@ -17032,7 +17066,7 @@ PIXI.BaseTexture = function(source, scaleMode)
      *
      * Set this to true if a mipmap of this texture needs to be generated. This value needs to be set before the texture is used
      * Also the texture must be a power of two size to work
-     *
+     * 
      * @property mipmap
      * @type {Boolean}
      */
@@ -17166,7 +17200,7 @@ PIXI.BaseTexture.prototype.unloadFromGPU = function()
         {
             gl.deleteTexture(glTexture);
         }
-
+        
     }
 
     this._glTextures.length = 0;
@@ -17261,7 +17295,7 @@ PIXI.TextureCacheIdGenerator = 0;
  * @constructor
  * @param baseTexture {BaseTexture} The base texture source to create the texture from
  * @param [frame] {Rectangle} The rectangle frame of the texture to show
- * @param [crop] {Rectangle} The area of original texture
+ * @param [crop] {Rectangle} The area of original texture 
  * @param [trim] {Rectangle} Trimmed texture rectangle
  */
 PIXI.Texture = function(baseTexture, frame, crop, trim)
@@ -17437,7 +17471,7 @@ PIXI.Texture.prototype.setFrame = function(frame)
         this.frame.width = this.trim.width;
         this.frame.height = this.trim.height;
     }
-
+    
     if (this.valid) this._updateUvs();
 
 };
@@ -17455,7 +17489,7 @@ PIXI.Texture.prototype._updateUvs = function()
     var frame = this.crop;
     var tw = this.baseTexture.width;
     var th = this.baseTexture.height;
-
+    
     this._uvs.x0 = frame.x / tw;
     this._uvs.y0 = frame.y / th;
 
@@ -17776,8 +17810,8 @@ PIXI.RenderTexture.prototype.renderWebGL = function(displayObject, matrix, clear
 {
     if(!this.valid)return;
     //TOOD replace position with matrix..
-
-    //Lets create a nice matrix to apply to our display object. Frame buffers come in upside down so we need to flip the matrix
+   
+    //Lets create a nice matrix to apply to our display object. Frame buffers come in upside down so we need to flip the matrix 
     var wt = displayObject.worldTransform;
     wt.identity();
     wt.translate(0, this.projection.y * 2);
@@ -17787,14 +17821,14 @@ PIXI.RenderTexture.prototype.renderWebGL = function(displayObject, matrix, clear
     // setWorld Alpha to ensure that the object is renderer at full opacity
     displayObject.worldAlpha = 1;
 
-    // Time to update all the children of the displayObject with the new matrix..
+    // Time to update all the children of the displayObject with the new matrix..    
     var children = displayObject.children;
 
     for(var i=0,j=children.length; i<j; i++)
     {
         children[i].updateTransform();
     }
-
+    
     // time for the webGL fun stuff!
     var gl = this.renderer.gl;
 
@@ -17828,11 +17862,11 @@ PIXI.RenderTexture.prototype.renderCanvas = function(displayObject, matrix, clea
     var wt = displayObject.worldTransform;
     wt.identity();
     if(matrix)wt.append(matrix);
-
+    
     // setWorld Alpha to ensure that the object is renderer at full opacity
     displayObject.worldAlpha = 1;
 
-    // Time to update all the children of the displayObject with the new matrix..
+    // Time to update all the children of the displayObject with the new matrix..    
     var children = displayObject.children;
 
     for(var i = 0, j = children.length; i < j; i++)
@@ -18053,7 +18087,7 @@ PIXI.VideoTexture.baseTextureFromVideo = function( video, scaleMode )
  * Mimic Pixi BaseTexture.from.... method.
  *
  * @static
- * @method textureFromVideo
+ * @method textureFromVideo 
  * @param video {HTMLVideoElement}
  * @param scaleMode {Number} See {{#crossLink "PIXI/scaleModes:property"}}PIXI.scaleModes{{/crossLink}} for possible values
  * @return {Texture} A Texture, but not a VideoTexture.
@@ -18068,7 +18102,7 @@ PIXI.VideoTexture.textureFromVideo = function( video, scaleMode )
  * Mimic Pixi BaseTexture.from.... method.
  *
  * @static
- * @method fromUrl
+ * @method fromUrl 
  * @param videoSrc {String} The URL for the video.
  * @param scaleMode {Number} See {{#crossLink "PIXI/scaleModes:property"}}PIXI.scaleModes{{/crossLink}} for possible values
  * @return {VideoTexture}
@@ -18416,61 +18450,61 @@ PIXI.JsonLoader.prototype.onJSONLoaded = function () {
     }
     else if(this.json.bones)
     {
-        /* check if the json was loaded before */
-        if (PIXI.AnimCache[this.url])
-        {
-            this.onLoaded();
-        }
-        else
-        {
-            /* use a bit of hackery to load the atlas file, here we assume that the .json, .atlas and .png files
-             * that correspond to the spine file are in the same base URL and that the .json and .atlas files
-             * have the same name
-            */
-            var atlasPath = this.url.substr(0, this.url.lastIndexOf('.')) + '.atlas';
-            var atlasLoader = new PIXI.JsonLoader(atlasPath, this.crossorigin);
-            // save a copy of the current object for future reference //
-            var originalLoader = this;
-            // before loading the file, replace the "onJSONLoaded" function for our own //
-            atlasLoader.onJSONLoaded = function()
-            {
-                // at this point "this" points at the atlasLoader (JsonLoader) instance //
-                if(!this.ajaxRequest.responseText)
-                {
-                    this.onError(); // FIXME: hmm, this is funny because we are not responding to errors yet
-                    return;
-                }
-                // create a new instance of a spine texture loader for this spine object //
-                var textureLoader = new PIXI.SpineTextureLoader(this.url.substring(0, this.url.lastIndexOf('/')));
-                // create a spine atlas using the loaded text and a spine texture loader instance //
-                var spineAtlas = new spine.Atlas(this.ajaxRequest.responseText, textureLoader);
-                // now we use an atlas attachment loader //
-                var attachmentLoader = new spine.AtlasAttachmentLoader(spineAtlas);
-                // spine animation
-                var spineJsonParser = new spine.SkeletonJson(attachmentLoader);
-                var skeletonData = spineJsonParser.readSkeletonData(originalLoader.json);
-                PIXI.AnimCache[originalLoader.url] = skeletonData;
-                originalLoader.spine = skeletonData;
-                originalLoader.spineAtlas = spineAtlas;
-                originalLoader.spineAtlasLoader = atlasLoader;
-                // wait for textures to finish loading if needed
-                if (textureLoader.loadingCount > 0)
-                {
-                    textureLoader.addEventListener('loadedBaseTexture', function(evt){
-                        if (evt.content.content.loadingCount <= 0)
-                        {
-                            originalLoader.onLoaded();
-                        }
-                    });
-                }
-                else
-                {
-                    originalLoader.onLoaded();
-                }
-            };
-            // start the loading //
-            atlasLoader.load();
-        }
+		/* check if the json was loaded before */
+		if (PIXI.AnimCache[this.url])
+		{
+			this.onLoaded();
+		}
+		else
+		{
+			/* use a bit of hackery to load the atlas file, here we assume that the .json, .atlas and .png files
+			 * that correspond to the spine file are in the same base URL and that the .json and .atlas files
+			 * have the same name
+			*/
+			var atlasPath = this.url.substr(0, this.url.lastIndexOf('.')) + '.atlas';
+			var atlasLoader = new PIXI.JsonLoader(atlasPath, this.crossorigin);
+			// save a copy of the current object for future reference //
+			var originalLoader = this;
+			// before loading the file, replace the "onJSONLoaded" function for our own //
+			atlasLoader.onJSONLoaded = function()
+			{
+				// at this point "this" points at the atlasLoader (JsonLoader) instance //
+				if(!this.ajaxRequest.responseText)
+				{
+					this.onError(); // FIXME: hmm, this is funny because we are not responding to errors yet
+					return;
+				}
+				// create a new instance of a spine texture loader for this spine object //
+				var textureLoader = new PIXI.SpineTextureLoader(this.url.substring(0, this.url.lastIndexOf('/')));
+				// create a spine atlas using the loaded text and a spine texture loader instance //
+				var spineAtlas = new spine.Atlas(this.ajaxRequest.responseText, textureLoader);
+				// now we use an atlas attachment loader //
+				var attachmentLoader = new spine.AtlasAttachmentLoader(spineAtlas);
+				// spine animation
+				var spineJsonParser = new spine.SkeletonJson(attachmentLoader);
+				var skeletonData = spineJsonParser.readSkeletonData(originalLoader.json);
+				PIXI.AnimCache[originalLoader.url] = skeletonData;
+				originalLoader.spine = skeletonData;
+				originalLoader.spineAtlas = spineAtlas;
+				originalLoader.spineAtlasLoader = atlasLoader;
+				// wait for textures to finish loading if needed
+				if (textureLoader.loadingCount > 0)
+				{
+					textureLoader.addEventListener('loadedBaseTexture', function(evt){
+						if (evt.content.content.loadingCount <= 0)
+						{
+							originalLoader.onLoaded();
+						}
+					});
+				}
+				else
+				{
+					originalLoader.onLoaded();
+				}
+			};
+			// start the loading //
+			atlasLoader.load();
+		}
     }
     else
     {
@@ -18514,10 +18548,10 @@ PIXI.JsonLoader.prototype.onError = function () {
  * The atlas file loader is used to load in Texture Atlas data and parse it. When loaded this class will dispatch a 'loaded' event. If loading fails this class will dispatch an 'error' event.
  *
  * To generate the data you can use http://www.codeandweb.com/texturepacker and publish in the 'JSON' format.
- *
+ * 
  * It is highly recommended to use texture atlases (also know as 'sprite sheets') as it allowed sprites to be batched and drawn together for highly increased rendering speed.
  * Once the data has been loaded the frames are stored in the PIXI texture cache and can be accessed though PIXI.Texture.fromFrameId() and PIXI.Sprite.fromFrameId()
- *
+ * 
  * @class AtlasLoader
  * @uses EventTarget
  * @constructor
@@ -18553,7 +18587,7 @@ PIXI.AtlasLoader.prototype.load = function () {
 
 /**
  * Invoked when the Atlas has fully loaded. Parses the JSON and builds the texture frames.
- *
+ * 
  * @method onAtlasLoaded
  * @private
  */
@@ -18673,7 +18707,7 @@ PIXI.AtlasLoader.prototype.onAtlasLoaded = function () {
 
 /**
  * Invoked when json file has loaded.
- *
+ * 
  * @method onLoaded
  * @private
  */
@@ -18689,7 +18723,7 @@ PIXI.AtlasLoader.prototype.onLoaded = function () {
 
 /**
  * Invoked when an error occurs.
- *
+ * 
  * @method onError
  * @private
  */
@@ -18872,27 +18906,67 @@ PIXI.ImageLoader.prototype.onLoaded = function()
 PIXI.ImageLoader.prototype.loadFramedSpriteSheet = function(frameWidth, frameHeight, textureName)
 {
     this.frames = [];
-    var cols = Math.floor(this.texture.width / frameWidth);
-    var rows = Math.floor(this.texture.height / frameHeight);
-
-    var i=0;
-    for (var y=0; y<rows; y++)
+    if(!this.texture.baseTexture.hasLoaded)
     {
-        for (var x=0; x<cols; x++,i++)
-        {
-            var texture = new PIXI.Texture(this.texture.baseTexture, {
-                x: x*frameWidth,
-                y: y*frameHeight,
-                width: frameWidth,
-                height: frameHeight
-            });
+        var scope = this;
+        textureName = textureName || scope.texture.baseTexture.imageUrl;
+        this.texture.baseTexture.addEventListener('loaded', function () {
+            var texture;
+            var cols = Math.floor(scope.texture.width / frameWidth);
+            var rows = Math.floor(scope.texture.height / frameHeight);
 
-            this.frames.push(texture);
-            if (textureName) PIXI.TextureCache[textureName + '-' + i] = texture;
-        }
+            var i = 0;
+            for (var y = 0; y < rows; y++) {
+                for (var x = 0; x < cols; x++, i++) {
+                    if (!PIXI.TextureCache[textureName + '-' + i]) {
+                        texture = new PIXI.Texture(scope.texture, {
+                            x: x * frameWidth,
+                            y: y * frameHeight,
+                            width: frameWidth,
+                            height: frameHeight
+                        });
+                        PIXI.TextureCache[textureName + '-' + i] = texture;
+                    }
+                    else {
+                        texture = PIXI.TextureCache[textureName + '-' + i];
+                    }
+                    scope.frames.push(texture);
+                }
+            }
+
+            scope.onLoaded();
+        });
     }
+    else
+    {
 
-    this.load();
+        textureName = textureName || this.texture.baseTexture.imageUrl;
+
+        var texture;
+        var cols = Math.floor(this.texture.width / frameWidth);
+        var rows = Math.floor(this.texture.height / frameHeight);
+
+        var i = 0;
+        for (var y = 0; y < rows; y++) {
+            for (var x = 0; x < cols; x++, i++) {
+                if (!PIXI.TextureCache[textureName + '-' + i]) {
+                    texture = new PIXI.Texture(this.texture, {
+                        x: x * frameWidth,
+                        y: y * frameHeight,
+                        width: frameWidth,
+                        height: frameHeight
+                    });
+                    PIXI.TextureCache[textureName + '-' + i] = texture;
+                }
+                else {
+                    texture = PIXI.TextureCache[textureName + '-' + i];
+                }
+
+                this.frames.push(texture);
+            }
+        }
+        this.onLoaded();
+    }
 };
 
 /**
@@ -19168,7 +19242,7 @@ PIXI.AbstractFilter = function(fragmentSrc, uniforms)
     * @private
     */
     this.shaders = [];
-
+    
     /**
     * @property dirty
     * @type Boolean
@@ -19225,7 +19299,7 @@ PIXI.AbstractFilter.prototype.apply = function(frameBuffer)
  * The AlphaMaskFilter class uses the pixel values from the specified texture (called the displacement map) to perform a displacement of an object.
  * You can use this filter to apply all manor of crazy warping effects
  * Currently the r property of the texture is used to offset the x and the g property of the texture is used to offset the y.
- *
+ * 
  * @class AlphaMaskFilter
  * @extends AbstractFilter
  * @constructor
@@ -19247,8 +19321,8 @@ PIXI.AlphaMaskFilter = function(texture)
 
     if(texture.baseTexture.hasLoaded)
     {
-        this.uniforms.mask.value.x = texture.width;
-        this.uniforms.mask.value.y = texture.height;
+        this.uniforms.mapDimensions.value.x = texture.width;
+        this.uniforms.mapDimensions.value.y = texture.height;
     }
     else
     {
@@ -19323,7 +19397,7 @@ Object.defineProperty(PIXI.AlphaMaskFilter.prototype, 'map', {
  * The ColorMatrixFilter class lets you apply a 4x4 matrix transformation on the RGBA
  * color and alpha values of every pixel on your displayObject to produce a result
  * with a new set of RGBA color and alpha values. It's pretty powerful!
- *
+ * 
  * @class ColorMatrixFilter
  * @extends AbstractFilter
  * @constructor
@@ -19381,7 +19455,7 @@ Object.defineProperty(PIXI.ColorMatrixFilter.prototype, 'matrix', {
 
 /**
  * This greyscales the palette of your Display Objects.
- *
+ * 
  * @class GrayFilter
  * @extends AbstractFilter
  * @constructor
@@ -19437,7 +19511,7 @@ Object.defineProperty(PIXI.GrayFilter.prototype, 'gray', {
  * The DisplacementFilter class uses the pixel values from the specified texture (called the displacement map) to perform a displacement of an object.
  * You can use this filter to apply all manor of crazy warping effects
  * Currently the r property of the texture is used offset the x and the g property of the texture is used to offset the y.
- *
+ * 
  * @class DisplacementFilter
  * @extends AbstractFilter
  * @constructor
@@ -19570,7 +19644,7 @@ Object.defineProperty(PIXI.DisplacementFilter.prototype, 'offset', {
 
 /**
  * This filter applies a pixelate effect making display objects appear 'blocky'.
- *
+ * 
  * @class PixelateFilter
  * @extends AbstractFilter
  * @constructor
@@ -19613,7 +19687,7 @@ PIXI.PixelateFilter.prototype.constructor = PIXI.PixelateFilter;
 
 /**
  * This a point that describes the size of the blocks. x is the width of the block and y is the height.
- *
+ * 
  * @property size
  * @type Point
  */
@@ -19839,7 +19913,7 @@ Object.defineProperty(PIXI.BlurFilter.prototype, 'blurY', {
 
 /**
  * This inverts your Display Objects colors.
- *
+ * 
  * @class InvertFilter
  * @extends AbstractFilter
  * @constructor
@@ -19894,7 +19968,7 @@ Object.defineProperty(PIXI.InvertFilter.prototype, 'invert', {
 
 /**
  * This applies a sepia effect to your Display Objects.
- *
+ * 
  * @class SepiaFilter
  * @extends AbstractFilter
  * @constructor
@@ -19950,7 +20024,7 @@ Object.defineProperty(PIXI.SepiaFilter.prototype, 'sepia', {
 
 /**
  * This filter applies a twist effect making display objects appear twisted in the given direction.
- *
+ * 
  * @class TwistFilter
  * @extends AbstractFilter
  * @constructor
@@ -20001,7 +20075,7 @@ PIXI.TwistFilter.prototype.constructor = PIXI.TwistFilter;
 
 /**
  * This point describes the the offset of the twist.
- *
+ * 
  * @property offset
  * @type Point
  */
@@ -20017,7 +20091,7 @@ Object.defineProperty(PIXI.TwistFilter.prototype, 'offset', {
 
 /**
  * This radius of the twist.
- *
+ * 
  * @property radius
  * @type Number
  */
@@ -20033,7 +20107,7 @@ Object.defineProperty(PIXI.TwistFilter.prototype, 'radius', {
 
 /**
  * This angle of the twist.
- *
+ * 
  * @property angle
  * @type Number
  */
@@ -20053,7 +20127,7 @@ Object.defineProperty(PIXI.TwistFilter.prototype, 'angle', {
 
 /**
  * This lowers the color depth of your image by the given amount, producing an image with a smaller palette.
- *
+ * 
  * @class ColorStepFilter
  * @extends AbstractFilter
  * @constructor
@@ -20109,7 +20183,7 @@ Object.defineProperty(PIXI.ColorStepFilter.prototype, 'step', {
 
 /**
  * This filter applies a dotscreen effect making display objects appear to be made out of black and white halftone dots like an old printer.
- *
+ * 
  * @class DotScreenFilter
  * @extends AbstractFilter
  * @constructor
@@ -20194,7 +20268,7 @@ Object.defineProperty(PIXI.DotScreenFilter.prototype, 'angle', {
 
 /**
  * A Cross Hatch effect filter.
- *
+ * 
  * @class CrossHatchFilter
  * @extends AbstractFilter
  * @constructor
@@ -20275,7 +20349,7 @@ Object.defineProperty(PIXI.CrossHatchFilter.prototype, 'blur', {
 
 /**
  * An RGB Split Filter.
- *
+ * 
  * @class RGBSplitFilter
  * @extends AbstractFilter
  * @constructor
@@ -20318,7 +20392,7 @@ PIXI.RGBSplitFilter.prototype.constructor = PIXI.RGBSplitFilter;
 
 /**
  * Red channel offset.
- *
+ * 
  * @property red
  * @type Point
  */
@@ -20333,7 +20407,7 @@ Object.defineProperty(PIXI.RGBSplitFilter.prototype, 'red', {
 
 /**
  * Green channel offset.
- *
+ * 
  * @property green
  * @type Point
  */
@@ -20348,7 +20422,7 @@ Object.defineProperty(PIXI.RGBSplitFilter.prototype, 'green', {
 
 /**
  * Blue offset.
- *
+ * 
  * @property blue
  * @type Point
  */

@@ -186,7 +186,7 @@
 	
 	Window_MenuCommand.prototype.addOriginalCommands = function() {
 		var enabled = $gameParty.size() >= 2 && !$gameSwitches.value(4);
-		if(talkCheckUnread()){
+		if(talkCheckUnread() && enabled){
 			this.addCommand("会話\\I[12]", 'talk', enabled);
 		}else{
 			this.addCommand("会話", 'talk', enabled);
@@ -230,7 +230,9 @@
 	    	var bitmapName = $dataActors[actor.actorId()].meta.stand_picture;
         	var bitmap = bitmapName ? ImageManager.loadPicture(bitmapName) : null;
 	    }, this);
+	    ImageManager.loadFace('Actor5');
 	};
+	
     Window_MenuStatus.prototype.drawItemImage = function(index) {
         var actor = $gameParty.members()[index];
         var rect = this.itemRectForText(index);
@@ -447,7 +449,11 @@ Window_Effect.prototype.refresh = function() {
 	var param;
 	var name;
 	if( this._paramId == 7 ){
-		param = this._actor.nextRequiredExp();
+		if (this._actor.level >= this._actor.maxLevel()){
+			param = "----";
+		}else{
+			param = this._actor.nextRequiredExp();
+		}
 		name = TextManager.expNext.format(TextManager.level);
 		this.width = 320;
 	}else{
