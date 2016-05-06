@@ -2432,7 +2432,13 @@ Scene_Gameover.prototype.create = function() {
 
 Scene_Gameover.prototype.start = function() {
     Scene_Base.prototype.start.call(this);
+    this.record();
     this.startFadeIn(this.slowFadeSpeed(), false);
+};
+
+Scene_Gameover.prototype.record = function() {
+    var chikuwa = new Chikuwa();
+    chikuwa.increment(4,1);
 };
 
 Scene_Gameover.prototype.update = function() {

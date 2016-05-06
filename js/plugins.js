@@ -47,7 +47,7 @@ var $plugins =
 {"name":"Tradesman","status":true,"description":"","parameters":{}},
 {"name":"WeaponSkill","status":true,"description":"武器ごとに通常攻撃のスキルIDを変更します。","parameters":{}},
 {"name":"Talk","status":true,"description":"","parameters":{}},
-{"name":"VersionSpecified","status":true,"description":"【MMP ver.1.0】タイトル画面にバージョンを明記します。","parameters":{"version":"Ver 1.10","fontSize":"20","fontColor":"rgb(255, 255, 255)","windowX":"0","windowY":"0"}},
+{"name":"VersionSpecified","status":true,"description":"【MMP ver.1.0】タイトル画面にバージョンを明記します。","parameters":{"version":"Ver 1.12","fontSize":"20","fontColor":"rgb(255, 255, 255)","windowX":"0","windowY":"0"}},
 {"name":"CommandIcon","status":true,"description":"アイコン付きコマンドプラグイン","parameters":{}},
 {"name":"EnemyCount","status":true,"description":"","parameters":{}},
 {"name":"debug","status":false,"description":"","parameters":{}},
@@ -55,5 +55,6 @@ var $plugins =
 {"name":"CacheManager","status":true,"description":"Selectively clear the image cache for memory usage improvements","parameters":{"Mobile only":"N","--------------------------------------------":"","Clear All":"N","Clear Animations":"Y","Clear Battlebacks":"Y","Clear Battlers":"Y","Clear Characters":"N","Clear Faces":"N","Clear Parallaxes":"N","Clear Pictures":"Y","Clear System":"N","Clear Tilesets":"N","Clear Titles":"N","Custom Images":""}},
 {"name":"111_InputForm","status":true,"description":"フォーム作って文字入力","parameters":{}},
 {"name":"Moogle_X_PassiveSkill","status":true,"description":"v1.14 Adds passive skills functionality to actors.","parameters":{"Default Hide in Battle":"0","Hidden Skill Type ID in Battle":"0"}},
-{"name":"DragonEscape","status":true,"description":"","parameters":{}}
+{"name":"DragonEscape","status":true,"description":"","parameters":{}},
+{"name":"RewardsAdjust","status":true,"description":"","parameters":{}}
 ];
