@@ -183,6 +183,21 @@ var _Scene_Equip_update = Scene_Equip.prototype.update;
 	}
 };
 
+Scene_Equip.prototype.onItemOk = function() {
+    SoundManager.playEquip();
+    var lastEquip = this.actor().equips()[this._slotWindow.index()];
+    if(lastEquip == this._itemWindow.item()){
+    	this.actor().changeEquip(this._slotWindow.index(), null);
+    }else{
+    	this.actor().changeEquip(this._slotWindow.index(), this._itemWindow.item());
+    }
+    this._slotWindow.activate();
+    this._slotWindow.refresh();
+    this._itemWindow.deselect();
+    this._itemWindow.refresh();
+    this._statusWindow.refresh();
+};
+
 //-----------------------------------------------------------------------------
 // Window_Operate
 //-----------------------------------------------------------------------------
@@ -246,6 +261,36 @@ Window_EquipStatus.prototype.drawItem = function(x, y, paramId) {
     }
 };
 
-})();
+//-----------------------------------------------------------------------------
+// Window_EquipItem
+//
+// The window for selecting an equipment item on the equipment screen.
 
+Window_EquipItem.prototype.includes = function(item) {
+    if (item === null) {
+        return true;
+    }
+    if (this._slotId < 0 || item.etypeId !== this._actor.equipSlots()[this._slotId]) {
+        return false;
+    }
+    return this._actor.canEquip(item);
+};
+
+/*
+Window_EquipItem.prototype.makeItemList = function() {
+    this._data = $gameParty.allItems().filter(function(item) {
+        return this.includes(item);
+    }, this);
+    if (this.includes(null)) {
+    	if(this._slotId >= 0 && this._actor.equips()[this._slotId] !== null) {
+    		this._data.unshift(null);
+    	}else{
+    		this._data.push(null);
+    	}
+    }
+};
+*/
+
+
+})();
 

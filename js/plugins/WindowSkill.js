@@ -228,3 +228,6 @@ Window_ControlHelp.prototype.playBuzzerSound = function() {
     //SoundManager.playBuzzer();
 };
 
+
+
+

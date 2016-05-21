@@ -101,6 +101,7 @@
                     console.log(this.input);
                     this.input.setAttribute('id', '_111_input');
                     if(is_default){
+                    	this.input.placeholder = "名前入力(5文字以内)";
                     	this.input.value = default_name; 
                     }else{
                     	this.input.placeholder = "名前入力(5文字以内)";

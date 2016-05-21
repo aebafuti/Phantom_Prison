@@ -159,7 +159,7 @@ Scene_Title.prototype.reloadMapIfUpdated = function() {
 };
 
 //-----------------------------------------------------------------------------
-// Scene_Men
+// Scene_Menu
 //-----------------------------------------------------------------------------
 
 Scene_Menu.prototype.commandSave = function() {

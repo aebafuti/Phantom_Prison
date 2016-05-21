@@ -4,7 +4,7 @@ var talk_list = [];
 
 
 function talkSort(val1, val2){
-	var ruleA = ['黒', '白', '赤', '青', '緑', '銀', '金', '紺', '水'];
+	var ruleA = ['ク', '黒', '白', '赤', '青', '緑', '銀', '金', '紺', '水'];
 	//var ruleB = ['の', 'と'];
 	var ruleB = ['聖', '子', '黒', '白', '赤', '青', '緑', '銀', '金', '紺'];
 	var ruleC = ['①', '②', '③', '④'];
@@ -64,6 +64,7 @@ function talkCheckUnread(){
 
 function setTalkList(){
 	talk_list = [];
+	talk_list.push('クリアコメント');
 	talk_list.push('黒の聖霊①');
 	talk_list.push('黒の聖霊②');
 	talk_list.push('黒の聖霊③');
@@ -128,8 +129,10 @@ function talkCondition(key){
 	var dark = $gameParty.members().contains($gameActors.actor(9));
 	var slime = $gameParty.members().contains($gameActors.actor(10));
 	var deathEncount = $gameSystem.enemyEncount()[10] || $gameSystem.enemyEncount()[40];
-	
 	switch (key){
+	case 'クリアコメント': //全員加入クリア＆会話回想
+		return $gameSwitches.value(24);
+		break;
 	case '黒の聖霊①':
 	case '黒の聖霊②':
 		return black;

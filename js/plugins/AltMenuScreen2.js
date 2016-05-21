@@ -100,6 +100,14 @@
 	    this._wheelHelpWindow.y = this._statusWindow.y + this._statusWindow.height;
 	    this.addWindow(this._wheelHelpWindow);
 	    
+	    // EXTRAの場合
+	    if($gameSwitches.value(30)){ 
+		    this._spiritWindow = new Window_SpiritLimit();
+		    this._spiritWindow.x = this._goldWindow.x - this._spiritWindow.width;
+		    this._spiritWindow.y = this._goldWindow.y;
+		    this.addWindow(this._spiritWindow);
+	    }
+	    
 	    //魔術、装備、ステータスから戻る場合
 	    switch (this._commandWindow.currentSymbol()) {
 		    case 'skill':
@@ -140,10 +148,10 @@
     var _Scene_Menu_createBackground = Scene_Menu.prototype.createBackground;
     Scene_Menu.prototype.createBackground = function(){
         if(backGroundBitmap){
-            this._backgroundSprite = new Sprite();
-            this._backgroundSprite.bitmap =
+            this._backgroundspirite = new spirite();
+            this._backgroundspirite.bitmap =
              ImageManager.loadPicture(backGroundBitmap);
-            this.addChild(this._backgroundSprite);
+            this.addChild(this._backgroundspirite);
             return;
         }
         // if background file is invalid, it does original process.
@@ -466,6 +474,51 @@ Window_Effect.prototype.refresh = function() {
     this.contents.clear();
     this.drawText(name + ":", 0, 0, width);
     this.drawText(param, 0, 0, width, 'right');
+};
+
+//-----------------------------------------------------------------------------
+// Window_spiritLimit
+//-----------------------------------------------------------------------------
+function Window_SpiritLimit() {
+    this.initialize.apply(this, arguments);
+}
+
+Window_SpiritLimit.prototype = Object.create(Window_Base.prototype);
+Window_SpiritLimit.prototype.constructor = Window_SpiritLimit;
+
+Window_SpiritLimit.prototype.initialize = function(x, y) {
+    var width = this.windowWidth();
+    var height = this.windowHeight();
+    Window_Base.prototype.initialize.call(this, x, y, width, height);
+    this.refresh();
+};
+
+Window_SpiritLimit.prototype.windowWidth = function() {
+    return 200;
+};
+
+Window_SpiritLimit.prototype.windowHeight = function() {
+    return this.fittingHeight(1);
+};
+
+Window_SpiritLimit.prototype.refresh = function() {
+    var x = this.textPadding();
+    var width = this.contents.width - this.textPadding() * 2;
+    this.contents.clear();
+    this.drawText("聖霊制限：" + this.value(), 0, 0, width);
+};
+
+Window_SpiritLimit.prototype.value = function() {
+    return $gameVariables.value(60);
+};
+
+Window_SpiritLimit.prototype.currencyUnit = function() {
+    return TextManager.currencyUnit;
+};
+
+Window_SpiritLimit.prototype.open = function() {
+    this.refresh();
+    Window_Base.prototype.open.call(this);
 };
 
 })();

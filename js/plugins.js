@@ -47,7 +47,7 @@ var $plugins =
 {"name":"Tradesman","status":true,"description":"","parameters":{}},
 {"name":"WeaponSkill","status":true,"description":"武器ごとに通常攻撃のスキルIDを変更します。","parameters":{}},
 {"name":"Talk","status":true,"description":"","parameters":{}},
-{"name":"VersionSpecified","status":true,"description":"【MMP ver.1.0】タイトル画面にバージョンを明記します。","parameters":{"version":"Ver 1.12","fontSize":"20","fontColor":"rgb(255, 255, 255)","windowX":"0","windowY":"0"}},
+{"name":"VersionSpecified","status":true,"description":"【MMP ver.1.0】タイトル画面にバージョンを明記します。","parameters":{"version":"Ver 1.13","fontSize":"20","fontColor":"rgb(255, 255, 255)","windowX":"0","windowY":"0"}},
 {"name":"CommandIcon","status":true,"description":"アイコン付きコマンドプラグイン","parameters":{}},
 {"name":"EnemyCount","status":true,"description":"","parameters":{}},
 {"name":"debug","status":false,"description":"","parameters":{}},
@@ -56,5 +56,7 @@ var $plugins =
 {"name":"111_InputForm","status":true,"description":"フォーム作って文字入力","parameters":{}},
 {"name":"Moogle_X_PassiveSkill","status":true,"description":"v1.14 Adds passive skills functionality to actors.","parameters":{"Default Hide in Battle":"0","Hidden Skill Type ID in Battle":"0"}},
 {"name":"DragonEscape","status":true,"description":"","parameters":{}},
-{"name":"RewardsAdjust","status":true,"description":"","parameters":{}}
+{"name":"RewardsAdjust","status":true,"description":"","parameters":{}},
+{"name":"DTextPicture","status":true,"description":"動的文字列ピクチャ生成プラグイン","parameters":{}},
+{"name":"DisplayStateTurnsOnIcon","status":true,"description":"v1.04 Number of turns remaining for states/debuffs/buffs is\r\ndisplayed on the icon.\r\n<lolaccount DisplayStateTurnsOnIcon>","parameters":{"Font Size":"16","Position":"topright","---Compatibility---":"","Decimal Places":"0"}}
 ];

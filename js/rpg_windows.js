@@ -1528,7 +1528,7 @@ Window_Gold.prototype.initialize = function(x, y) {
 };
 
 Window_Gold.prototype.windowWidth = function() {
-    return 240;
+    return 200;
 };
 
 Window_Gold.prototype.windowHeight = function() {
