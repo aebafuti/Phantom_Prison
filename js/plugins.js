@@ -47,7 +47,7 @@ var $plugins =
 {"name":"Tradesman","status":true,"description":"","parameters":{}},
 {"name":"WeaponSkill","status":true,"description":"武器ごとに通常攻撃のスキルIDを変更します。","parameters":{}},
 {"name":"Talk","status":true,"description":"","parameters":{}},
-{"name":"VersionSpecified","status":true,"description":"【MMP ver.1.0】タイトル画面にバージョンを明記します。","parameters":{"version":"Ver 1.13","fontSize":"20","fontColor":"rgb(255, 255, 255)","windowX":"0","windowY":"0"}},
+{"name":"VersionSpecified","status":true,"description":"【MMP ver.1.0】タイトル画面にバージョンを明記します。","parameters":{"version":"Ver 1.13b","fontSize":"20","fontColor":"rgb(255, 255, 255)","windowX":"0","windowY":"0"}},
 {"name":"CommandIcon","status":true,"description":"アイコン付きコマンドプラグイン","parameters":{}},
 {"name":"EnemyCount","status":true,"description":"","parameters":{}},
 {"name":"debug","status":false,"description":"","parameters":{}},
